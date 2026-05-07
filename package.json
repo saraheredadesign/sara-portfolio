@@ -4,6 +4,7 @@
   "private": true,
   "description": "Portfolio minimalista inspirado en el estilo de Sara Hereda",
   "scripts": {
+    "build": "echo 'Static site - no build needed'",
     "dev": "node server.js",
     "start": "node server.js"
   },
