@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-sara-hereda",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio minimalista inspirado en el estilo de Sara Hereda",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "pngjs": "^7.0.0"
+  }
+}

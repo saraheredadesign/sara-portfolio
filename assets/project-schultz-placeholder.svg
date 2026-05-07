@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" fill="none">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="1400" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EDEAE8"/>
+      <stop offset="1" stop-color="#F7F5F4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="900" fill="url(#g2)"/>
+  <rect x="130" y="140" width="1140" height="620" rx="26" fill="#121212" opacity="0.92"/>
+  <text x="192" y="430" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-size="74" font-weight="700">SCHULTZ' STUDIOS</text>
+  <text x="195" y="500" fill="#D8D8D8" font-family="Manrope, Arial, sans-serif" font-size="32" font-weight="600">Web design for desktop</text>
+</svg>
