@@ -1,34 +1,30 @@
 {
-  "version": 2,
-  "cleanUrls": true,
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "other",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": ".",
   "trailingSlash": false,
-  "routes": [
+  "rewrites": [
     {
-      "src": "^/$",
-      "dest": "/index.html"
+      "source": "/",
+      "destination": "/index.html"
     },
     {
-      "src": "^/projects/?$",
-      "dest": "/projects.html"
+      "source": "/projects",
+      "destination": "/projects.html"
     },
     {
-      "src": "^/project-truffle/?$",
-      "dest": "/project-truffle.html"
+      "source": "/project-truffle",
+      "destination": "/project-truffle.html"
     },
     {
-      "src": "^/project-moveit/?$",
-      "dest": "/project-moveit.html"
+      "source": "/project-moveit",
+      "destination": "/project-moveit.html"
     },
     {
-      "src": "^/project-schultz-studios/?$",
-      "dest": "/project-schultz-studios.html"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/project-schultz-studios",
+      "destination": "/project-schultz-studios.html"
     }
   ]
 }
