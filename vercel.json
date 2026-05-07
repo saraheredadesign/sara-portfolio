@@ -1,22 +1,34 @@
 {
+  "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
+  "routes": [
     {
-      "source": "/projects",
-      "destination": "/projects.html"
+      "src": "^/$",
+      "dest": "/index.html"
     },
     {
-      "source": "/project-truffle",
-      "destination": "/project-truffle.html"
+      "src": "^/projects/?$",
+      "dest": "/projects.html"
     },
     {
-      "source": "/project-moveit",
-      "destination": "/project-moveit.html"
+      "src": "^/project-truffle/?$",
+      "dest": "/project-truffle.html"
     },
     {
-      "source": "/project-schultz-studios",
-      "destination": "/project-schultz-studios.html"
+      "src": "^/project-moveit/?$",
+      "dest": "/project-moveit.html"
+    },
+    {
+      "src": "^/project-schultz-studios/?$",
+      "dest": "/project-schultz-studios.html"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
