@@ -7,6 +7,7 @@
   --pink-soft: #ffcdff;
   --max: 1120px;
   --radius: 24px;
+  --section-title-size: clamp(1.2rem, 2.1vw, 1.6rem);
 }
 
 * {
@@ -399,7 +400,7 @@ h1 {
 
 .process-title {
   font-family: "Montserrat", sans-serif;
-  font-size: clamp(1.2rem, 2.1vw, 1.6rem);
+  font-size: var(--section-title-size);
   font-weight: 700;
   letter-spacing: 0;
   color: var(--ink);
@@ -581,6 +582,14 @@ h1 {
     font-size: 1.15rem;
   }
 
+  .project-title {
+    font-size: 1.15rem;
+  }
+
+  #welcome-to-truffle {
+    font-size: 1.15rem !important;
+  }
+
   .process-grid {
     grid-template-columns: 1fr;
     gap: 1.3rem;
@@ -618,10 +627,19 @@ h1 {
 
 .project-title {
   font-family: "Montserrat", sans-serif;
-  font-size: clamp(0.78rem, 1.25vw, 1rem);
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-size: var(--section-title-size);
+  font-weight: 700;
+  letter-spacing: 0;
   margin: 0 0 1.8rem;
+}
+
+#welcome-to-truffle {
+  font-family: "Inter", sans-serif !important;
+  font-size: var(--section-title-size) !important;
+  font-weight: 500 !important;
+  font-style: normal !important;
+  letter-spacing: normal !important;
+  line-height: 1.2 !important;
 }
 
 .project-video {
@@ -884,15 +902,6 @@ h2 {
   font-family: "Montserrat", sans-serif;
   font-size: clamp(1.8rem, 4vw, 3rem);
   margin: 0 0 1.2rem;
-}
-
-#welcome-to-truffle {
-  font-family: "Montserrat", sans-serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-weight: 700;
-  letter-spacing: normal;
-  line-height: normal;
-  color: var(--ink);
 }
 
 .projects-grid {
