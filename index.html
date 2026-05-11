@@ -40,27 +40,64 @@
 
     <main id="home">
       <section class="hero reveal">
-        <h1
-          class="hero-title"
-          data-letterfx="true"
-          data-line1="Hi, I’m Sara"
-          data-line2=""
-          data-line3="it's nice to meet you."
-        >
-          Hi, I’m Sara.<br />
-          UX & UI Designer.
-        </h1>
-        <p class="hero-copy">
-          
-          I'm a UX/UI designer with focus on product-oriented digital experiences. Madrid raised, Oslo based. <br />  
-        </p>
+        <div class="hero-copy-block">
+          <h1
+            class="hero-title"
+            data-letterfx="true"
+            data-line1="Hi, I’m Sara"
+            data-line2=""
+            data-line3="it's nice to meet you."
+          >
+            Hi, I’m Sara.<br />
+            UX & UI Designer.
+          </h1>
+          <p class="hero-copy">
+            I'm a UX/UI designer with focus on product-oriented digital experiences. Madrid raised, Oslo based. <br />
+          </p>
+        </div>
+        <div class="hero-image-wrap">
+          <img class="hero-image" src="/assets/sarita_happy.png" alt="Sara smiling portrait" />
+        </div>
       </section>
 
-      <section class="focus-section reveal" aria-label="Core focus">
-        <h2 class="focus-title">I focus on</h2>
+      <section class="home-section-gap" aria-hidden="true"></section>
+
+      <section class="hero-typing-panel reveal" aria-label="Core focus">
+        <h2 class="focus-title">Design approach</h2>
         <p class="focus-typing" aria-live="polite">
           <span class="focus-word" data-focus-word></span><span class="focus-caret" aria-hidden="true"></span>
         </p>
+      </section>
+
+      <section class="home-section-gap" aria-hidden="true"></section>
+
+      <section class="process-section reveal" aria-label="Design process and visual preview">
+        <h2 class="process-title">My designing process:</h2>
+        <div class="process-grid">
+          <div class="process-list" role="listbox" aria-label="Design process steps">
+            <button class="process-row is-active" type="button" data-process-step="0">1. Research</button>
+            <button class="process-row" type="button" data-process-step="1">2. Organize</button>
+            <button class="process-row" type="button" data-process-step="2">3. Structure</button>
+            <button class="process-row" type="button" data-process-step="3">4. Prototype</button>
+            <button class="process-row" type="button" data-process-step="4">5. Test </button>
+            <button class="process-row" type="button" data-process-step="5">6. Repeat</button>
+          </div>
+
+          <div class="process-image-shell" aria-label="Process visual">
+            <img class="process-image is-active" src="/assets/1-animationnew.png" alt="Finding the real problem" data-process-image="0" />
+            <img class="process-image" src="/assets/2-animationnew.png" alt="Organizing insights" data-process-image="1" />
+            <img class="process-image" src="/assets/3-animationnew.png" alt="Connecting the dots" data-process-image="2" />
+            <img class="process-image" src="/assets/4-animationnew.png" alt="Shaping the solution" data-process-image="3" />
+            <img class="process-image" src="/assets/5-animationnew.png" alt="Testing what works" data-process-image="4" />
+            <img class="process-image" src="/assets/6-animationnew.png" alt="Refining through feedback" data-process-image="5" />
+          </div>
+        </div>
+      </section>
+
+      <section class="home-section-gap" aria-hidden="true"></section>
+
+      <section class="featured-transition reveal" aria-label="Featured project introduction">
+        <h2 class="focus-title featured-transition-title">Where process becomes product</h2>
       </section>
 
       <section id="project" class="single-project reveal">

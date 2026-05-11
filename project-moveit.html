@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="moveit-dark-page">
     <div id="top"></div>
     <div class="custom-cursor" aria-hidden="true"></div>
     <header class="site-header">
@@ -30,36 +30,67 @@
         <a href="projects.html">Projects</a>
       </nav>
     </header>
-    <main class="project-info-page reveal">
-      <p class="eyebrow">Project details</p>
-      <h1 class="info-title">MoveIT</h1>
-      <p class="info-copy">Case study page ready for your final mockups and full process notes.</p>
-    </main>
+    <main class="moveit-page reveal">
+      <section class="moveit-showcase" aria-label="Move It project showcase">
+        <div class="moveit-showcase-inner">
+          <h1 class="moveit-showcase-title">MoveIt</h1>
+          <p class="moveit-showcase-intro">
+            A mobile and smartwatch fitness app designed for quick, equipment-free workouts, helping busy users stay active while
+            tracking real-time health data.
+          </p>
 
-    <section class="moveit-showcase reveal" aria-label="Move It project showcase">
-      <div class="moveit-showcase-inner">
-        <p class="eyebrow">MOVE IT PROJECT</p>
-        <h2 class="moveit-showcase-title">One of my first UX team projects</h2>
-        <p class="moveit-showcase-intro">
-          Move It was one of the first projects I developed in a group while studying UX Design,
-          focused on building a fitness experience across mobile and smartwatch.
-        </p>
-
+      <section class="moveit-overview-layout" aria-label="Move It overview">
         <div class="moveit-mockups">
           <img src="assets/moveit/moveit-mobile.png" alt="Move It mobile app mockup" />
           <img src="assets/moveit/moveit-watch.png" alt="Move It smartwatch app mockup" />
         </div>
 
-        <a
-          class="prototype-button"
-          href="https://www.figma.com/proto/TNFmPF1HMqdA34jojlF9mn/MOVEIT-UX-CASE-STUDIE?node-id=49-99&p=f&t=3aLip0V6akwpsxjX-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open full case study in Figma
-        </a>
-      </div>
-    </section>
+        <section class="moveit-details-grid" aria-label="Move It key details">
+          <article class="moveit-detail-card">
+            <p class="moveit-detail-label">Project Type</p>
+            <p class="moveit-detail-value">UX/UI Design</p>
+          </article>
+          <article class="moveit-detail-card">
+            <p class="moveit-detail-label">Role</p>
+            <p class="moveit-detail-value">UX/UI Designer</p>
+          </article>
+          <article class="moveit-detail-card">
+            <p class="moveit-detail-label">Tools</p>
+            <p class="moveit-detail-value">Figma, FlowMapp, Miro, WCAG, Design System principles</p>
+          </article>
+          <article class="moveit-detail-card">
+            <p class="moveit-detail-label">Focus Areas</p>
+            <p class="moveit-detail-value">Mobile app, Smartwatch experience, Quick workouts, Heart rate tracking, Calorie tracking, Progress overview</p>
+          </article>
+        </section>
+      </section>
+
+      <section class="moveit-preview" aria-label="Move It solution preview">
+        <div class="moveit-preview-copy">
+          <h2>Solution preview</h2>
+          <p>
+            MoveIt connects a mobile fitness app with a smartwatch experience, helping users start short workouts, follow their
+            progress, and track heart rate and calories in real time.
+          </p>
+          <p>
+            MoveIt was one of my first group projects while studying UX Design. The website shows a curated overview, while the full
+            case study and process can be opened through the Figma link.
+          </p>
+        </div>
+        <div class="moveit-preview-cta">
+          <a
+            class="prototype-button"
+            href="https://www.figma.com/proto/TNFmPF1HMqdA34jojlF9mn/MOVEIT-UX-CASE-STUDIE?node-id=49-99&p=f&t=3aLip0V6akwpsxjX-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open full case study in Figma
+          </a>
+        </div>
+      </section>
+        </div>
+      </section>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>

@@ -140,6 +140,55 @@ if (focusWordEl) {
   requestAnimationFrame(tickFocusWord);
 }
 
+const frameAnimationEl = document.querySelector('[data-frame-animation="true"]');
+
+if (frameAnimationEl) {
+  const totalFrames = 9;
+  let frameIndex = 1;
+
+  window.setInterval(() => {
+    frameIndex = frameIndex >= totalFrames ? 1 : frameIndex + 1;
+    frameAnimationEl.src = `assets/${frameIndex}-animation.png`;
+  }, 1200);
+}
+
+const processRows = Array.from(document.querySelectorAll('.process-row[data-process-step]'));
+const processImages = Array.from(document.querySelectorAll('.process-image[data-process-image]'));
+
+if (processRows.length && processImages.length) {
+  const setActiveProcessStep = (step) => {
+    const stepKey = String(step);
+
+    processRows.forEach((row) => {
+      row.classList.toggle('is-active', row.dataset.processStep === stepKey);
+      row.setAttribute('aria-selected', row.dataset.processStep === stepKey ? 'true' : 'false');
+    });
+
+    processImages.forEach((image) => {
+      image.classList.toggle('is-active', image.dataset.processImage === stepKey);
+    });
+  };
+
+  processRows.forEach((row) => {
+    const step = row.dataset.processStep;
+
+    row.addEventListener('mouseenter', () => {
+      setActiveProcessStep(step);
+    });
+
+    row.addEventListener('focus', () => {
+      setActiveProcessStep(step);
+    });
+
+    row.addEventListener('click', () => {
+      setActiveProcessStep(step);
+    });
+  });
+
+  const activeRow = processRows.find((row) => row.classList.contains('is-active'));
+  setActiveProcessStep(activeRow?.dataset.processStep ?? processRows[0].dataset.processStep);
+}
+
 const cursor = document.querySelector('.custom-cursor');
 const desktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
