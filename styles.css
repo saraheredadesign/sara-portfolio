@@ -398,6 +398,18 @@ h1 {
   padding-bottom: 2.2rem;
 }
 
+.process-card {
+  width: min(100%, 1040px);
+  margin: 0 auto;
+  padding: clamp(1.2rem, 2.6vw, 2rem);
+  border-radius: 36px;
+  background: rgba(255, 255, 255, 0.685);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  box-shadow: 0 14px 36px rgba(18, 18, 18, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
 .process-title {
   font-family: "Montserrat", sans-serif;
   font-size: var(--section-title-size);
@@ -578,6 +590,12 @@ h1 {
     margin-top: 0.5rem;
   }
 
+  .process-card {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 28px;
+  }
+
   .process-title {
     font-size: 1.15rem;
   }
@@ -605,6 +623,80 @@ h1 {
     aspect-ratio: 4 / 3;
     min-height: 0;
     height: auto;
+  }
+
+  .truffle-brand-story {
+    padding: 88px 16px 58px;
+  }
+
+  .truffle-brand-hero {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+    align-items: start;
+  }
+
+  .truffle-brand-hero-copy h1 {
+    font-size: clamp(1.8rem, 9vw, 2.8rem);
+    line-height: 1.02;
+  }
+
+  .truffle-brand-hero-collage {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "top-left top-right"
+      "bottom-left bottom-right";
+    gap: 0.62rem;
+    padding: 0;
+  }
+
+  .truffle-brand-hero-image-1,
+  .truffle-brand-hero-image-2,
+  .truffle-brand-hero-image-3,
+  .truffle-brand-hero-image-4 {
+    height: 180px;
+    width: 100%;
+    transform: none;
+    justify-self: stretch;
+  }
+
+  .truffle-brand-grid-two,
+  .truffle-brand-grid-three,
+  .truffle-brand-grid-four,
+  .truffle-brand-grid-five {
+    grid-template-columns: 1fr;
+  }
+
+  .truffle-brand-placeholder {
+    min-height: 168px;
+  }
+
+  .truffle-brand-card:has(.truffle-why-story-stack) {
+    padding: 1rem;
+  }
+
+  .truffle-why-story-card,
+  .truffle-why-story-card:nth-child(2),
+  .truffle-why-story-card-mascot {
+    grid-template-columns: 1fr;
+    gap: 0.82rem;
+    padding: 0.95rem;
+    border-radius: 24px;
+  }
+
+  .truffle-why-story-visual,
+  .truffle-why-story-card:nth-child(1) .truffle-why-story-visual,
+  .truffle-why-story-card:nth-child(2) .truffle-why-story-visual,
+  .truffle-why-story-card-mascot .truffle-why-story-visual {
+    min-height: 210px;
+  }
+
+  .truffle-why-story-card-mascot .truffle-why-story-visual img {
+    width: min(100%, 82%);
+  }
+
+  .truffle-why-highlight span {
+    width: 100%;
+    padding: 0.72rem 0.95rem;
   }
 }
 
@@ -1036,6 +1128,864 @@ h2 {
   background: #f5f5f5;
 }
 
+.truffle-brand-story {
+  background:
+    radial-gradient(1200px 480px at 12% 0%, rgba(105, 211, 179, 0.1), transparent 60%),
+    radial-gradient(900px 420px at 88% 100%, rgba(64, 26, 2, 0.08), transparent 62%),
+    #f7f6f2;
+  padding: 112px 24px 76px;
+}
+
+.truffle-brand-shell {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(1.8rem, 2.8vw, 2.8rem);
+}
+
+.truffle-brand-header {
+  text-align: left;
+  margin-bottom: 0.45rem;
+}
+
+.truffle-brand-eyebrow {
+  margin: 0 0 12px;
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(46, 46, 46, 0.65);
+}
+
+.truffle-brand-header h1 {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(34px, 5.2vw, 56px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #401a02;
+}
+
+.truffle-brand-hero {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(1.2rem, 3vw, 2.6rem);
+  align-items: center;
+  margin-bottom: clamp(1.8rem, 3.4vw, 2.8rem);
+}
+
+.truffle-brand-hero-copy {
+  text-align: left;
+}
+
+.truffle-brand-hero-copy h1 {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(2rem, 4.4vw, 4rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: #2e2e2e;
+}
+
+.truffle-brand-hero-copy h1 span {
+  color: #69d3b3;
+}
+
+.truffle-brand-hero-subheading {
+  margin-top: 1rem !important;
+  font-size: clamp(1.02rem, 1.6vw, 1.24rem) !important;
+  line-height: 1.45 !important;
+  color: #3a3a3a !important;
+}
+
+.truffle-brand-hero-pill {
+  display: inline-flex;
+  margin-top: 1rem !important;
+  padding: 0.48rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(46, 46, 46, 0.14);
+  background: rgba(105, 211, 179, 0.24);
+  color: #2e2e2e !important;
+  font-weight: 600;
+}
+
+.truffle-brand-hero-collage {
+  display: grid;
+  grid-template-columns: 0.92fr 0.92fr 1.45fr;
+  grid-template-areas:
+    "top-left top-left top-right"
+    "bottom-left bottom-right top-right";
+  gap: 0.78rem;
+  align-items: start;
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+}
+
+.truffle-brand-hero-image {
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+.truffle-brand-hero-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.truffle-brand-hero-image-1 {
+  grid-area: bottom-left;
+  height: clamp(150px, 16vw, 190px);
+}
+
+.truffle-brand-hero-image-2 {
+  grid-area: top-left;
+  height: clamp(180px, 20vw, 235px);
+}
+
+.truffle-brand-hero-image-3 {
+  grid-area: top-right;
+  height: clamp(342px, 37vw, 438px);
+}
+
+.truffle-brand-hero-image-4 {
+  grid-area: bottom-right;
+  height: clamp(150px, 16vw, 190px);
+}
+
+.truffle-brand-card {
+  padding: clamp(1.05rem, 2.2vw, 1.7rem);
+  border-radius: 22px;
+  border: 1px solid rgba(64, 26, 2, 0.12);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 34px rgba(64, 26, 2, 0.06);
+}
+
+.truffle-brand-card h2 {
+  margin: 0 0 0.55rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(1.2rem, 2.4vw, 1.8rem);
+  line-height: 1.2;
+  color: #401a02;
+}
+
+.truffle-brand-card h3,
+.truffle-brand-card h4 {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  color: #2e2e2e;
+}
+
+.truffle-brand-card h3 {
+  font-size: 1.02rem;
+}
+
+.truffle-brand-card h4 {
+  font-size: 0.95rem;
+}
+
+.truffle-brand-card p {
+  margin: 0.65rem 0 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #2e2e2e;
+}
+
+.truffle-brand-subtitle {
+  color: #5a4b42;
+}
+
+.truffle-brand-closing {
+  font-weight: 600;
+  color: #401a02;
+}
+
+.truffle-brand-card:has(.truffle-why-story-stack) {
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+  padding: clamp(2rem, 2.5vw, 2.35rem);
+  border-radius: 28px;
+  background-image: url("assets/tarjeta_patron.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(105, 211, 179, 0.22);
+}
+
+.truffle-brand-card:has(.truffle-why-story-stack)::before {
+  content: none;
+}
+
+.truffle-brand-card:has(.truffle-why-story-stack) > * {
+  position: relative;
+  z-index: 1;
+}
+
+.truffle-brand-card:has(.truffle-why-story-stack) h2 {
+  font-size: clamp(1.55rem, 2.6vw, 2.15rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+  color: #2e2e2e;
+}
+
+.truffle-brand-card:has(.truffle-why-story-stack) .truffle-brand-subtitle {
+  max-width: 72ch;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.truffle-why-story-stack {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 2vw, 2rem);
+  position: relative;
+  z-index: 1;
+  align-items: stretch;
+}
+
+.truffle-why-story-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-height: 240px;
+  padding: 28px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(105, 211, 179, 0.26);
+  box-shadow: 0 12px 28px rgba(64, 26, 2, 0.04);
+}
+
+.truffle-why-story-inner {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  align-items: center;
+  min-height: 140px;
+}
+
+.truffle-why-story-copy {
+  min-width: 0;
+}
+
+.truffle-why-story-eyebrow {
+  margin: 0;
+  font-size: 0.75rem !important;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: rgba(46, 46, 46, 0.65) !important;
+}
+
+.truffle-why-story-copy h3 {
+  margin: 0;
+  font-size: clamp(1.4rem, 1.9vw, 1.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #69d3b3;
+}
+
+.truffle-why-story-copy p:last-child {
+  margin-top: 0.45rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #2e2e2e;
+  max-width: 26ch;
+}
+
+.truffle-why-story-visual {
+  margin: 0;
+  width: 140px;
+  height: 140px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  justify-self: start;
+  align-self: center;
+}
+
+.truffle-why-story-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 18px;
+}
+
+.truffle-why-story-card-mascot .truffle-why-story-visual {
+  width: 140px;
+  height: 140px;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+
+.truffle-why-mascot-accent {
+  position: absolute;
+  inset: 8% 6%;
+  border-radius: 26px;
+  background: rgba(105, 211, 179, 0.28);
+}
+
+.truffle-why-story-card-mascot .truffle-why-story-visual img {
+  width: min(100%, 88%);
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+.truffle-why-highlight {
+  margin: 28px 0 0 !important;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.truffle-why-highlight span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.66rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid rgba(105, 211, 179, 0.45);
+  background: rgba(105, 211, 179, 0.18);
+  color: #2e2e2e;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.truffle-identity-world {
+  position: relative;
+  overflow: hidden;
+  border-radius: 34px;
+  border: 1px solid rgba(105, 211, 179, 0.22);
+  background: rgba(105, 211, 179, 0.04);
+  padding: clamp(1.45rem, 2.5vw, 2.2rem);
+}
+
+.truffle-identity-world::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("assets/patternbackground.png");
+  background-repeat: repeat;
+  background-size: 140px auto;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.truffle-identity-world > * {
+  position: relative;
+  z-index: 1;
+}
+
+.truffle-identity-label,
+.truffle-identity-caption {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2e2e2e;
+  font-weight: 700;
+}
+
+.truffle-identity-hero {
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: clamp(1rem, 2.6vw, 2rem);
+  align-items: center;
+}
+
+.truffle-identity-copy h2 {
+  margin: 0.35rem 0 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  line-height: 0.95;
+  color: #2e2e2e;
+  letter-spacing: -0.02em;
+}
+
+.truffle-identity-copy p {
+  margin: 0.85rem 0 0;
+  font-size: 0.97rem;
+  line-height: 1.6;
+  max-width: 46ch;
+  color: #2e2e2e;
+}
+
+.truffle-identity-hero-logo {
+  margin: 0;
+  position: relative;
+  min-height: clamp(220px, 28vw, 320px);
+  display: grid;
+  place-items: center;
+}
+
+.truffle-identity-blob {
+  position: absolute;
+  width: min(100%, 420px);
+  height: clamp(180px, 20vw, 260px);
+  border-radius: 52% 48% 46% 54% / 44% 56% 48% 52%;
+  background: rgba(105, 211, 179, 0.34);
+}
+
+.truffle-identity-hero-logo img {
+  position: relative;
+  width: min(100%, 360px);
+  height: auto;
+  display: block;
+  z-index: 1;
+  filter: drop-shadow(0 18px 32px rgba(46, 46, 46, 0.1));
+}
+
+.truffle-identity-top-grid {
+  margin-top: 1.35rem;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.truffle-identity-logo-variants {
+  border: 1px solid rgba(65, 26, 2, 0.12);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 1rem;
+}
+
+.truffle-identity-variants-row {
+  margin-top: 0.72rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.72rem;
+}
+
+.truffle-identity-variants-row figure {
+  margin: 0;
+  border-radius: 14px;
+  border: 1px solid rgba(65, 26, 2, 0.09);
+  background: rgba(247, 246, 242, 0.86);
+  min-height: 88px;
+  display: grid;
+  place-items: center;
+  padding: 0.55rem;
+}
+
+.truffle-identity-variants-row img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.truffle-identity-note {
+  border-radius: 20px;
+  border: 1px solid rgba(105, 211, 179, 0.3);
+  background: rgba(105, 211, 179, 0.16);
+  box-shadow: 0 10px 24px rgba(46, 46, 46, 0.04);
+  padding: 1rem;
+  align-self: center;
+}
+
+.truffle-identity-note p {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: #2e2e2e;
+}
+
+.truffle-identity-mascot {
+  margin-top: 1.15rem;
+}
+
+.truffle-identity-mascot-grid {
+  margin-top: 0.68rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.72rem;
+}
+
+.truffle-identity-mascot-grid article {
+  border-radius: 16px;
+  border: 1px solid rgba(105, 211, 179, 0.25);
+  background: rgba(255, 255, 255, 0.82);
+  padding: 0.78rem;
+}
+
+.truffle-identity-mascot-grid h3 {
+  margin: 0;
+  font-size: 0.93rem;
+  color: #2e2e2e;
+}
+
+.truffle-identity-mascot-grid p {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #2e2e2e;
+}
+
+.truffle-identity-type-color {
+  margin-top: 1.15rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.truffle-identity-type-card,
+.truffle-identity-color-card {
+  border-radius: 20px;
+  border: 1px solid rgba(65, 26, 2, 0.11);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 1rem;
+}
+
+.truffle-identity-type-card > p,
+.truffle-identity-color-card > p {
+  margin: 0.58rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #2e2e2e;
+}
+
+.truffle-identity-type-pairs {
+  margin-top: 0.8rem;
+  display: grid;
+  gap: 0.62rem;
+}
+
+.truffle-identity-type-pairs h3 {
+  margin: 0;
+  font-size: 1.02rem;
+  color: #2e2e2e;
+}
+
+.truffle-identity-type-pairs p {
+  margin: 0.24rem 0 0;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.truffle-identity-type-words {
+  margin-top: 0.78rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.truffle-identity-type-words span {
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(1.15rem, 2vw, 1.7rem);
+  letter-spacing: -0.02em;
+  color: #2e2e2e;
+}
+
+.truffle-identity-swatches {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem 0.6rem;
+}
+
+.truffle-identity-swatches span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: #2e2e2e;
+}
+
+.truffle-identity-swatches i {
+  width: 13px;
+  height: 13px;
+  border-radius: 99px;
+  border: 1px solid rgba(46, 46, 46, 0.22);
+}
+
+.truffle-identity-pattern {
+  margin: 0.85rem 0 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(65, 26, 2, 0.1);
+  background: #f7f6f2;
+}
+
+.truffle-identity-pattern img {
+  width: 100%;
+  height: 92px;
+  object-fit: cover;
+  opacity: 0.75;
+  display: block;
+}
+
+.truffle-identity-graphic {
+  margin-top: 1.15rem;
+  border-radius: 22px;
+  border: 1px solid rgba(105, 211, 179, 0.24);
+  background: rgba(255, 255, 255, 0.76);
+  padding: 1rem;
+}
+
+.truffle-identity-graphic-head p {
+  margin: 0.58rem 0 0;
+  max-width: 62ch;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.truffle-identity-product-stage {
+  margin-top: 0.9rem;
+  position: relative;
+  min-height: 430px;
+  border-radius: 20px;
+  background: rgba(247, 246, 242, 0.9);
+  overflow: hidden;
+}
+
+.truffle-identity-stage-accent {
+  position: absolute;
+  width: 360px;
+  height: 220px;
+  border-radius: 50%;
+  background: rgba(105, 211, 179, 0.2);
+  right: 70px;
+  top: 90px;
+}
+
+.truffle-identity-product {
+  position: absolute;
+  margin: 0;
+  filter: drop-shadow(0 12px 24px rgba(46, 46, 46, 0.12));
+}
+
+.truffle-identity-product img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.truffle-identity-product-hero { width: 330px; left: 22px; bottom: 12px; z-index: 3; }
+.truffle-identity-product-teddy { width: 126px; left: 300px; bottom: 36px; z-index: 4; }
+.truffle-identity-product-passdog { width: 148px; left: 370px; top: 38px; z-index: 3; }
+.truffle-identity-product-passcat { width: 148px; left: 524px; top: 40px; z-index: 3; }
+.truffle-identity-product-id { width: 118px; left: 700px; top: 170px; z-index: 4; }
+.truffle-identity-product-arness { width: 144px; left: 420px; bottom: 38px; z-index: 3; }
+.truffle-identity-product-necklace { width: 140px; left: 570px; bottom: 24px; z-index: 3; }
+.truffle-identity-product-ceramic { width: 132px; right: 186px; bottom: 56px; z-index: 3; }
+.truffle-identity-product-drink { width: 122px; right: 72px; bottom: 64px; z-index: 3; }
+.truffle-identity-product-totebrown { width: 158px; right: 172px; top: 26px; z-index: 2; }
+.truffle-identity-product-totegreen { width: 146px; right: 24px; top: 24px; z-index: 2; }
+
+
+.truffle-identity-closing {
+  margin: 1rem auto 0 !important;
+  max-width: 740px;
+  text-align: center;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(105, 211, 179, 0.35);
+  background: rgba(105, 211, 179, 0.16);
+  color: #2e2e2e;
+  font-weight: 600;
+}
+
+@media (max-width: 1180px) {
+  .truffle-why-story-stack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .truffle-why-story-stack .truffle-why-story-card:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  .truffle-why-story-copy p:last-child {
+    max-width: 42ch;
+  }
+
+  .truffle-identity-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .truffle-identity-top-grid,
+  .truffle-identity-type-color {
+    grid-template-columns: 1fr;
+  }
+
+  .truffle-identity-mascot-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .truffle-identity-product-stage {
+    min-height: 520px;
+  }
+
+  .truffle-identity-product-hero { width: 300px; left: 18px; }
+  .truffle-identity-product-teddy { width: 112px; left: 258px; }
+  .truffle-identity-product-passdog { width: 128px; left: 350px; }
+  .truffle-identity-product-passcat { width: 128px; left: 488px; }
+  .truffle-identity-product-id { width: 102px; left: 620px; }
+  .truffle-identity-product-arness { width: 130px; left: 380px; }
+  .truffle-identity-product-necklace { width: 122px; left: 518px; }
+}
+
+@media (max-width: 920px) {
+  .truffle-identity-mascot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .truffle-identity-swatches {
+    grid-template-columns: 1fr;
+  }
+
+  .truffle-identity-product-stage {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+    padding: 0.7rem;
+  }
+
+  .truffle-identity-stage-accent {
+    display: none;
+  }
+
+  .truffle-identity-product {
+    position: static;
+    width: auto !important;
+  }
+
+  .truffle-identity-product img {
+    width: 100%;
+    height: 120px;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 14px;
+    padding: 0.25rem;
+  }
+}
+
+@media (max-width: 920px) {
+  .truffle-why-story-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .truffle-why-story-stack .truffle-why-story-card:nth-child(3) {
+    grid-column: auto;
+  }
+}
+
+.truffle-brand-grid {
+  display: grid;
+  gap: 0.78rem;
+  margin-top: 1rem;
+}
+
+.truffle-brand-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.truffle-brand-grid-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.truffle-brand-grid-four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.truffle-brand-grid-five {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.truffle-brand-mini-card {
+  border-radius: 16px;
+  border: 1px solid rgba(64, 26, 2, 0.14);
+  background: rgba(247, 246, 242, 0.92);
+  padding: 0.82rem 0.88rem 0.86rem;
+}
+
+.truffle-brand-mini-card p {
+  margin-top: 0.45rem;
+  font-size: 0.92rem;
+}
+
+.truffle-brand-placeholder {
+  margin: 0;
+  min-height: 190px;
+  border-radius: 18px;
+  border: 1px dashed rgba(64, 26, 2, 0.32);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(247, 246, 242, 0.92));
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 0.8rem;
+}
+
+.truffle-brand-placeholder figcaption {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #5b4f48;
+}
+
+.truffle-brand-color-card {
+  border-radius: 16px;
+  border: 1px solid rgba(64, 26, 2, 0.14);
+  background: rgba(255, 255, 255, 0.88);
+  padding: 0.75rem;
+}
+
+.truffle-brand-swatch {
+  width: 100%;
+  height: 76px;
+  border-radius: 10px;
+  border: 1px solid rgba(46, 46, 46, 0.14);
+}
+
+.truffle-brand-hex {
+  margin-top: 0.56rem;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.07em;
+  color: #6d5e53 !important;
+}
+
+.truffle-brand-tags {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.truffle-brand-tags span {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.42rem 0.7rem;
+  border: 1px solid rgba(64, 26, 2, 0.2);
+  background: rgba(255, 255, 255, 0.82);
+  color: #2e2e2e;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.truffle-brand-final {
+  margin-top: 1rem !important;
+  font-size: 1.06rem !important;
+  font-weight: 600;
+  color: #401a02 !important;
+}
+
 .truffle-prototype-showcase {
   background: #f5f5f5;
   padding: 96px 24px;
@@ -1117,6 +2067,8 @@ h2 {
 }
 
 .macbook-screen-slot iframe {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   border: 0;
@@ -3034,4 +3986,752 @@ h2 {
     font-size: 15px;
     line-height: 1.7;
   }
+}
+
+/* Editorial redesign: The world of Truffle */
+.truffle-identity-world {
+  border: none;
+  background: #faf9f7;
+  padding: clamp(2rem, 3vw, 3rem);
+}
+
+.truffle-identity-world::before {
+  opacity: 0.05;
+  background-size: 160px auto;
+}
+
+.truffle-identity-block + .truffle-identity-block {
+  margin-top: clamp(2.2rem, 4vw, 4.2rem);
+}
+
+.truffle-identity-block-hero {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(1.4rem, 3vw, 3rem);
+  align-items: center;
+}
+
+.truffle-identity-copy h2 {
+  font-size: clamp(2.1rem, 4.6vw, 4.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-top: 0.42rem;
+}
+
+.truffle-identity-copy p {
+  max-width: 44ch;
+  font-size: 1.02rem;
+}
+
+.truffle-identity-logo-stage {
+  min-height: clamp(260px, 34vw, 420px);
+  position: relative;
+}
+
+.truffle-identity-logo {
+  margin: 0;
+  position: absolute;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+  padding: 0.7rem;
+}
+
+.truffle-identity-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.truffle-identity-logo-main {
+  width: min(72%, 420px);
+  left: 50%;
+  transform: translateX(-50%);
+  top: 6%;
+  z-index: 3;
+}
+
+.truffle-identity-logo-secondary-a {
+  width: min(34%, 200px);
+  left: 6%;
+  bottom: 6%;
+  z-index: 2;
+}
+
+.truffle-identity-logo-secondary-b {
+  width: min(34%, 200px);
+  right: 6%;
+  bottom: 6%;
+  z-index: 2;
+}
+
+.truffle-identity-block-foundations {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.4rem, 2.8vw, 2.6rem);
+}
+
+.truffle-identity-foundation-intro {
+  margin: 0.58rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.truffle-identity-mini-label {
+  margin: 0;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(46, 46, 46, 0.64) !important;
+}
+
+.truffle-identity-type-samples {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.truffle-identity-type-samples h3 {
+  margin: 0.25rem 0 0;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  letter-spacing: -0.02em;
+}
+
+.truffle-identity-blacker-word {
+  font-family: "Blacker Shield", "Montserrat", serif;
+}
+
+.truffle-identity-type-samples p {
+  margin: 0.28rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.truffle-identity-type-words {
+  margin-top: 1.2rem;
+  gap: 0.9rem;
+}
+
+.truffle-identity-type-words span {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: #2e2e2e;
+}
+
+.truffle-identity-swatches-large {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.truffle-identity-swatches-large span {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-radius: 999px;
+  padding: 0.42rem 0.62rem;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 0.76rem;
+}
+
+.truffle-identity-swatches-large i {
+  width: 13px;
+  height: 13px;
+  border-radius: 99px;
+  border: 1px solid rgba(46, 46, 46, 0.2);
+}
+
+.truffle-identity-color-extras {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.truffle-identity-pattern,
+.truffle-identity-ui-mockup {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.truffle-identity-pattern img {
+  height: 126px;
+  opacity: 0.5;
+}
+
+.truffle-identity-ui-mockup img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* Fallback without :has for Why Truffle background pattern */
+.why-truffle-section {
+  position: relative;
+  overflow: hidden;
+  background-image: url("assets/tarjeta_patron.png") !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.why-truffle-section::before {
+  content: none !important;
+}
+
+.why-truffle-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Remove all page background treatment only on project-truffle */
+body.truffle-prototype-page,
+body.truffle-prototype-page .trf-page,
+body.truffle-prototype-page .truffle-brand-story {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Keep navigation visible on project-truffle */
+body.truffle-prototype-page .site-header {
+  background: #ffffff !important;
+  background-image: none !important;
+}
+
+.truffle-visual-identity-section {
+  width: 100%;
+  min-height: clamp(320px, 48vh, 560px);
+  border-radius: 28px;
+  padding: clamp(2.8rem, 6vw, 5.2rem) clamp(1.2rem, 3vw, 2rem);
+  display: grid;
+  place-items: start center;
+}
+
+.truffle-visual-identity-section h2 {
+  margin: 0;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #2e2e2e;
+}
+
+.truffle-visual-identity-hero-image {
+  width: min(100%, 1100px);
+  margin: clamp(1.25rem, 3vw, 2.2rem) auto 0;
+}
+
+.truffle-visual-identity-hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.truffle-mascot-split {
+  width: min(100%, 1100px);
+  margin: clamp(2.2rem, 4.6vw, 3.8rem) auto 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+  gap: clamp(1.2rem, 3vw, 2.8rem);
+  align-items: center;
+}
+
+.truffle-mascot-copy {
+  text-align: left;
+}
+
+.truffle-mascot-copy h3 {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #2e2e2e;
+}
+
+.truffle-mascot-copy p {
+  margin: 1rem 0 0;
+  font-size: clamp(1rem, 1.35vw, 1.1rem);
+  line-height: 1.7;
+  color: #2e2e2e;
+  max-width: 62ch;
+}
+
+.truffle-mascot-visual {
+  margin: 0;
+  width: min(100%, 260px);
+  justify-self: center;
+}
+
+.truffle-mascot-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.truffle-mascot-pillars {
+  width: min(100%, 1100px);
+  margin: clamp(2.2rem, 4.6vw, 3.8rem) auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.9rem, 2.1vw, 1.4rem);
+}
+
+.truffle-mascot-pillar-card {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(220px, 24vw, 270px);
+  border-radius: 22px;
+  padding: clamp(1.4rem, 2.6vw, 2rem);
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  background: #69d3b3;
+  border: 1px solid rgba(105, 211, 179, 0.55);
+  box-shadow: 0 16px 34px rgba(46, 46, 46, 0.08);
+}
+
+.truffle-mascot-pillar-card h4 {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(1.55rem, 2vw, 2rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #2e2e2e;
+}
+
+.truffle-mascot-pillar-card p {
+  margin: 1rem 0 0;
+  max-width: 24ch;
+  font-size: clamp(1.02rem, 1.5vw, 1.15rem);
+  line-height: 1.45;
+  color: #2e2e2e;
+}
+
+.truffle-identity-foundations {
+  width: min(100%, 1150px);
+  margin: clamp(2.8rem, 5.6vw, 4.8rem) auto 0;
+}
+
+.truffle-identity-block-head {
+  border-bottom: 3px solid #2e2e2e;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.truffle-identity-block-head h3 {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(1.35rem, 2.2vw, 2.05rem);
+  font-weight: 700;
+  color: #2e2e2e;
+}
+
+.truffle-identity-color-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.8rem, 2vw, 1.4rem);
+  margin-bottom: clamp(2rem, 4vw, 3.2rem);
+}
+
+.truffle-identity-color-item p {
+  margin: 0.75rem 0 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  font-weight: 700;
+  color: rgba(46, 46, 46, 0.75);
+}
+
+.truffle-identity-color-item span {
+  display: block;
+  margin-top: 0.25rem;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  font-weight: 600;
+  color: #2e2e2e;
+}
+
+.truffle-identity-chip {
+  height: clamp(54px, 6.2vw, 72px);
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.truffle-identity-chip-cream {
+  background: #f7f6f2;
+}
+
+.truffle-identity-type-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.8vw, 2.8rem);
+}
+
+.truffle-identity-type-item h4 {
+  margin: 0 0 0.45rem;
+  color: #2e2e2e;
+}
+
+.truffle-identity-type-item p {
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: #2e2e2e;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.truffle-identity-type-blacker h4,
+.truffle-identity-type-blacker p {
+  font-family: "Blacker Shield", "Montserrat", serif;
+}
+
+.truffle-identity-type-blacker h4 {
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
+}
+
+.truffle-identity-type-blacker p {
+  font-size: clamp(0.95rem, 1.2vw, 1.2rem);
+}
+
+.truffle-identity-type-montserrat h4,
+.truffle-identity-type-montserrat p {
+  font-family: "Montserrat", sans-serif;
+}
+
+.truffle-identity-type-montserrat h4 {
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
+  font-weight: 500;
+}
+
+.truffle-identity-type-montserrat p {
+  font-size: clamp(0.95rem, 1.2vw, 1.2rem);
+  font-weight: 500;
+}
+
+.truffle-tone-identity {
+  width: min(100%, 1150px);
+  margin: clamp(2.8rem, 5.6vw, 4.8rem) auto 0;
+}
+
+.truffle-tone-intro {
+  margin: 1rem 0 0;
+  max-width: 95ch;
+  text-align: left;
+  font-size: clamp(1rem, 1.45vw, 1.2rem);
+  line-height: 1.35;
+  color: #2e2e2e;
+}
+
+.truffle-tone-orbit {
+  position: relative;
+  margin-top: 1.3rem;
+  min-height: clamp(340px, 38vw, 470px);
+}
+
+.truffle-tone-center {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  width: clamp(120px, 12vw, 165px);
+}
+
+.truffle-tone-center img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.truffle-tone-chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: clamp(120px, 11vw, 180px);
+  height: clamp(36px, 3.2vw, 42px);
+  padding: 0 1rem;
+  border-radius: 999px;
+  border: 1.5px solid #69d3b3 !important;
+  background: rgba(255, 255, 255, 0.85);
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(0.86rem, 1.1vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #2e2e2e;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.truffle-tone-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(46, 46, 46, 0.12);
+  background: #ffffff;
+}
+
+.chip-joyful { top: 6%; left: 2%; }
+.chip-calming { top: 3%; left: 32%; }
+.chip-supportive { top: 1%; right: 1%; }
+.chip-positive { top: 34%; left: 16%; }
+.chip-sensitive { top: 14%; right: 28%; }
+.chip-inviting { top: 36%; right: 10%; }
+.chip-characterful { top: 66%; left: 4%; }
+.chip-meaningful { top: 63%; right: 23%; }
+.chip-bright { bottom: 4%; left: 30%; }
+.chip-cool { bottom: 11%; right: 4%; }
+
+.truffle-merch-hero {
+  width: min(100%, 1150px);
+  margin: clamp(3.2rem, 6.2vw, 5.6rem) auto 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(1.2rem, 3.2vw, 3rem);
+  align-items: center;
+}
+
+.truffle-merch-copy {
+  text-align: left;
+}
+
+.truffle-merch-copy h3 {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(2.1rem, 4.3vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: #111111;
+  max-width: 9ch;
+}
+
+.truffle-merch-copy p {
+  margin-top: 1rem !important;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.02rem, 1.6vw, 1.24rem) !important;
+  line-height: 1.45 !important;
+  color: #3a3a3a !important;
+}
+
+.truffle-merch-visual {
+  margin: 0;
+}
+
+.truffle-merch-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.truffle-merch-grid-section {
+  width: min(100%, 1150px);
+  margin: clamp(2.6rem, 5vw, 4.4rem) auto 0;
+}
+
+.truffle-merch-count {
+  margin: 0 0 1rem;
+  text-align: left;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2e2e2e;
+}
+
+.truffle-merch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 2.2vw, 1.5rem);
+}
+
+.truffle-merch-item {
+  text-align: left;
+}
+
+.truffle-merch-item-visual {
+  margin: 0;
+  background: #f1f1f1;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.truffle-merch-item-visual img {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  display: block;
+}
+
+.truffle-merch-item h4 {
+  margin: 0.78rem 0 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.truffle-merch-item p {
+  margin: 0.3rem 0 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.95rem;
+  color: #5c5c5c;
+}
+
+.truffle-merch-swatch-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.55rem;
+}
+
+.truffle-merch-swatch-row span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.swatch-mint {
+  background: #69d3b3;
+}
+
+.swatch-brown {
+  background: #6b5043;
+}
+
+@media (max-width: 920px) {
+  .truffle-mascot-split {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .truffle-mascot-copy p {
+    max-width: none;
+  }
+
+  .truffle-mascot-pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .truffle-mascot-pillar-card {
+    min-height: 200px;
+  }
+
+  .truffle-identity-color-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .truffle-identity-type-row {
+    grid-template-columns: 1fr;
+  }
+
+  .truffle-tone-orbit {
+    min-height: 0;
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
+
+  .truffle-tone-center {
+    position: static;
+    transform: none;
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 130px;
+    margin: 0.2rem 0 0.6rem;
+  }
+
+  .truffle-tone-chip {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    justify-self: stretch;
+  }
+
+  .truffle-merch-hero {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .truffle-merch-copy h3 {
+    max-width: none;
+  }
+
+  .truffle-merch-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .truffle-merch-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.truffle-closing-cta {
+  width: min(1150px, 92vw);
+  margin: clamp(2.2rem, 5vw, 4.5rem) auto clamp(3rem, 6vw, 5rem);
+}
+
+.truffle-closing-cta-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: clamp(1.6rem, 3.4vw, 3rem);
+  background-color: #69d3b3;
+  background-image: url("assets/patron_trufas_transparent.png");
+  background-repeat: repeat;
+  background-size: 1800px auto;
+  background-position: center;
+  border: 1px solid rgba(105, 211, 179, 0.3);
+  box-shadow: 0 16px 40px rgba(46, 46, 46, 0.08);
+  text-align: center;
+}
+
+.truffle-closing-cta-card h2 {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(1.7rem, 3.2vw, 2.8rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: #2e2e2e;
+}
+
+.truffle-closing-cta-card p {
+  margin: clamp(0.8rem, 1.8vw, 1.2rem) auto 0;
+  max-width: 72ch;
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  line-height: 1.55;
+  color: #3a3a3a;
+}
+
+.truffle-closing-cta-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(1rem, 2.2vw, 1.5rem);
+  padding: 0.76rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid #2e2e2e;
+  background: rgba(255, 255, 255, 0.94);
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  color: #2e2e2e;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, border-color 160ms ease;
+  box-shadow: 0 8px 20px rgba(46, 46, 46, 0.12);
+}
+
+.truffle-closing-cta-link:hover {
+  transform: translateY(-1px);
+  background: #ffffff;
+  border-color: #69d3b3;
+  box-shadow: 0 10px 22px rgba(46, 46, 46, 0.16);
 }

@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "dev": "python3 -m http.server 5173",
-    "start": "python3 -m http.server 5173"
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "start": "vite --host 0.0.0.0 --port 5173"
   },
   "dependencies": {
     "pngjs": "^7.0.0"
