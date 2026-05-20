@@ -18,20 +18,22 @@
     <div class="custom-cursor" aria-hidden="true"></div>
 
     <header class="site-header">
-      <a class="brand" href="index.html#top" aria-label="Go to home">
-        <img class="brand-icon" src="assets/logo-flower-clean.png" alt="Sara Hereda flower logo" />
-        <span class="brand-text">Sara Hereda<span class="dot">.</span></span>
-      </a>
+      <div class="site-header-inner">
+        <a class="brand" href="index.html#top" aria-label="Go to home">
+          <img class="brand-icon" src="assets/logo-flower-clean.png" alt="Sara Hereda flower logo" />
+          <span class="brand-text">Sara Hereda<span class="dot">.</span></span>
+        </a>
 
-      <button class="menu-btn" aria-expanded="false" aria-controls="menu">
-        <span></span><span></span>
-      </button>
+        <button class="menu-btn" aria-expanded="false" aria-controls="menu">
+          <span></span><span></span>
+        </button>
 
-      <nav id="menu" class="nav-links" aria-label="Main">
-        <a href="index.html#top">Home</a>
-        <a href="projects.html">Projects</a>
-        <a href="#top">About</a>
-      </nav>
+        <nav id="menu" class="nav-links" aria-label="Main">
+          <a href="index.html#top">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="#top">About</a>
+        </nav>
+      </div>
     </header>
 
     <main class="about-page reveal">
@@ -39,7 +41,7 @@
         <div class="about-hero-pattern" aria-hidden="true"></div>
 
         <div class="about-hero-copy">
-          <h1>About me</h1>
+          <h1>About me<span class="dot">.</span></h1>
           <p>
             My name is Sara Hereda and my path into design didn’t start with screens. It started with learning how to observe people,
             animals and situations closely.
@@ -84,7 +86,7 @@
           </div>
           <div class="about-story-intro-media" aria-hidden="true">
             <img src="assets/horse_sara.png" alt="Sara with a horse" />
-            <img src="assets/horse.png" alt="Horse portrait" />
+            <img class="about-story-intro-horse" src="assets/horse.png" alt="Horse portrait" />
           </div>
         </div>
 
@@ -141,15 +143,18 @@
 
       <section class="about-closing-card" aria-label="Closing call to action">
         <div class="about-closing-card-pattern" aria-hidden="true"></div>
-        <h2>Thanks for taking the time to get to know me.</h2>
-        <p>Want to talk about design, pets, products or future opportunities?</p>
+        <img class="about-closing-logo-mark" src="assets/logo-flower-clean.png" alt="" aria-hidden="true" />
+        <div class="about-closing-copy">
+          <h2>Thanks for taking the time to get to know me<span class="footer-title-dot">.</span></h2>
+          <p>Want to talk about design, pets, products or future opportunities?</p>
+        </div>
 
         <div class="about-closing-actions" aria-label="Contact options">
           <!-- TODO: replace with actual CV file path when available -->
-          <a href="#" class="about-closing-btn" aria-label="Read my CV">Read my CV</a>
-          <a href="mailto:saraheredadesign@gmail.com" class="about-closing-btn" aria-label="Send me an email">Send me an email</a>
+          <a href="#" class="btn btn-dark" aria-label="Read my CV">Read my CV</a>
+          <a href="mailto:saraheredadesign@gmail.com" class="btn btn-dark" aria-label="Send me an email">Send me an email</a>
           <!-- TODO: replace with actual LinkedIn profile URL when available -->
-          <a href="#" class="about-closing-btn about-closing-btn-linkedin" aria-label="LinkedIn">LinkedIn</a>
+          <a href="#" class="btn btn-light" aria-label="LinkedIn">LinkedIn</a>
         </div>
       </section>
     </main>

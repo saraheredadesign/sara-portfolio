@@ -7,34 +7,222 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@700;800&family=Manrope:wght@500;700;800&family=Montserrat:wght@600;700;800&family=Syne:wght@500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@700;800&family=Manrope:wght@500;700;800&family=Montserrat:wght@600;700;800&family=Schibsted+Grotesk:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="page-schultz">
     <div id="top"></div>
     <div class="custom-cursor" aria-hidden="true"></div>
     <header class="site-header">
-      <a class="brand" href="index.html#top" aria-label="Go to home">
-        <img class="brand-icon" src="assets/logo-flower-clean.png" alt="Sara Hereda flower logo" />
-        <span class="brand-text">Sara Hereda<span class="dot">.</span></span>
-      </a>
+      <div class="site-header-inner">
+        <a class="brand" href="index.html#top" aria-label="Go to home">
+          <img class="brand-icon" src="assets/logo-flower-clean.png" alt="Sara Hereda flower logo" />
+          <span class="brand-text">Sara Hereda<span class="dot">.</span></span>
+        </a>
 
-      <button class="menu-btn" aria-expanded="false" aria-controls="menu">
-        <span></span><span></span>
-      </button>
+        <button class="menu-btn" aria-expanded="false" aria-controls="menu">
+          <span></span><span></span>
+        </button>
 
-      <nav id="menu" class="nav-links" aria-label="Main">
-        <a href="index.html#top">Home</a>
-        <a href="projects.html">Projects</a>
-        <a href="about.html">About</a>
-      </nav>
+        <nav id="menu" class="nav-links" aria-label="Main">
+          <a href="index.html#top">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
     </header>
-    <main class="project-info-page reveal">
-      <p class="eyebrow">Project details</p>
-      <h1 class="info-title">Schultz' Studios</h1>
-      <p class="info-copy">Case study page ready for your final mockups and full process notes.</p>
+    <main class="schultz-page reveal">
+      <section class="schultz-hero" aria-label="Schultz Studios project intro">
+        <div class="schultz-hero-copy">
+          <h1 class="info-title">Schultz’ Studios</h1>
+          <p class="info-copy">
+            A small creative studio created with my partner, where we share UX projects, code experiments, design explorations and
+            interesting findings through our blog.
+          </p>
+          <p class="schultz-goal-copy">
+            Our goal is simple: to create a place where our work can grow over time, from small experiments to more complete digital
+            products.
+          </p>
+          <a
+            class="btn btn-light schultz-hero-cta"
+            href="https://www.schultz-studios.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Explore our space
+          </a>
+        </div>
+
+        <aside class="schultz-hero-preview" aria-label="Schultz Studios system preview">
+          <img src="assets/02_the_system.png" alt="Schultz Studios system visual preview" />
+        </aside>
+      </section>
+
+      <section class="schultz-sections" aria-label="Schultz Studios case study details">
+        <article class="schultz-section-card schultz-about-card">
+          <h2 class="schultz-design-direction-title">About the website</h2>
+
+          <div class="schultz-about-layout">
+            <figure class="schultz-about-visual">
+              <img src="assets/welcomeSchultz.png" alt="Welcome visual for Schultz Studios website" />
+            </figure>
+
+            <div class="schultz-site-structure" aria-label="Website pages and descriptions">
+              <div class="schultz-site-row">
+                <p class="schultz-site-page">Home</p>
+                <p class="schultz-site-description">introduces the studio and gives a preview of our work.</p>
+              </div>
+              <div class="schultz-site-row">
+                <p class="schultz-site-page">About Us</p>
+                <p class="schultz-site-description">
+                  explains who we are, how we work together and the values behind Schultz’ Studios.
+                </p>
+              </div>
+              <div class="schultz-site-row">
+                <p class="schultz-site-page">Lab</p>
+                <p class="schultz-site-description">
+                  where we publish UX projects, code experiments and visual explorations.
+                </p>
+              </div>
+              <div class="schultz-site-row">
+                <p class="schultz-site-page">Blog</p>
+                <p class="schultz-site-description">collects articles, references and ideas that inspire us.</p>
+              </div>
+              <div class="schultz-site-row">
+                <p class="schultz-site-page">Contact</p>
+                <p class="schultz-site-description">where people can reach us anytime.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="schultz-section-card schultz-about-card schultz-design-card">
+          <h2 class="schultz-design-direction-title">Design direction</h2>
+          <p>
+            We wanted Schultz’ Studios to feel different from a typical portfolio or studio website. Instead of going for a very
+            neutral or corporate look, we built the concept around space, exploration and the idea of moving towards the future.
+          </p>
+
+          <section class="schultz-design-module" aria-label="Typography and colour palette">
+            <article class="schultz-design-block schultz-design-typography">
+              <h3>Typography</h3>
+              <p class="schultz-design-font-name">Schibsted Grotesk</p>
+              <p class="schultz-design-specimen">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+              <p class="schultz-design-specimen">abcdefghijklmnopqrstuvwxyz</p>
+              <p class="schultz-design-specimen">0123456789</p>
+              <p class="schultz-design-note">Used for a clean, readable and slightly tech-oriented visual identity.</p>
+            </article>
+
+            <article class="schultz-design-block schultz-design-palette">
+              <h3>Colour palette</h3>
+
+              <div class="schultz-palette-group">
+                <p class="schultz-palette-group-title">Neutral dark</p>
+                <div class="schultz-swatch-grid schultz-swatch-grid-main">
+                  <article class="schultz-swatch-item">
+                    <span class="schultz-swatch-chip" style="background:#0C0D11"></span>
+                    <p>Space Black</p>
+                    <code>#0C0D11</code>
+                  </article>
+                  <article class="schultz-swatch-item">
+                    <span class="schultz-swatch-chip" style="background:#2A2C32"></span>
+                    <p>Border Dark</p>
+                    <code>#2A2C32</code>
+                  </article>
+                  <article class="schultz-swatch-item">
+                    <span class="schultz-swatch-chip" style="background:#595B61"></span>
+                    <p>Muted Grey</p>
+                    <code>#595B61</code>
+                  </article>
+                  <article class="schultz-swatch-item">
+                    <span class="schultz-swatch-chip" style="background:#989A9E"></span>
+                    <p>Soft Grey</p>
+                    <code>#989A9E</code>
+                  </article>
+                  <article class="schultz-swatch-item schultz-swatch-item-light">
+                    <span class="schultz-swatch-chip schultz-swatch-chip--light" style="background:#E1E3E7"></span>
+                    <p>Off White</p>
+                    <code>#E1E3E7</code>
+                  </article>
+                </div>
+              </div>
+
+              <div class="schultz-palette-group schultz-palette-group-accent">
+                <div class="schultz-palette-group-head">
+                  <p class="schultz-palette-group-title">Lab red exclusive</p>
+                  <p class="schultz-palette-note">Used only inside the Lab page.</p>
+                </div>
+                <div class="schultz-swatch-grid schultz-swatch-grid-accent">
+                  <article class="schultz-swatch-item schultz-swatch-item-accent">
+                    <span class="schultz-swatch-chip" style="background:#FF4B4B"></span>
+                    <p>Lab Red</p>
+                    <code>#FF4B4B</code>
+                  </article>
+                  <article class="schultz-swatch-item">
+                    <span class="schultz-swatch-chip schultz-swatch-chip--translucent" style="background:rgba(255,75,75,0.18)"></span>
+                    <p>Lab Red Soft</p>
+                    <code>rgba(255, 75, 75, 0.18)</code>
+                  </article>
+                  <article class="schultz-swatch-item">
+                    <span class="schultz-swatch-chip schultz-swatch-chip--translucent" style="background:rgba(255,92,92,0.24)"></span>
+                    <p>Lab Red Line</p>
+                    <code>rgba(255, 92, 92, 0.24)</code>
+                  </article>
+                  <article class="schultz-swatch-item">
+                    <span class="schultz-swatch-chip schultz-swatch-chip--translucent" style="background:rgba(255,62,62,0.20)"></span>
+                    <p>Lab Red Glow</p>
+                    <code>rgba(255, 62, 62, 0.20)</code>
+                  </article>
+                </div>
+              </div>
+            </article>
+          </section>
+        </article>
+
+        <article class="schultz-section-card schultz-about-card schultz-origin-section">
+          <figure class="schultz-origin-map">
+            <img src="assets/01_schultz_dark.png" alt="Google Maps view of Schultz' Gate in Oslo" />
+          </figure>
+
+          <div class="schultz-origin-content">
+            <h2 class="schultz-design-direction-title schultz-origin-title">Why Schultz’?</h2>
+            <div class="schultz-origin-copy">
+              <p>
+                The name Schultz comes from Schultz’ Gate, the first street we lived on when we moved to Norway.
+              </p>
+              <p>
+                Moving to another country was a big step for us, and that street became a symbol of that new beginning.
+              </p>
+              <p>
+                Naming the studio after that street felt natural. 
+                Now, it also represents another step forward: creating a space where we can build, experiment and grow together.
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="schultz-closing-cta" aria-label="Schultz Studios closing call to action">
+        <img class="schultz-closing-watermark" src="assets/02_the_system.png" alt="" aria-hidden="true" />
+        <div class="schultz-closing-copy">
+          <h2 class="schultz-design-direction-title">Step into our space.</h2>
+          <p>Explore Schultz’ Studios, see what we are building, or reach out if you want to connect.</p>
+        </div>
+
+        <div class="schultz-closing-actions" aria-label="Schultz contact options">
+          <a
+            class="btn btn-dark schultz-closing-btn schultz-closing-btn-primary"
+            href="https://www.schultz-studios.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Enter the website
+          </a>
+          <a class="btn btn-light schultz-closing-btn" href="mailto:saraheredadesign@gmail.com">Email us</a>
+        </div>
+      </section>
     </main>
     <script src="script.js"></script>
   </body>

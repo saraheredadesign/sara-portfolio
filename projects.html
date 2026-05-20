@@ -18,25 +18,25 @@
     <div class="custom-cursor" aria-hidden="true"></div>
 
     <header class="site-header">
-      <a class="brand" href="index.html#top" aria-label="Go to home">
-        <img class="brand-icon" src="assets/logo-flower-clean.png" alt="Sara Hereda flower logo" />
-        <span class="brand-text">Sara Hereda<span class="dot">.</span></span>
-      </a>
+      <div class="site-header-inner">
+        <a class="brand" href="index.html#top" aria-label="Go to home">
+          <img class="brand-icon" src="assets/logo-flower-clean.png" alt="Sara Hereda flower logo" />
+          <span class="brand-text">Sara Hereda<span class="dot">.</span></span>
+        </a>
 
-      <button class="menu-btn" aria-expanded="false" aria-controls="menu">
-        <span></span><span></span>
-      </button>
+        <button class="menu-btn" aria-expanded="false" aria-controls="menu">
+          <span></span><span></span>
+        </button>
 
-      <nav id="menu" class="nav-links" aria-label="Main">
-        <a href="index.html#top">Home</a>
-        <a href="#top">Projects</a>
-        <a href="about.html">About</a>
-      </nav>
+        <nav id="menu" class="nav-links" aria-label="Main">
+          <a href="index.html#top">Home</a>
+          <a href="#top">Projects</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
     </header>
 
     <main class="projects-page reveal" id="home">
-      <h1 class="projects-title">Projects</h1>
-
       <section class="projects-grid" aria-label="Project grid">
         <a class="project-tile project-tile-truffle" href="project-truffle.html">
           <img src="assets/portada_truffle.png" alt="Truffle project cover" />
@@ -55,12 +55,36 @@
         </a>
 
         <a class="project-tile project-tile-moveit" href="project-moveit.html">
-          <img src="/projects/moveit-cover.webp" alt="MoveIT project cover" loading="lazy" />
+          <img src="assets/portada_moveit.png" alt="MoveIT project cover" loading="lazy" />
           <div class="project-tile-meta">
             <h2>MoveIT</h2>
             <p>Smartwatch App</p>
           </div>
         </a>
+
+        <article class="project-tile project-tile-placeholder" aria-label="More projects coming soon">
+          <div class="project-tile-placeholder-meta">
+            <h2>More work is coming</h2>
+            <p>New case studies are taking shape.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="about-closing-card" aria-label="Closing call to action">
+        <div class="about-closing-card-pattern" aria-hidden="true"></div>
+        <img class="about-closing-logo-mark" src="assets/logo-flower-clean.png" alt="" aria-hidden="true" />
+        <div class="about-closing-copy">
+          <h2>Thanks for exploring my work<span class="footer-title-dot">.</span></h2>
+          <p>Have a project idea, a design opportunity, or want to chat about one of my case studies? I’d love to hear from you.</p>
+        </div>
+
+        <div class="about-closing-actions" aria-label="Contact options">
+          <!-- TODO: replace with actual CV file path when available -->
+          <a href="#" class="btn btn-dark" aria-label="Read my CV">Read my CV</a>
+          <a href="mailto:saraheredadesign@gmail.com" class="btn btn-dark" aria-label="Send me an email">Send me an email</a>
+          <!-- TODO: replace with actual LinkedIn profile URL when available -->
+          <a href="#" class="btn btn-light" aria-label="LinkedIn">LinkedIn</a>
+        </div>
       </section>
     </main>
 

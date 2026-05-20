@@ -242,11 +242,32 @@ if (cursor && desktopPointer) {
       cursor.classList.remove('is-black');
     });
   });
+
+  document.querySelectorAll('.process-row').forEach((row) => {
+    row.addEventListener('mouseenter', () => {
+      cursor.classList.add('is-black');
+    });
+
+    row.addEventListener('mouseleave', () => {
+      cursor.classList.remove('is-black');
+    });
+  });
+
+  document.querySelectorAll('.about-timeline-item').forEach((item) => {
+    item.addEventListener('mouseenter', () => {
+      cursor.classList.add('is-black');
+    });
+
+    item.addEventListener('mouseleave', () => {
+      cursor.classList.remove('is-black');
+    });
+  });
 }
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMoveitPage = document.body.classList.contains('moveit-dark-page');
 
-if (!reducedMotion) {
+if (!reducedMotion && !isMoveitPage) {
   let bg = document.querySelector('.calm-lavender-bg');
   if (!bg) {
     bg = document.createElement('div');
