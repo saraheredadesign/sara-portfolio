@@ -272,6 +272,26 @@ if (cursor && desktopPointer) {
       cursor.classList.remove('is-black');
     });
   });
+
+  document.querySelectorAll('body.moveit-dark-page .prototype-button').forEach((button) => {
+    button.addEventListener('mouseenter', () => {
+      cursor.classList.add('is-black');
+    });
+
+    button.addEventListener('mouseleave', () => {
+      cursor.classList.remove('is-black');
+    });
+  });
+
+  document.querySelectorAll('body.moveit-dark-page .moveit-detail-card').forEach((card) => {
+    card.addEventListener('mouseenter', () => {
+      cursor.classList.add('is-black');
+    });
+
+    card.addEventListener('mouseleave', () => {
+      cursor.classList.remove('is-black');
+    });
+  });
 }
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -1014,6 +1014,15 @@ h2 {
   transform: translateY(0);
 }
 
+@media (max-width: 768px) {
+  .about-page.reveal,
+  .about-page.reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .lavender-layer,
   .lavender-glow {
@@ -6329,6 +6338,17 @@ body.truffle-prototype-page .site-header {
   color: #3c3132;
 }
 
+.about-hero-copy .prototype-button:hover,
+.about-hero-copy .prototype-button:focus-visible {
+  background: #2e2e2e;
+  color: #f7f6f2;
+  border-color: #2e2e2e;
+}
+
+.about-hero-copy .prototype-button {
+  margin-top: 36px;
+}
+
 .about-hero-media {
   justify-self: end;
   width: min(100%, 380px);
@@ -6354,7 +6374,7 @@ body.truffle-prototype-page .site-header {
   }
 
   .about-hero-copy .prototype-button {
-    margin-top: 28px;
+    margin-top: 40px;
   }
 
   .about-hero-media {
