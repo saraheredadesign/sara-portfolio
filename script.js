@@ -262,6 +262,16 @@ if (cursor && desktopPointer) {
       cursor.classList.remove('is-black');
     });
   });
+
+  document.querySelectorAll('.schultz-explore-btn').forEach((button) => {
+    button.addEventListener('mouseenter', () => {
+      cursor.classList.add('is-black');
+    });
+
+    button.addEventListener('mouseleave', () => {
+      cursor.classList.remove('is-black');
+    });
+  });
 }
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
