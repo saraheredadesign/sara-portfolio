@@ -3,7 +3,8 @@
 Proyecto portfolio listo para abrir en servidor local.
 
 ## Requisitos
-
+**Frontend**
+Frontend
 - Node.js 18 o superior
 
 ## Como abrirlo
