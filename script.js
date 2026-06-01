@@ -51,6 +51,7 @@ if (letterFxTitle && !letterFxTitle.dataset.processed) {
     words.forEach((word, wordIndex) => {
       const wordSpan = document.createElement('span');
       wordSpan.className = 'word';
+      wordSpan.classList.add(`line-${lineIndex + 1}`);
       for (const char of word) {
         const span = document.createElement('span');
         span.className = 'char';
@@ -82,14 +83,13 @@ const focusWordEl = document.querySelector('[data-focus-word]');
 
 if (focusWordEl) {
   const focusWords = [
-    'empathy',
-    'user research',
-    'prototyping and wireframing',
-    'solid visual design',
-    'usability testing',
-    'clear communication',
-    'teamwork',
-    'adaptability and learning'
+    'care',
+    'structure',
+    'clarity',
+    'usable products',
+    'real needs and small details',
+    'iteration',
+    'team work'
   ];
 
   let wordIndex = 0;
@@ -99,9 +99,9 @@ if (focusWordEl) {
   let phaseStarted = 0;
 
   const speed = {
-    type: 65,
-    blink: 520,
-    select: 360
+    type: 95,
+    blink: 760,
+    select: 520
   };
 
   const tickFocusWord = (time) => {
@@ -189,6 +189,59 @@ if (processRows.length && processImages.length) {
   setActiveProcessStep(activeRow?.dataset.processStep ?? processRows[0].dataset.processStep);
 }
 
+const heroGalleryScroll = document.querySelector('[data-hero-gallery-scroll]');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (heroGalleryScroll && !prefersReducedMotion) {
+  heroGalleryScroll.addEventListener(
+    'wheel',
+    (event) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
+        return;
+      }
+
+      const atStart = heroGalleryScroll.scrollLeft <= 0;
+      const atEnd =
+        heroGalleryScroll.scrollLeft + heroGalleryScroll.clientWidth >= heroGalleryScroll.scrollWidth - 1;
+
+      if ((event.deltaY < 0 && atStart) || (event.deltaY > 0 && atEnd)) {
+        return;
+      }
+
+      event.preventDefault();
+      heroGalleryScroll.scrollLeft += event.deltaY * 0.95;
+    },
+    { passive: false }
+  );
+}
+
+const projectSelectorButtons = Array.from(document.querySelectorAll('[data-featured-project]'));
+const truffleFeaturedPanel = document.querySelector('[data-featured-panel="truffle"]');
+const schultzFeaturedPanel = document.querySelector('[data-featured-panel="schultz"]');
+
+if (projectSelectorButtons.length && truffleFeaturedPanel && schultzFeaturedPanel) {
+  const setFeaturedProject = (projectKey) => {
+    const showTruffle = projectKey === 'truffle';
+
+    truffleFeaturedPanel.classList.toggle('is-hidden', !showTruffle);
+    schultzFeaturedPanel.classList.toggle('is-hidden', showTruffle);
+
+    projectSelectorButtons.forEach((button) => {
+      const isActive = button.dataset.featuredProject === projectKey;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+  };
+
+  projectSelectorButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      setFeaturedProject(button.dataset.featuredProject);
+    });
+  });
+
+  setFeaturedProject('truffle');
+}
+
 const cursor = document.querySelector('.custom-cursor');
 const desktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -213,7 +266,7 @@ if (cursor && desktopPointer) {
     cursor.classList.remove('is-visible');
   });
 
-  document.querySelectorAll('.meta-item').forEach((item) => {
+  document.querySelectorAll('.meta-item:not(#project-schultz-featured .meta-item)').forEach((item) => {
     item.addEventListener('mouseenter', () => {
       cursor.classList.add('is-black');
     });
@@ -223,11 +276,25 @@ if (cursor && desktopPointer) {
     });
   });
 
+  document.querySelectorAll('#project-schultz-featured .meta-item').forEach((item) => {
+    item.addEventListener('mouseenter', () => {
+      cursor.classList.remove('is-black');
+    });
+  });
+
   const heroTitle = document.querySelector('.hero-title');
   if (heroTitle) {
-    heroTitle.addEventListener('mouseenter', () => {
-      cursor.classList.add('is-black');
+    heroTitle.querySelectorAll('.char').forEach((charEl) => {
+      charEl.addEventListener('mouseenter', () => {
+        const becomesPinkOnHover = !charEl.closest('.word.line-2') && !charEl.classList.contains('hero-dot');
+        if (becomesPinkOnHover) {
+          cursor.classList.add('is-black');
+        } else {
+          cursor.classList.remove('is-black');
+        }
+      });
     });
+
     heroTitle.addEventListener('mouseleave', () => {
       cursor.classList.remove('is-black');
     });
@@ -289,6 +356,16 @@ if (cursor && desktopPointer) {
     });
 
     card.addEventListener('mouseleave', () => {
+      cursor.classList.remove('is-black');
+    });
+  });
+
+  document.querySelectorAll('.btn-dark').forEach((button) => {
+    button.addEventListener('mouseenter', () => {
+      cursor.classList.add('is-black');
+    });
+
+    button.addEventListener('mouseleave', () => {
       cursor.classList.remove('is-black');
     });
   });

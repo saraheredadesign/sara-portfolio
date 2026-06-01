@@ -47,29 +47,258 @@
           <h1
             class="hero-title"
             data-letterfx="true"
-            data-line1="Hi, I’m Sara"
-            data-line2=""
+            data-line1="Hi, I'm Sara"
+            data-line2="UX & UI designer"
             data-line3="it's nice to meet you."
           >
             Hi, I’m Sara.<br />
             UX & UI Designer.
           </h1>
           <p class="hero-copy">
-            I’m a UX/UI designer bringing care, structure and a product mindset into digital experiences. Madrid raised, Oslo based. <br />
+            I design digital experiences with care, structure and attention to the small details people usually overlook.
+From Madrid, based in Oslo. <br />
           </p>
+          <div class="hero-cta">
+            <a class="btn btn-dark btn-home-cta" href="projects.html">Explore my projects</a>
+          </div>
         </div>
         <div class="hero-image-wrap">
-          <img class="hero-image" src="/assets/sarita_happy.png" alt="Sara smiling portrait" />
+          <img class="hero-image" src="/assets/1sara_hero.png" alt="Sara smiling portrait" />
         </div>
       </section>
 
+      <section class="truffle-intro-head reveal" aria-label="Truffle featured project intro">
+        <p>Recent ideas turned into experiences</p>
+      </section>
+
+      <section class="featured-project-selector reveal" aria-label="Featured project selector">
+        <div class="project-segmented-toggle" role="tablist" aria-label="Featured project selector">
+          <button
+            class="project-segmented-option is-active"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            aria-label="Show Truffle project"
+            data-featured-project="truffle"
+          >
+            Truffle
+          </button>
+          <button
+            class="project-segmented-option"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-label="Show Schultz’ Studios project"
+            data-featured-project="schultz"
+          >
+            Schultz’ Studios
+          </button>
+        </div>
+      </section>
+
+      <div data-featured-panel="truffle">
+      <section class="truffle-teaser-card reveal" aria-label="Featured Truffle teaser">
+        <a class="truffle-teaser-inner" href="project-truffle.html" aria-label="View Truffle project" data-featured-teaser-link>
+          <div class="truffle-teaser-media">
+            <video class="truffle-teaser-video" autoplay muted loop playsinline webkit-playsinline preload="auto" data-featured-teaser-video>
+              <source src="/assets/truffle_onboarding_view.mp4" type="video/mp4" data-featured-teaser-source />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <div class="truffle-teaser-copy">
+            <h2 data-featured-teaser-title>Truffle</h2>
+            <p data-featured-teaser-subtitle>A calmer way to care for your pet.</p>
+            <span class="truffle-teaser-cta" data-featured-teaser-cta>See case study</span>
+          </div>
+        </a>
+      </section>
+
+      <section class="featured-transition reveal" aria-label="Featured project introduction"></section>
+
+      <section id="project" class="single-project reveal">
+        
+        <!-- Saved for later use:
+        <div class="project-video-wrap">
+          <video class="project-video" autoplay loop muted playsinline preload="auto">
+            <source src="assets/project-video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        -->
+
+        <section class="project-meta-bar" aria-label="Project metadata">
+          <div class="meta-item">
+            <p class="meta-label">ROLE</p>
+            <p class="meta-value" data-featured-meta-role>UX/UI Designer</p>
+          </div>
+          <div class="meta-item">
+            <p class="meta-label">SCOPE</p>
+            <p class="meta-value">End to end</p>
+          </div>
+          <div class="meta-item">
+            <p class="meta-label">TYPE</p>
+            <p class="meta-value" data-featured-meta-type>Personal</p>
+          </div>
+          <div class="meta-item">
+            <p class="meta-label">FOCUS</p>
+            <p class="meta-value" data-featured-meta-focus>Mobile App</p>
+          </div>
+        </section>
+
+        <section class="project-details-two-col" aria-label="About Truffle">
+          <div class="project-image-col">
+            <img
+              src="assets/mockup_truffle01.png"
+              alt="Truffle app presentation screens on mobile devices"
+              data-featured-intro-image
+            />
+          </div>
+          <div class="project-copy-col">
+            <h3 data-featured-intro-title>The easiest way to care for your pet</h3>
+            <p data-featured-intro-p1>
+              Truffle is a mobile experience designed to make everyday pet care
+              feel lighter, clearer, and more intentional.
+            </p>
+            <p data-featured-intro-p2>
+              Helping pet owners manage routines, track health, and keep
+              essential information in one simple, structured place.
+            </p>
+          </div>
+        </section>
+
+        <div class="truffle-intro-actions">
+          <a class="btn btn-dark btn-truffle-cta" href="project-truffle.html" data-featured-explore-link>Explore Truffle</a>
+          <a class="project-copy-link" href="projects.html">View all projects &#8250;</a>
+        </div>
+      </section>
+      </div>
+
+      <div data-featured-panel="schultz" class="is-hidden">
+      <section class="truffle-teaser-card truffle-teaser-card--schultz reveal" aria-label="Featured Schultz Studios teaser">
+        <a class="truffle-teaser-inner truffle-teaser-inner--schultz" href="project-schultz-studios.html" aria-label="View Schultz Studios project">
+          <div class="truffle-teaser-media">
+            <video class="truffle-teaser-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
+              <source src="/assets/schultz_preview.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <div class="truffle-teaser-copy">
+            <h2>Schultz' Studios</h2>
+            <p>A small creative studio website</p>
+            <span class="truffle-teaser-cta">See case study</span>
+          </div>
+        </a>
+      </section>
+
+      <section class="featured-transition reveal" aria-label="Featured project introduction"></section>
+
+      <section id="project-schultz-featured" class="single-project reveal">
+        <section class="project-meta-bar" aria-label="Project metadata">
+          <div class="meta-item">
+            <p class="meta-label">ROLE</p>
+            <p class="meta-value">UX/UI Designer</p>
+          </div>
+          <div class="meta-item">
+            <p class="meta-label">SCOPE</p>
+            <p class="meta-value">Brand &amp; Website</p>
+          </div>
+          <div class="meta-item">
+            <p class="meta-label">TYPE</p>
+            <p class="meta-value">Personal studio</p>
+          </div>
+          <div class="meta-item">
+            <p class="meta-label">FOCUS</p>
+            <p class="meta-value">Web Design</p>
+          </div>
+        </section>
+
+        <section class="project-details-two-col" aria-label="About Schultz’ Studios">
+          <div class="project-image-col">
+            <img
+              src="assets/mockup_schultz00.png"
+              alt="Schultz Studios website preview"
+            />
+          </div>
+          <div class="project-copy-col">
+            <h3>A small studio website with a space-inspired visual system</h3>
+            <p>
+              Schultz’ Studios is a creative website concept built to present a
+              small digital studio with a bold, minimal and atmospheric identity.
+            </p>
+            <p>
+              The project explores visual direction, responsive web design and a
+              more cinematic way to present digital services online.
+            </p>
+          </div>
+        </section>
+
+        <div class="truffle-intro-actions">
+          <a class="btn btn-dark btn-schultz-cta" href="project-schultz-studios.html">Explore Schultz’ Studios</a>
+          <a class="project-copy-link" href="projects.html">View all projects &#8250;</a>
+        </div>
+      </section>
+      </div>
+
       <section class="home-section-gap" aria-hidden="true"></section>
 
-      <section class="hero-typing-panel reveal" aria-label="Core focus">
-        <h2 class="focus-title">Design approach</h2>
-        <p class="focus-typing" aria-live="polite">
-          <span class="focus-word" data-focus-word></span><span class="focus-caret" aria-hidden="true"></span>
-        </p>
+      <section class="design-tools-band reveal" aria-label="Design approach and tools">
+        <div class="hero-typing-panel" aria-label="Core focus">
+          <h2 class="focus-title">Design approach</h2>
+          <p class="focus-typing" aria-live="polite">
+            <span class="focus-word" data-focus-word></span><span class="focus-caret" aria-hidden="true"></span>
+          </p>
+        </div>
+
+        <section class="tools-strip" aria-label="Tools I use">
+          <div class="tools-floating-grid" aria-label="Tools and skills">
+            <button class="tool-float" type="button" aria-label="Figma">
+              <img src="/assets/Figma.png" alt="Figma icon" />
+              <span class="tool-float-label">Figma</span>
+            </button>
+            <button class="tool-float" type="button" aria-label="FigJam">
+              <img src="/assets/FigJam.png" alt="FigJam icon" />
+              <span class="tool-float-label">FigJam</span>
+            </button>
+            <button class="tool-float" type="button" aria-label="Miro">
+              <img src="/assets/Miro.png" alt="Miro icon" />
+              <span class="tool-float-label">Miro</span>
+            </button>
+            <button class="tool-float" type="button" aria-label="Canva">
+              <img src="/assets/Canva.png" alt="Canva icon" />
+              <span class="tool-float-label">Canva</span>
+            </button>
+            <button class="tool-float" type="button" aria-label="VS Code">
+              <img src="/assets/VSCode.png" alt="VS Code icon" />
+              <span class="tool-float-label">VS Code</span>
+            </button>
+            <button class="tool-float" type="button" aria-label="HTML / CSS basics">
+              <img src="/assets/CSS_basics.png" alt="HTML / CSS basics icon" />
+              <span class="tool-float-label">HTML / CSS basics</span>
+            </button>
+            <button class="tool-float" type="button" aria-label="Codex">
+              <img src="/assets/Codex.png" alt="Codex icon" />
+              <span class="tool-float-label">Codex</span>
+            </button>
+            <button class="tool-float" type="button" aria-label="ChatGPT">
+              <img src="/assets/ChatGPT.png" alt="ChatGPT icon" />
+              <span class="tool-float-label">ChatGPT</span>
+            </button>
+            <button class="tool-float" type="button" aria-label="Accessibility basics">
+              <img src="/assets/Accesibility_basics.png" alt="Accessibility basics icon" />
+              <span class="tool-float-label">Accessibility basics</span>
+            </button>
+            <button class="tool-float" type="button" aria-label="Responsive design">
+              <img src="/assets/Responsive_design.png" alt="Responsive design icon" />
+              <span class="tool-float-label">Responsive design</span>
+            </button>
+            <button class="tool-float" type="button" aria-label="AI-assisted workflows">
+              <img src="/assets/AI-asisted_workkflows.png" alt="AI-assisted workflows icon" />
+              <span class="tool-float-label">AI-assisted workflows</span>
+            </button>
+          </div>
+        </section>
       </section>
 
       <section class="home-section-gap" aria-hidden="true"></section>
@@ -101,58 +330,20 @@
 
       <section class="home-section-gap" aria-hidden="true"></section>
 
-      <section class="featured-transition reveal" aria-label="Featured project introduction">
-        <h2 class="focus-title featured-transition-title">Where process becomes product</h2>
-      </section>
-
-      <section id="project" class="single-project reveal">
-        <h2 id="welcome-to-truffle" class="project-title">Welcome to Truffle</h2>
-        <div class="project-video-wrap">
-          <video class="project-video" autoplay loop muted playsinline preload="auto">
-            <source src="assets/project-video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+      <section class="about-note-card reveal" aria-label="A little about me">
+        <div class="about-note-title-col">
+          <span class="about-note-accent" aria-hidden="true"></span>
+          <h2>From care<br />to design</h2>
         </div>
-
-        <section class="project-meta-bar" aria-label="Project metadata">
-          <div class="meta-item">
-            <p class="meta-label">ROLE</p>
-            <p class="meta-value">UX/UI Designer</p>
-          </div>
-          <div class="meta-item">
-            <p class="meta-label">DURATION</p>
-            <p class="meta-value">10 weeks</p>
-          </div>
-          <div class="meta-item">
-            <p class="meta-label">TYPE</p>
-            <p class="meta-value">Personal</p>
-          </div>
-          <div class="meta-item">
-            <p class="meta-label">FOCUS</p>
-            <p class="meta-value">Mobile App</p>
-          </div>
-        </section>
-
-        <section class="project-details-two-col" aria-label="About Truffle">
-          <div class="project-image-col">
-            <img
-              src="assets/presentation-screens.png"
-              alt="Truffle app presentation screens on mobile devices"
-            />
-          </div>
-          <div class="project-copy-col">
-            <h3>The easiest way to care for your pet</h3>
-            <p>
-              Truffle is a mobile experience designed to make everyday pet care
-              feel lighter, clearer, and more intentional.
-            </p>
-            <p>
-              Helping pet owners manage routines, track health, and keep
-              essential information in one simple, structured place.
-            </p>
-          </div>
-        </section>
+        <div class="about-note-content-col">
+          <p>
+            My path into design started far from the screen. In veterinary care, I learned to observe carefully, stay calm under pressure and notice the small signals people don’t always say out loud. Today, I bring that same care, trust and attention to detail into digital products.
+          </p>
+          <a class="about-note-link" href="/about">Read more about me &#8594;</a>
+        </div>
       </section>
+
+      <section class="home-section-gap" aria-hidden="true"></section>
 
       <section class="about-closing-card" aria-label="Closing call to action">
         <div class="about-closing-card-pattern" aria-hidden="true"></div>
