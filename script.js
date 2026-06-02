@@ -330,6 +330,16 @@ if (cursor && desktopPointer) {
     });
   });
 
+  document.querySelectorAll('.story-timeline, .timeline-milestone, .timeline-icon-img').forEach((item) => {
+    item.addEventListener('mouseenter', () => {
+      cursor.classList.add('is-black');
+    });
+
+    item.addEventListener('mouseleave', () => {
+      cursor.classList.remove('is-black');
+    });
+  });
+
   document.querySelectorAll('.schultz-explore-btn').forEach((button) => {
     button.addEventListener('mouseenter', () => {
       cursor.classList.add('is-black');
