@@ -446,3 +446,296 @@ if (!reducedMotion && !isMoveitPage) {
   window.addEventListener('mouseleave', onLeave);
   raf = requestAnimationFrame(tick);
 }
+const aboutSlider = document.querySelector('[data-about-slider]');
+
+if (aboutSlider) {
+  const sliderButtons = Array.from(aboutSlider.querySelectorAll('[data-about-slide]'));
+  const sliderPanels = Array.from(aboutSlider.querySelectorAll('[data-about-panel]'));
+  const galleryNodes = Array.from(aboutSlider.querySelectorAll('[data-about-gallery]'));
+  let indicatorResetTimer = null;
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const aboutCarouselImages = {
+    animals: [
+      'assets/carrousel_1/sara_vet0.png',
+      'assets/carrousel_1/sara_vet1.png',
+      'assets/carrousel_1/sara_vet2.png'
+    ],
+    design: [
+      'assets/carrousel_2/sara_studio0.png',
+      'assets/carrousel_2/sara_studio1.png',
+      'assets/carrousel_2/sara_studio2.png',
+      'assets/carrousel_2/sara_studio3.png'
+    ],
+    life: [
+      'assets/carrousel_3/life_0.png',
+      'assets/carrousel_3/life_1.png',
+      'assets/carrousel_3/life_2.png',
+      'assets/carrousel_3/life_3.png'
+    ]
+  };
+  const galleryState = new Map();
+  const galleryTransitionMs = 460;
+
+  const positionIndicator = (activeButton) => {
+    const sliderIndicator = aboutSlider.querySelector('.about-slider-indicator');
+    const sliderToggle = aboutSlider.querySelector('.about-slider-toggle');
+
+    if (!sliderIndicator || !activeButton || !sliderToggle) {
+      return;
+    }
+
+    const toggleStyles = window.getComputedStyle(sliderToggle);
+    const inset = parseFloat(toggleStyles.paddingLeft) || 0;
+
+    sliderIndicator.style.width = `${activeButton.offsetWidth}px`;
+    sliderIndicator.style.transform = `translateX(${activeButton.offsetLeft - inset}px)`;
+  };
+
+  const animateIndicator = () => {
+    const sliderIndicator = aboutSlider.querySelector('.about-slider-indicator');
+
+    if (!sliderIndicator) {
+      return;
+    }
+
+    sliderIndicator.classList.add('is-moving');
+    if (indicatorResetTimer) {
+      window.clearTimeout(indicatorResetTimer);
+    }
+    indicatorResetTimer = window.setTimeout(() => {
+      sliderIndicator.classList.remove('is-moving');
+      indicatorResetTimer = null;
+    }, 460);
+  };
+
+  const setLayerState = (layer, stateName) => {
+    layer.classList.toggle('is-active', stateName === 'active');
+    layer.classList.toggle('is-exiting', stateName === 'exiting');
+    layer.classList.toggle('is-hidden', stateName === 'hidden');
+  };
+
+  const stopTransitionTimer = (state) => {
+    if (!state?.transitionTimerId) {
+      return;
+    }
+
+    window.clearTimeout(state.transitionTimerId);
+    state.transitionTimerId = null;
+  };
+
+  const setGalleryImage = (state, index, immediate = false) => {
+    if (!state?.layers?.length || !state.images.length) {
+      return;
+    }
+
+    const nextIndex = index % state.images.length;
+    const nextSrc = state.images[nextIndex];
+    const activeLayerIndex = state.activeLayerIndex ?? 0;
+    const incomingLayerIndex = 1 - activeLayerIndex;
+    const activeLayer = state.layers[activeLayerIndex];
+    const incomingLayer = state.layers[incomingLayerIndex];
+
+    stopTransitionTimer(state);
+
+    if (state.activeThumb) {
+      state.activeThumb.classList.remove('is-active');
+      state.activeThumb.setAttribute('aria-current', 'false');
+    }
+
+    if (state.thumbButtons?.[nextIndex]) {
+      state.thumbButtons[nextIndex].classList.add('is-active');
+      state.thumbButtons[nextIndex].setAttribute('aria-current', 'true');
+      state.activeThumb = state.thumbButtons[nextIndex];
+    }
+
+    if (immediate || reducedMotionQuery.matches || state.images.length === 1) {
+      state.index = nextIndex;
+      state.activeLayerIndex = 0;
+      activeLayer.src = nextSrc;
+      setLayerState(activeLayer, 'active');
+      setLayerState(incomingLayer, 'hidden');
+      return;
+    }
+
+    incomingLayer.src = nextSrc;
+    setLayerState(incomingLayer, 'hidden');
+    incomingLayer.getBoundingClientRect();
+
+    window.requestAnimationFrame(() => {
+      setLayerState(activeLayer, 'exiting');
+      setLayerState(incomingLayer, 'active');
+    });
+
+    state.transitionTimerId = window.setTimeout(() => {
+      setLayerState(activeLayer, 'hidden');
+      setLayerState(incomingLayer, 'active');
+      state.activeLayerIndex = incomingLayerIndex;
+      state.index = nextIndex;
+      state.transitionTimerId = null;
+    }, galleryTransitionMs);
+  };
+
+  const renderGallery = (slideKey) => {
+    const state = galleryState.get(slideKey);
+    if (!state) {
+      return;
+    }
+
+    if (!state.images.length) {
+      return;
+    }
+
+    const mainIndex = state.index ?? 0;
+    const alternateIndex = 1 - (state.activeLayerIndex ?? 0);
+    const mainLayer = state.layers[state.activeLayerIndex ?? 0];
+    const hiddenLayer = state.layers[alternateIndex];
+    state.layers.forEach((layer, layerIndex) => {
+      if (layerIndex === (state.activeLayerIndex ?? 0)) {
+        setLayerState(layer, 'active');
+      } else {
+        setLayerState(layer, 'hidden');
+      }
+    });
+
+    state.images.forEach((src) => {
+      const preload = new Image();
+      preload.src = src;
+    });
+
+    state.thumbButtons.forEach((button, index) => {
+      button.classList.toggle('is-active', index === mainIndex);
+      button.setAttribute('aria-current', index === mainIndex ? 'true' : 'false');
+    });
+
+    if (mainLayer && hiddenLayer) {
+      mainLayer.src = state.images[mainIndex];
+      hiddenLayer.src = state.images[mainIndex];
+    }
+  };
+
+  const setAboutSlide = (slideKey) => {
+    sliderButtons.forEach((button) => {
+      const isActive = button.dataset.aboutSlide === slideKey;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    sliderPanels.forEach((panel) => {
+      const isActive = panel.dataset.aboutPanel === slideKey;
+      panel.classList.toggle('is-active', isActive);
+      panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+    });
+
+    animateIndicator();
+    positionIndicator(sliderButtons.find((button) => button.dataset.aboutSlide === slideKey));
+
+    galleryState.forEach((state, key) => {
+      if (key !== slideKey) {
+        state.index = 0;
+      }
+    });
+
+    const state = galleryState.get(slideKey);
+    if (state) {
+      state.index = 0;
+      state.activeLayerIndex = 0;
+      setGalleryImage(state, 0, true);
+    }
+  };
+
+  galleryNodes.forEach((gallery) => {
+    const slideKey = gallery.closest('[data-about-panel]')?.dataset.aboutPanel;
+    const mainImage = gallery.querySelector('[data-about-gallery-image]');
+    const thumbRail = gallery.querySelector('[data-about-gallery-thumbs]');
+    const images = aboutCarouselImages[slideKey] ?? [];
+
+    if (!slideKey || !mainImage || !thumbRail || !images.length) {
+      return;
+    }
+
+    const galleryMain = gallery.querySelector('.about-gallery-main');
+    const overlayImage = mainImage.cloneNode(true);
+    overlayImage.removeAttribute('data-about-gallery-image');
+    overlayImage.alt = '';
+    overlayImage.setAttribute('aria-hidden', 'true');
+    overlayImage.classList.remove('is-active', 'is-exiting');
+    overlayImage.classList.add('is-hidden');
+    galleryMain?.appendChild(overlayImage);
+
+    const layers = [mainImage, overlayImage];
+    const thumbButtons = [];
+    thumbRail.innerHTML = '';
+
+    images.forEach((src, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'about-gallery-thumb';
+      button.setAttribute('aria-label', `Show image ${index + 1} for ${slideKey}`);
+      button.setAttribute('aria-current', index === 0 ? 'true' : 'false');
+      button.dataset.imageSrc = src;
+
+      const thumbImage = document.createElement('img');
+      thumbImage.src = src;
+      thumbImage.alt = '';
+      thumbImage.setAttribute('aria-hidden', 'true');
+      button.appendChild(thumbImage);
+
+      button.addEventListener('click', () => {
+        const state = galleryState.get(slideKey);
+        if (!state) {
+          return;
+        }
+
+        const clickedSrc = button.dataset.imageSrc;
+        const clickedIndex = state.images.indexOf(clickedSrc);
+        if (clickedIndex === -1) {
+          return;
+        }
+
+        state.index = clickedIndex;
+        setGalleryImage(state, clickedIndex, false);
+      });
+
+      thumbRail.appendChild(button);
+      thumbButtons.push(button);
+    });
+
+    galleryState.set(slideKey, {
+      layers,
+      images,
+      thumbButtons,
+      index: 0,
+      activeLayerIndex: 0,
+      transitionTimerId: null,
+      activeThumb: thumbButtons[0] ?? null
+    });
+
+    setLayerState(layers[0], 'active');
+    if (layers[1]) {
+      setLayerState(layers[1], 'hidden');
+    }
+  });
+
+  sliderButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      setAboutSlide(button.dataset.aboutSlide);
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    positionIndicator(sliderButtons.find((button) => button.classList.contains('is-active')));
+  });
+
+  requestAnimationFrame(() => {
+    const activeButton = sliderButtons.find((button) => button.classList.contains('is-active')) ?? sliderButtons[0];
+    if (activeButton) {
+      setAboutSlide(activeButton.dataset.aboutSlide);
+    }
+  });
+
+  window.addEventListener('beforeunload', () => {
+    galleryState.forEach((state) => {
+      stopTransitionTimer(state);
+    });
+  });
+}

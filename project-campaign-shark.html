@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campaign Shark | Sara Hereda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@700;800&family=Manrope:wght@500;700;800&family=Montserrat:wght@600;700;800&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="top"></div>
+    <div class="custom-cursor" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="index.html" aria-label="Go to home">
+          <img class="brand-icon" src="assets/logo-flower-clean.png" alt="Sara Hereda flower logo" />
+          <span class="brand-text">Sara Hereda<span class="dot">.</span></span>
+        </a>
+
+        <button class="menu-btn" aria-expanded="false" aria-controls="menu">
+          <span></span><span></span>
+        </button>
+
+        <nav id="menu" class="nav-links" aria-label="Main">
+          <a href="index.html">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="about.html">About</a>
+          <div class="project-menu-wrap">
+            <button
+              class="project-menu-trigger"
+              type="button"
+              aria-expanded="false"
+              aria-controls="project-menu"
+              data-project-menu-trigger
+            >
+              <span>My projects</span>
+              <span class="project-menu-trigger-icon" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </button>
+            <div class="project-menu-popover" id="project-menu" hidden data-project-menu>
+              <a href="project-truffle.html">Truffle</a>
+              <a href="project-campaign-shark.html">Campaign Shark</a>
+              <a href="project-schultz-studios.html">Schultz' Studios</a>
+              <a href="project-moveit.html">MoveIt</a>
+              <a href="project-flexee.html">Flexee</a>
+              <a class="project-menu-see-all" href="projects.html">See all projects</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="blank-page" aria-label="Campaign Shark">
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

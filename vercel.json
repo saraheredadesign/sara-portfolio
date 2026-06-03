@@ -17,6 +17,10 @@
     {
       "source": "/project-schultz-studios",
       "destination": "/project-schultz-studios.html"
+    },
+    {
+      "source": "/test",
+      "destination": "/test.html"
     }
   ]
 }
