@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="projects-page-html">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,7 +13,7 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="projects-page-body">
     <div id="top"></div>
     <div class="custom-cursor" aria-hidden="true"></div>
 
@@ -36,62 +36,109 @@
       </div>
     </header>
 
-    <main class="projects-page reveal" id="home">
-      <section class="projects-grid" aria-label="Project grid">
-        <a class="project-tile project-tile-truffle" href="project-truffle.html">
-          <img src="assets/portada_truffle.png" alt="Truffle project cover" />
-          <div class="project-tile-meta">
-            <h2>Truffle</h2>
-            <p>Mobile App</p>
+    <main class="projects-page" id="home">
+      <aside class="projects-progress" aria-hidden="true">
+        <span class="projects-progress-current" data-project-progress-current>01</span>
+        <span class="projects-progress-track">
+          <span class="projects-progress-fill" data-project-progress-fill></span>
+        </span>
+        <span class="projects-progress-end">04</span>
+      </aside>
+
+      <div class="projects-snap">
+        <section class="project-section" data-project-index="01" aria-label="Truffle project">
+          <div class="project-section-inner">
+            <a class="project-section-media-link" href="project-truffle.html" aria-label="View Truffle project">
+              <div class="project-section-media">
+                <img src="assets/portada_truffle.png" alt="Truffle project cover" />
+              </div>
+              <span class="project-section-hover-cta" aria-hidden="true">View project</span>
+            </a>
+            <div class="project-section-copy">
+              <div class="project-section-kicker">
+                <p class="project-section-name">Truffle</p>
+              </div>
+              <h2>A calmer way to care for your pet.</h2>
+              <p class="project-section-meta">Mobile app · UX/UI · Product design</p>
+              <a class="project-section-link" href="project-truffle.html">View project →</a>
+            </div>
           </div>
-        </a>
+        </section>
 
-        <a class="project-tile" href="project-schultz-studios.html">
-          <img src="assets/portadaSchultz.png" alt="Schultz Studios project cover" />
-          <div class="project-tile-meta">
-            <h2>Schultz' Studios</h2>
-            <p>Web Design for PC</p>
+        <section class="project-section" data-project-index="02" aria-label="Schultz Studios project">
+          <div class="project-section-inner">
+            <a class="project-section-media-link" href="project-schultz-studios.html" aria-label="View Schultz’ Studios project">
+              <div class="project-section-media">
+                <img src="assets/portadaSchultz.png" alt="Schultz Studios project cover" />
+              </div>
+              <span class="project-section-hover-cta" aria-hidden="true">View project</span>
+            </a>
+            <div class="project-section-copy">
+              <div class="project-section-kicker">
+                <p class="project-section-name">Schultz’ Studios</p>
+              </div>
+              <h2>Designing a digital space for creative technology.</h2>
+              <p class="project-section-meta">Web design · Visual design</p>
+              <a class="project-section-link" href="project-schultz-studios.html">View project →</a>
+            </div>
           </div>
-        </a>
+        </section>
 
-        <a class="project-tile project-tile-moveit" href="project-moveit.html">
-          <img src="assets/portada_moveit.png" alt="MoveIT project cover" loading="lazy" />
-          <div class="project-tile-meta">
-            <h2>MoveIT</h2>
-            <p>Smartwatch App and Mobile App</p>
+        <section class="project-section" data-project-index="03" aria-label="MoveIt project">
+          <div class="project-section-inner">
+            <a class="project-section-media-link" href="project-moveit.html" aria-label="View MoveIt project">
+              <div class="project-section-media">
+                <img src="assets/portada_moveit.png" alt="MoveIT project cover" loading="lazy" />
+              </div>
+              <span class="project-section-hover-cta" aria-hidden="true">View project</span>
+            </a>
+            <div class="project-section-copy">
+              <div class="project-section-kicker">
+                <p class="project-section-name">MoveIt</p>
+              </div>
+              <h2>Fitness tracking across mobile and smartwatch.</h2>
+              <p class="project-section-meta">Mobile app · Smartwatch app · UX/UI</p>
+              <a class="project-section-link" href="project-moveit.html">View project →</a>
+            </div>
           </div>
-        </a>
+        </section>
 
-        <a class="project-tile project-tile-moveit" href="project-flexee.html">
-          <img src="assets/portada_flexee.png" alt="Flexee project cover" loading="lazy" />
-          <div class="project-tile-meta">
-            <h2>Flexee</h2>
-            <p>UX/UI Mobile App</p>
+        <section class="project-section" data-project-index="04" aria-label="Flexee project">
+          <div class="project-section-inner">
+            <a class="project-section-media-link" href="project-flexee.html" aria-label="View Flexee project">
+              <div class="project-section-media">
+                <img src="assets/portada_flexee.png" alt="Flexee project cover" loading="lazy" />
+              </div>
+              <span class="project-section-hover-cta" aria-hidden="true">View project</span>
+            </a>
+            <div class="project-section-copy">
+              <div class="project-section-kicker">
+                <p class="project-section-name">Flexee</p>
+              </div>
+              <h2>Helping students find flexible work with more clarity.</h2>
+              <p class="project-section-meta">UX/UI · Mobile app</p>
+              <a class="project-section-link" href="project-flexee.html">View project →</a>
+            </div>
           </div>
-        </a>
+        </section>
+      </div>
 
-        <article class="project-tile project-tile-placeholder" aria-label="More projects coming soon">
-          <div class="project-tile-placeholder-meta">
-            <h2>More work is coming</h2>
-            <p>New case studies are taking shape.</p>
-          </div>
-        </article>
-      </section>
+      <section class="projects-ending" aria-label="Closing call to action">
+        <div class="projects-closing-cta">
+          <section class="about-closing-card" aria-label="Closing call to action">
+            <div class="about-closing-card-pattern" aria-hidden="true"></div>
+            <img class="about-closing-logo-mark" src="assets/logo-flower-clean.png" alt="" aria-hidden="true" />
+            <div class="about-closing-copy">
+              <h2>Thanks for exploring my work<span class="footer-title-dot">.</span></h2>
+              <p>Have a project idea, a design opportunity, or want to chat about one of my case studies? I’d love to hear from you.</p>
+            </div>
 
-      <section class="about-closing-card" aria-label="Closing call to action">
-        <div class="about-closing-card-pattern" aria-hidden="true"></div>
-        <img class="about-closing-logo-mark" src="assets/logo-flower-clean.png" alt="" aria-hidden="true" />
-        <div class="about-closing-copy">
-          <h2>Thanks for exploring my work<span class="footer-title-dot">.</span></h2>
-          <p>Have a project idea, a design opportunity, or want to chat about one of my case studies? I’d love to hear from you.</p>
-        </div>
-
-        <div class="about-closing-actions" aria-label="Contact options">
-          <!-- TODO: replace with actual CV file path when available -->
-          <a href="/assets/CV_Sara.pdf" class="btn btn-light" aria-label="Read my CV" target="_blank" rel="noopener noreferrer">Read my CV</a>
-          <a href="mailto:hello@saraheredadesign.com" class="btn btn-light" aria-label="Send me an email">Send me an email</a>
-          <!-- TODO: replace with actual LinkedIn profile URL when available -->
-          <a href="https://www.linkedin.com/in/saraheredadesign" class="btn btn-light" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <div class="about-closing-actions" aria-label="Contact options">
+              <a href="/assets/CV_Sara.pdf" class="btn btn-light" aria-label="Read my CV" target="_blank" rel="noopener noreferrer">Read my CV</a>
+              <a href="mailto:hello@saraheredadesign.com" class="btn btn-light" aria-label="Send me an email">Send me an email</a>
+              <a href="https://www.linkedin.com/in/saraheredadesign" class="btn btn-light" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+          </section>
         </div>
       </section>
     </main>
