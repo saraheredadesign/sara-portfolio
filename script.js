@@ -265,43 +265,6 @@ if (isProjectsPage && projectsProgress && projectsEnding) {
   endingObserver.observe(projectsEnding);
 }
 
-const projectMediaLinks = Array.from(document.querySelectorAll('.project-section-media-link'));
-
-if (isProjectsPage && desktopPointer && projectMediaLinks.length) {
-  projectMediaLinks.forEach((link) => {
-    const floatingCta = link.querySelector('.project-section-hover-cta');
-    const projectPageBody = document.body;
-
-    if (!floatingCta) {
-      return;
-    }
-
-    const hideFloatingCta = () => {
-      link.classList.remove('is-hovering');
-      projectPageBody.classList.remove('is-project-hover-cta-active');
-      floatingCta.style.opacity = '0';
-    };
-
-    const showFloatingCta = (event) => {
-      const rect = link.getBoundingClientRect();
-      const padding = 26;
-      const x = Math.min(Math.max(event.clientX - rect.left, padding), rect.width - padding);
-      const y = Math.min(Math.max(event.clientY - rect.top, padding), rect.height - padding);
-
-      link.classList.add('is-hovering');
-      projectPageBody.classList.add('is-project-hover-cta-active');
-      floatingCta.style.left = `${x}px`;
-      floatingCta.style.top = `${y}px`;
-      floatingCta.style.opacity = '1';
-    };
-
-    link.addEventListener('pointerenter', showFloatingCta);
-    link.addEventListener('pointermove', showFloatingCta);
-    link.addEventListener('pointerleave', hideFloatingCta);
-    link.addEventListener('focusout', hideFloatingCta);
-  });
-}
-
 if (heroGalleryScroll && !prefersReducedMotion) {
   heroGalleryScroll.addEventListener(
     'wheel',
