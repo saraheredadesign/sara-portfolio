@@ -5,6 +5,7 @@
   --line: #ddd6d2;
   --pink: #ffcdff;
   --pink-soft: #ffcdff;
+  --hero-spotlight-dark: #111111;
   --max: 1120px;
   --radius: 12px;
   --radius-card: 12px;
@@ -27,6 +28,45 @@ body {
   color: var(--ink);
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+body.has-custom-cursor,
+body.has-custom-cursor * {
+  cursor: none !important;
+}
+
+.custom-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow:
+    0 0 0 8px rgba(255, 205, 255, 0.18),
+    0 4px 10px rgba(17, 17, 17, 0.12);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) scale(1);
+  transition:
+    width 140ms cubic-bezier(0.2, 0, 0, 1),
+    height 140ms cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 120ms linear;
+  will-change: transform, width, height, box-shadow;
+}
+
+body.has-custom-cursor .custom-cursor {
+  opacity: 1;
+}
+
+.custom-cursor.is-black {
+  background: var(--pink) !important;
+}
+
+body.hero-reveal-cursor-active .custom-cursor {
+  visibility: hidden;
 }
 
 p,
@@ -88,41 +128,6 @@ button,
     radial-gradient(45% 35% at 72% 62%, rgba(203, 167, 225, 0.28), transparent 72%);
   filter: blur(18px);
 }
-
-body.has-custom-cursor,
-body.has-custom-cursor * {
-  cursor: none;
-}
-
-.custom-cursor {
-  position: fixed;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--pink);
-  box-shadow: 0 0 0 8px rgba(255, 205, 255, 0.18);
-  pointer-events: none;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 0;
-  transition: transform 140ms cubic-bezier(0.2, 0, 0, 1), opacity 180ms ease;
-}
-
-.custom-cursor.is-visible {
-  opacity: 1;
-}
-
-.custom-cursor.is-active {
-  transform: translate(-50%, -50%) scale(0.86);
-}
-
-.custom-cursor.is-black {
-  background: #121212;
-  box-shadow: 0 0 0 8px rgba(18, 18, 18, 0.12);
-}
-
 
 a {
   color: inherit;
@@ -259,7 +264,18 @@ main {
 .hero-copy-block {
   min-width: 0;
   margin-left: clamp(8px, 1vw, 12px);
+  position: relative;
+  isolation: isolate;
 }
+
+#hero-dark-cv {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: none;
+}
+
+#hero-dark-cv { z-index: 3; }
 
 .hero-image-wrap {
   justify-self: end;
@@ -307,6 +323,9 @@ h1 {
   word-break: normal;
   overflow-wrap: normal;
   hyphens: none;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
 }
 
 @media (min-width: 761px) {
@@ -320,41 +339,55 @@ h1 {
   white-space: nowrap;
 }
 
+.hero-title .hero-line {
+  display: block;
+  width: fit-content;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title .hero-line--accent {
+  z-index: 1;
+}
+
+.hero-title .hero-line--accent::after {
+  content: "";
+  position: absolute;
+  left: -0.09em;
+  right: -0.09em;
+  bottom: 0.06em;
+  height: 0.96em;
+  border-radius: 0.3em;
+  background: rgba(255, 205, 255, 0.88);
+  box-shadow:
+    0 0 0 1px rgba(255, 205, 255, 0.03),
+    0 12px 26px rgba(255, 205, 255, 0.08);
+  z-index: -1;
+  transform: skewX(-3deg);
+}
+
 .hero-title .char {
   display: inline-block;
   color: var(--ink);
-  transition:
-    color 220ms cubic-bezier(0.2, 0, 0, 1),
-    transform 220ms cubic-bezier(0.2, 0, 0, 1),
-    text-shadow 220ms cubic-bezier(0.2, 0, 0, 1);
-  will-change: color, transform;
+  transition: none;
+  will-change: auto;
 }
 
-.hero-title .char:hover {
-  color: var(--pink);
-  transform: translateY(-0.5px);
-  text-shadow: 0 0 12px rgba(255, 205, 255, 0.16);
-}
-
-.hero-title .word.line-2 .char {
-  color: var(--pink);
-}
-
-.hero-title .word.line-2 .char:hover {
-  color: var(--ink);
-}
-
-.hero-title .hero-dot {
-  color: var(--pink);
-}
-
-.hero-title .hero-dot:hover {
-  color: var(--ink);
-}
 
 @media (prefers-reduced-motion: reduce) {
   .hero-title .char {
     transition: none;
+  }
+}
+
+@media (hover: none), (pointer: coarse), (max-width: 767px), (prefers-reduced-motion: reduce) {
+  body.has-custom-cursor,
+  body.has-custom-cursor * {
+    cursor: auto !important;
+  }
+
+  .custom-cursor {
+    display: none;
   }
 }
 
@@ -1853,7 +1886,10 @@ h1 {
 }
 
 .btn-home-cta {
+  background: var(--pink);
   border-color: transparent;
+  color: #111827;
+  box-shadow: 0 12px 28px rgba(244, 169, 223, 0.32);
 }
 
 .btn-home-cta::before,
@@ -1864,10 +1900,10 @@ h1 {
 
 .btn-home-cta:hover,
 .btn-home-cta:focus-visible {
-  background: #ffcdff;
+  background: var(--ink);
   border-color: transparent;
-  color: #111827;
-  box-shadow: 0 12px 28px rgba(244, 169, 223, 0.42);
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(17, 17, 17, 0.18);
 }
 
 .btn-truffle-cta {
@@ -7968,7 +8004,7 @@ body.truffle-prototype-page .site-header {
 .about-hero {
   width: 100%;
   margin: 0 auto;
-  padding: clamp(3rem, 6vw, 5rem) 0 0;
+  padding: clamp(6.5rem, 10vw, 9rem) 0 clamp(6.5rem, 10vw, 9rem);
   display: flex;
   justify-content: center;
 }
@@ -7980,6 +8016,8 @@ body.truffle-prototype-page .site-header {
   gap: 2.25rem;
   align-items: center;
   text-align: center;
+  position: relative;
+  isolation: isolate;
 }
 
 .about-hero-eyebrow {
@@ -8000,16 +8038,45 @@ body.truffle-prototype-page .site-header {
   margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
   line-height: 0.95;
   font-size: clamp(2.15rem, 5vw, 4.15rem);
+  position: relative;
+  z-index: 1;
 }
 
-.about-hero-title .word.line-1,
-.about-hero-title .word.line-2 {
+#about-hero-dark-cv {
+  position: absolute;
+  inset: auto;
+  pointer-events: none;
+  display: none;
+  z-index: 3;
+}
+
+.about-hero-title .hero-line.line-1 {
   font-size: 1em;
 }
 
-.about-hero-title .word.line-3 {
+.about-hero-title .hero-line.line-2 {
   font-size: 0.64em;
   line-height: 1.02;
+}
+
+.about-hero-title .hero-line--accent::after {
+  content: none;
+}
+
+.about-hero-title .hero-line.line-1::after {
+  content: "";
+  position: absolute;
+  left: -0.09em;
+  right: -0.09em;
+  bottom: 0.06em;
+  height: 0.96em;
+  border-radius: 0.3em;
+  background: rgba(255, 205, 255, 0.88);
+  box-shadow:
+    0 0 0 1px rgba(255, 205, 255, 0.03),
+    0 12px 26px rgba(255, 205, 255, 0.08);
+  z-index: -1;
+  transform: skewX(-3deg);
 }
 
 .about-hero-media {
@@ -8354,7 +8421,7 @@ body.truffle-prototype-page .site-header {
     font-size: clamp(1.75rem, 8vw, 2.8rem);
   }
 
-  .about-hero-title .word.line-3 {
+  .about-hero-title .hero-line.line-2 {
     font-size: 0.62em;
   }
 }

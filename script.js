@@ -47,6 +47,12 @@ if (letterFxTitle && !letterFxTitle.dataset.processed) {
 
   const fragment = document.createDocumentFragment();
   sourceLines.forEach((lineText, lineIndex) => {
+    const lineSpan = document.createElement('span');
+    lineSpan.className = `hero-line line-${lineIndex + 1}`;
+    if (lineIndex === 1) {
+      lineSpan.classList.add('hero-line--accent');
+    }
+
     const words = lineText.split(' ');
     words.forEach((word, wordIndex) => {
       const wordSpan = document.createElement('span');
@@ -62,14 +68,12 @@ if (letterFxTitle && !letterFxTitle.dataset.processed) {
         span.textContent = char;
         wordSpan.append(span);
       }
-      fragment.append(wordSpan);
+      lineSpan.append(wordSpan);
       if (wordIndex < words.length - 1) {
-        fragment.append(document.createTextNode(' '));
+        lineSpan.append(document.createTextNode(' '));
       }
     });
-    if (lineIndex < sourceLines.length - 1) {
-      fragment.append(document.createElement('br'));
-    }
+    fragment.append(lineSpan);
   });
 
   const ariaText = sourceLines.join(' ');
@@ -78,6 +82,884 @@ if (letterFxTitle && !letterFxTitle.dataset.processed) {
   letterFxTitle.append(fragment);
   letterFxTitle.dataset.processed = 'true';
 }
+
+(() => {
+  const hero = document.querySelector('.hero');
+  const heroTitle = hero?.querySelector('.hero-title');
+  const heroCopyBlock = hero?.querySelector('.hero-copy-block');
+  const darkCanvas = document.getElementById('hero-dark-cv');
+  const customCursor = document.querySelector('.custom-cursor');
+  const supportsDesktopSpotlight = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const desktopWidthQuery = window.matchMedia('(min-width: 768px)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!hero || !heroTitle || !heroCopyBlock || !darkCanvas || !supportsDesktopSpotlight || reducedMotion || !desktopWidthQuery.matches) {
+    return;
+  }
+
+  const darkCtx = darkCanvas.getContext('2d');
+
+  if (!darkCtx) {
+    return;
+  }
+
+  const rootStyles = window.getComputedStyle(document.documentElement);
+  const spotlightDark = rootStyles.getPropertyValue('--hero-spotlight-dark').trim() || '#111111';
+  const spotlightPink = rootStyles.getPropertyValue('--pink').trim() || '#ffcdff';
+
+  const lineNodes = Array.from(heroTitle.querySelectorAll('.hero-line'));
+  const charNodes = Array.from(heroTitle.querySelectorAll('.char'));
+
+  let dpr = 1;
+  let heroRect = null;
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+  let canvasPadX = 0;
+  let canvasPadY = 0;
+  let titleFontString = '';
+  let lineMetrics = [];
+  let charMetrics = [];
+  let revealCanvas = null;
+  let revealCtx = null;
+  let titleMetrics = null;
+  let pointerX = -9999;
+  let pointerY = -9999;
+  let pointerInside = false;
+  let blobRadius = 0;
+  let blobTarget = 0;
+  let minRadius = 0;
+  let maxRadius = 0;
+  let activationPad = 0;
+  let activationPadTop = 0;
+  let activationPadBottom = 0;
+  let rafId = 0;
+  let resizeTimer = 0;
+  let lastRevealVisible = null;
+  let darkLayerDrawn = false;
+
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+  const roundRect = (ctx, x, y, w, h, r) => {
+    const radius = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.arcTo(x + w, y, x + w, y + h, radius);
+    ctx.arcTo(x + w, y + h, x, y + h, radius);
+    ctx.arcTo(x, y + h, x, y, radius);
+    ctx.arcTo(x, y, x + w, y, radius);
+    ctx.closePath();
+  };
+
+  const wrapText = (ctx, text, maxWidth) => {
+    const words = String(text).trim().split(/\s+/).filter(Boolean);
+    if (!words.length) {
+      return [];
+    }
+
+    const lines = [];
+    let current = words.shift();
+
+    while (words.length) {
+      const nextWord = words.shift();
+      const testLine = `${current} ${nextWord}`;
+      if (ctx.measureText(testLine).width <= maxWidth || current === '') {
+        current = testLine;
+      } else {
+        lines.push(current);
+        current = nextWord;
+      }
+    }
+
+    if (current) {
+      lines.push(current);
+    }
+
+    return lines;
+  };
+
+  const syncCanvasMetrics = () => {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    const copyBlockRect = heroCopyBlock.getBoundingClientRect();
+    heroRect = heroTitle.getBoundingClientRect();
+    const titleStyles = window.getComputedStyle(heroTitle);
+    titleFontString = titleStyles.font || `${titleStyles.fontWeight || '700'} ${titleStyles.fontSize} ${titleStyles.fontFamily}`;
+
+    const leftColumnWidth = Math.max(1, Math.round(copyBlockRect.width));
+    const leftColumnHeight = Math.max(1, Math.round(copyBlockRect.height));
+    minRadius = clamp(Math.round(Math.min(leftColumnWidth, leftColumnHeight) * 0.025), 6, 10);
+    maxRadius = clamp(Math.round(Math.min(leftColumnWidth, leftColumnHeight) * 0.17), 64, 88);
+    canvasPadX = maxRadius + 16;
+    canvasPadY = maxRadius + 16;
+
+    canvasWidth = Math.max(1, Math.round(heroRect.width + canvasPadX * 2));
+    canvasHeight = Math.max(1, Math.round(heroRect.height + canvasPadY * 2));
+
+    darkCanvas.style.display = 'block';
+    darkCanvas.style.inset = 'auto';
+    darkCanvas.style.left = `${heroRect.left - copyBlockRect.left - canvasPadX}px`;
+    darkCanvas.style.top = `${heroRect.top - copyBlockRect.top - canvasPadY}px`;
+    darkCanvas.style.right = 'auto';
+    darkCanvas.style.bottom = 'auto';
+    darkCanvas.style.width = `${canvasWidth}px`;
+    darkCanvas.style.height = `${canvasHeight}px`;
+    darkCanvas.width = Math.max(1, Math.round(canvasWidth * dpr));
+    darkCanvas.height = Math.max(1, Math.round(canvasHeight * dpr));
+
+    darkCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    lineMetrics = lineNodes.map((lineNode, index) => {
+      const rect = lineNode.getBoundingClientRect();
+      return {
+        text: lineNode.textContent.trim(),
+        x: rect.left - heroRect.left + canvasPadX,
+        y: rect.top - heroRect.top + canvasPadY,
+        width: rect.width,
+        height: rect.height
+      };
+    });
+
+    charMetrics = charNodes.map((charNode) => {
+      const rect = charNode.getBoundingClientRect();
+      const lineIndex = Number(charNode.closest('.hero-line')?.className.match(/line-(\d+)/)?.[1] || 1) - 1;
+      return {
+        char: charNode.textContent || '',
+        x: rect.left - heroRect.left + canvasPadX,
+        y: rect.top - heroRect.top + canvasPadY,
+        lineIndex
+      };
+    });
+
+    titleMetrics = {
+      left: heroRect.left,
+      right: heroRect.right,
+      top: heroRect.top,
+      bottom: heroRect.bottom,
+      x: canvasPadX,
+      y: canvasPadY,
+      width: heroRect.width,
+      height: heroRect.height
+    };
+
+    activationPad = clamp(Math.round(Math.min(titleMetrics.width, titleMetrics.height) * 0.28), 28, 72);
+    activationPadTop = clamp(Math.round(activationPad * 1.25), 34, 84);
+    activationPadBottom = clamp(Math.round(activationPad * 0.18), 6, 14);
+    renderRevealLayer();
+  };
+
+  const refreshViewportMetrics = () => {
+    if (!titleMetrics) {
+      return;
+    }
+
+    const currentHeroRect = heroTitle.getBoundingClientRect();
+    heroRect = currentHeroRect;
+    titleMetrics.left = currentHeroRect.left;
+    titleMetrics.right = currentHeroRect.right;
+    titleMetrics.top = currentHeroRect.top;
+    titleMetrics.bottom = currentHeroRect.bottom;
+  };
+
+  const drawHighlight = (ctx, metric, fillStyle) => {
+    const highlightX = metric.x - Math.max(10, metric.height * 0.16);
+    const highlightY = metric.y + metric.height * 0.08;
+    const highlightW = metric.width + Math.max(20, metric.height * 0.32);
+    const highlightH = metric.height * 0.92;
+    const highlightR = highlightH * 0.28;
+
+    ctx.fillStyle = fillStyle;
+    roundRect(ctx, highlightX, highlightY, highlightW, highlightH, highlightR);
+    ctx.fill();
+  };
+
+  const drawTitleChar = (ctx, charMetric, fillStyle) => {
+    ctx.fillStyle = fillStyle;
+    ctx.fillText(charMetric.char, charMetric.x, charMetric.y);
+  };
+
+  const renderRevealLayer = () => {
+    revealCanvas = document.createElement('canvas');
+    revealCanvas.width = Math.max(1, Math.round(canvasWidth * dpr));
+    revealCanvas.height = Math.max(1, Math.round(canvasHeight * dpr));
+    revealCtx = revealCanvas.getContext('2d');
+
+    if (!revealCtx) {
+      return;
+    }
+
+    revealCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    revealCtx.font = titleFontString;
+    revealCtx.textBaseline = 'top';
+    revealCtx.textAlign = 'left';
+
+    lineMetrics.forEach((metric, index) => {
+      if (index === 1) {
+        drawHighlight(revealCtx, metric, spotlightDark);
+      }
+    });
+
+    charMetrics.forEach((charMetric) => {
+      if (charMetric.lineIndex === 1) {
+        drawTitleChar(revealCtx, charMetric, spotlightPink);
+      } else {
+        drawTitleChar(revealCtx, charMetric, '#ffffff');
+      }
+    });
+  };
+
+  const isRevealCursorVisible = () => pointerInside && blobRadius > minRadius + 0.35;
+
+  const syncCursorVisual = (force = false) => {
+    if (!customCursor) {
+      return;
+    }
+
+    const revealVisible = isRevealCursorVisible();
+
+    if (force) {
+      customCursor.style.width = '14px';
+      customCursor.style.height = '14px';
+      customCursor.style.backgroundColor = spotlightDark;
+      customCursor.style.boxShadow = '0 0 0 8px rgba(255, 205, 255, 0.18), 0 4px 10px rgba(17, 17, 17, 0.12)';
+    }
+
+    if (force || revealVisible !== lastRevealVisible) {
+      document.body.classList.toggle('hero-reveal-cursor-active', revealVisible);
+      lastRevealVisible = revealVisible;
+    }
+  };
+
+  const drawDarkLayer = () => {
+    if (!isRevealCursorVisible()) {
+      if (darkLayerDrawn) {
+        darkCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+        darkLayerDrawn = false;
+      }
+      return;
+    }
+
+    darkCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    const cx = pointerX - heroRect.left + canvasPadX;
+    const cy = pointerY - heroRect.top + canvasPadY;
+    const transitionRadius = minRadius + Math.max(14, Math.round(maxRadius * 0.18));
+    const revealProgress = clamp((blobRadius - minRadius) / Math.max(transitionRadius - minRadius, 1), 0, 1);
+
+    darkCtx.save();
+    darkCtx.globalAlpha = 1;
+    darkCtx.globalCompositeOperation = 'source-over';
+    darkCtx.filter = 'none';
+    darkCtx.shadowColor = 'transparent';
+    darkCtx.shadowBlur = 0;
+    darkCtx.beginPath();
+    darkCtx.arc(cx, cy, blobRadius, 0, Math.PI * 2);
+    darkCtx.fillStyle = spotlightDark;
+    darkCtx.fill();
+
+    if (revealProgress > 0.01 && revealCanvas) {
+      darkCtx.save();
+      darkCtx.beginPath();
+      darkCtx.arc(cx, cy, blobRadius, 0, Math.PI * 2);
+      darkCtx.clip();
+      darkCtx.globalAlpha = revealProgress;
+      darkCtx.drawImage(revealCanvas, 0, 0, canvasWidth, canvasHeight);
+      darkCtx.restore();
+    }
+
+    darkCtx.restore();
+    darkLayerDrawn = true;
+  };
+
+  const updateBlobTarget = (clientX, clientY) => {
+    if (!heroRect || !titleMetrics) {
+      return;
+    }
+
+    const inActiveTitleArea =
+      clientX >= titleMetrics.left - activationPad &&
+      clientX <= titleMetrics.right + activationPad &&
+      clientY >= titleMetrics.top - activationPadTop &&
+      clientY <= titleMetrics.bottom + activationPadBottom;
+
+    if (!inActiveTitleArea) {
+      blobTarget = minRadius;
+      pointerInside = false;
+      return;
+    }
+
+    const dx = Math.max(titleMetrics.left - clientX, 0, clientX - titleMetrics.right);
+    const dy = Math.max(titleMetrics.top - clientY, 0, clientY - titleMetrics.bottom);
+    const distance = Math.hypot(dx, dy);
+    const activation = clamp(1 - distance / activationPad, 0, 1);
+
+    if (activation <= 0.04) {
+      blobTarget = minRadius;
+      pointerInside = false;
+      return;
+    }
+
+    pointerInside = true;
+    blobTarget = minRadius + (maxRadius - minRadius) * Math.pow(activation, 1.7);
+  };
+
+  const onMove = (event) => {
+    pointerX = event.clientX;
+    pointerY = event.clientY;
+    updateBlobTarget(pointerX, pointerY);
+  };
+
+  const onLeave = () => {
+    pointerInside = false;
+    blobTarget = minRadius;
+    drawDarkLayer();
+    syncCursorVisual();
+  };
+
+  const onScroll = () => {
+    refreshViewportMetrics();
+    updateBlobTarget(pointerX, pointerY);
+    drawDarkLayer();
+    syncCursorVisual();
+  };
+
+  const tick = () => {
+    blobRadius += (blobTarget - blobRadius) * 0.12;
+    blobRadius = Math.max(minRadius, blobRadius);
+    drawDarkLayer();
+    syncCursorVisual();
+    rafId = window.requestAnimationFrame(tick);
+  };
+
+  const handleResize = () => {
+    if (!desktopWidthQuery.matches) {
+      darkCanvas.style.display = 'none';
+      pointerInside = false;
+      blobRadius = minRadius;
+      blobTarget = minRadius;
+      document.body.classList.remove('hero-reveal-cursor-active');
+      lastRevealVisible = null;
+      darkLayerDrawn = false;
+      syncCursorVisual(true);
+      return;
+    }
+
+    syncCanvasMetrics();
+    blobRadius = Math.max(blobRadius, minRadius);
+    blobTarget = Math.max(blobTarget, minRadius);
+    syncCursorVisual(true);
+    drawDarkLayer();
+  };
+
+  const init = () => {
+    syncCanvasMetrics();
+    blobRadius = minRadius;
+    blobTarget = minRadius;
+    syncCursorVisual(true);
+    drawDarkLayer();
+    rafId = window.requestAnimationFrame(tick);
+  };
+
+  window.addEventListener('resize', () => {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(handleResize, 120);
+  });
+
+  desktopWidthQuery.addEventListener?.('change', handleResize);
+
+  window.addEventListener('mousemove', onMove, { passive: true });
+  window.addEventListener('mouseleave', onLeave);
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(init);
+  } else {
+    window.addEventListener('load', init);
+  }
+})();
+
+(() => {
+  const aboutHero = document.querySelector('.about-hero');
+  const aboutHeroContent = aboutHero?.querySelector('.about-hero-content');
+  const aboutHeroTitle = aboutHero?.querySelector('.about-hero-title');
+  const aboutHeroMedia = aboutHero?.querySelector('.about-hero-media');
+  const darkCanvas = document.getElementById('about-hero-dark-cv');
+  const customCursor = document.querySelector('.custom-cursor');
+  const supportsDesktopSpotlight = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const desktopWidthQuery = window.matchMedia('(min-width: 768px)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!aboutHero || !aboutHeroContent || !aboutHeroTitle || !darkCanvas || !supportsDesktopSpotlight || reducedMotion || !desktopWidthQuery.matches) {
+    return;
+  }
+
+  const darkCtx = darkCanvas.getContext('2d');
+
+  if (!darkCtx) {
+    return;
+  }
+
+  const rootStyles = window.getComputedStyle(document.documentElement);
+  const spotlightDark = rootStyles.getPropertyValue('--hero-spotlight-dark').trim() || '#111111';
+  const spotlightPink = rootStyles.getPropertyValue('--pink').trim() || '#ffcdff';
+
+  const lineNodes = Array.from(aboutHeroTitle.querySelectorAll('.hero-line'));
+  const charNodes = Array.from(aboutHeroTitle.querySelectorAll('.char'));
+
+  let dpr = 1;
+  let heroRect = null;
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+  let canvasPadX = 0;
+  let canvasPadY = 0;
+  let lineMetrics = [];
+  let charMetrics = [];
+  let revealCanvas = null;
+  let revealCtx = null;
+  let titleMetrics = null;
+  let pointerX = -9999;
+  let pointerY = -9999;
+  let pointerInside = false;
+  let blobRadius = 0;
+  let blobTarget = 0;
+  let minRadius = 0;
+  let maxRadius = 0;
+  let activationPad = 0;
+  let activationPadTop = 0;
+  let activationPadBottom = 0;
+  let rafId = 0;
+  let resizeTimer = 0;
+  let lastRevealVisible = null;
+  let darkLayerDrawn = false;
+
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  const smoothstep = (value) => value * value * (3 - 2 * value);
+
+  const roundRect = (ctx, x, y, w, h, r) => {
+    const radius = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.arcTo(x + w, y, x + w, y + h, radius);
+    ctx.arcTo(x + w, y + h, x, y + h, radius);
+    ctx.arcTo(x, y + h, x, y, radius);
+    ctx.arcTo(x, y, x + w, y, radius);
+    ctx.closePath();
+  };
+
+  const syncCanvasMetrics = () => {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    const contentRect = aboutHeroContent.getBoundingClientRect();
+    heroRect = aboutHeroTitle.getBoundingClientRect();
+
+    const titleWidth = Math.max(1, Math.round(heroRect.width));
+    const titleHeight = Math.max(1, Math.round(heroRect.height));
+    minRadius = clamp(Math.round(Math.min(titleWidth, titleHeight) * 0.025), 6, 10);
+    maxRadius = clamp(Math.round(Math.min(titleWidth, titleHeight) * 0.17), 64, 88);
+    canvasPadX = maxRadius + 16;
+    canvasPadY = maxRadius + 16;
+
+    canvasWidth = Math.max(1, Math.round(heroRect.width + canvasPadX * 2));
+    canvasHeight = Math.max(1, Math.round(heroRect.height + canvasPadY * 2));
+
+    darkCanvas.style.display = 'block';
+    darkCanvas.style.inset = 'auto';
+    darkCanvas.style.left = `${heroRect.left - contentRect.left - canvasPadX}px`;
+    darkCanvas.style.top = `${heroRect.top - contentRect.top - canvasPadY}px`;
+    darkCanvas.style.right = 'auto';
+    darkCanvas.style.bottom = 'auto';
+    darkCanvas.style.width = `${canvasWidth}px`;
+    darkCanvas.style.height = `${canvasHeight}px`;
+    darkCanvas.width = Math.max(1, Math.round(canvasWidth * dpr));
+    darkCanvas.height = Math.max(1, Math.round(canvasHeight * dpr));
+
+    darkCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    lineMetrics = lineNodes.map((lineNode) => {
+      const rect = lineNode.getBoundingClientRect();
+      return {
+        text: lineNode.textContent.trim(),
+        x: rect.left - heroRect.left + canvasPadX,
+        y: rect.top - heroRect.top + canvasPadY,
+        width: rect.width,
+        height: rect.height
+      };
+    });
+
+    charMetrics = charNodes.map((charNode) => {
+      const rect = charNode.getBoundingClientRect();
+      const charStyles = window.getComputedStyle(charNode);
+      const lineIndex = Number(charNode.closest('.hero-line')?.className.match(/line-(\d+)/)?.[1] || 1) - 1;
+      return {
+        char: charNode.textContent || '',
+        x: rect.left - heroRect.left + canvasPadX,
+        y: rect.top - heroRect.top + canvasPadY,
+        font: charStyles.font || `${charStyles.fontWeight || '700'} ${charStyles.fontSize} ${charStyles.fontFamily}`,
+        lineIndex
+      };
+    });
+
+    titleMetrics = {
+      left: heroRect.left,
+      right: heroRect.right,
+      top: heroRect.top,
+      bottom: heroRect.bottom,
+      x: canvasPadX,
+      y: canvasPadY,
+      width: heroRect.width,
+      height: heroRect.height
+    };
+
+    activationPad = clamp(Math.round(Math.min(titleMetrics.width, titleMetrics.height) * 0.28), 28, 72);
+    activationPadTop = clamp(Math.round(activationPad * 1.25), 34, 84);
+    activationPadBottom = clamp(Math.round(activationPad * 0.18), 6, 14);
+
+    renderRevealLayer();
+  };
+
+  const refreshViewportMetrics = () => {
+    if (!titleMetrics) {
+      return;
+    }
+
+    const currentHeroRect = aboutHeroTitle.getBoundingClientRect();
+    heroRect = currentHeroRect;
+    titleMetrics.left = currentHeroRect.left;
+    titleMetrics.right = currentHeroRect.right;
+    titleMetrics.top = currentHeroRect.top;
+    titleMetrics.bottom = currentHeroRect.bottom;
+  };
+
+  const drawHighlight = (ctx, metric, fillStyle) => {
+    const highlightX = metric.x - Math.max(10, metric.height * 0.16);
+    const highlightY = metric.y + metric.height * 0.08;
+    const highlightW = metric.width + Math.max(20, metric.height * 0.32);
+    const highlightH = metric.height * 0.92;
+    const highlightR = highlightH * 0.28;
+
+    ctx.fillStyle = fillStyle;
+    roundRect(ctx, highlightX, highlightY, highlightW, highlightH, highlightR);
+    ctx.fill();
+  };
+
+  const renderRevealLayer = () => {
+    revealCanvas = document.createElement('canvas');
+    revealCanvas.width = Math.max(1, Math.round(canvasWidth * dpr));
+    revealCanvas.height = Math.max(1, Math.round(canvasHeight * dpr));
+    revealCtx = revealCanvas.getContext('2d');
+
+    if (!revealCtx) {
+      return;
+    }
+
+    revealCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    revealCtx.textBaseline = 'top';
+    revealCtx.textAlign = 'left';
+
+    lineMetrics.forEach((metric, index) => {
+      if (index === 0) {
+        drawHighlight(revealCtx, metric, spotlightDark);
+      }
+    });
+
+    charMetrics.forEach((charMetric) => {
+      revealCtx.font = charMetric.font;
+      revealCtx.fillStyle = charMetric.lineIndex === 0 ? spotlightPink : '#ffffff';
+      revealCtx.fillText(charMetric.char, charMetric.x, charMetric.y);
+    });
+  };
+
+  const isRevealCursorVisible = () => pointerInside && blobRadius > minRadius + 0.35;
+
+  const syncCursorVisual = (force = false) => {
+    if (!customCursor) {
+      return;
+    }
+
+    const revealVisible = isRevealCursorVisible();
+
+    if (force) {
+      customCursor.style.width = '14px';
+      customCursor.style.height = '14px';
+      customCursor.style.backgroundColor = spotlightDark;
+      customCursor.style.boxShadow = '0 0 0 8px rgba(255, 205, 255, 0.18), 0 4px 10px rgba(17, 17, 17, 0.12)';
+    }
+
+    if (force || revealVisible !== lastRevealVisible) {
+      document.body.classList.toggle('hero-reveal-cursor-active', revealVisible);
+      lastRevealVisible = revealVisible;
+    }
+  };
+
+  const drawDarkLayer = () => {
+    if (!isRevealCursorVisible()) {
+      if (darkLayerDrawn) {
+        darkCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+        darkLayerDrawn = false;
+      }
+      return;
+    }
+
+    darkCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    const cx = pointerX - heroRect.left + canvasPadX;
+    const cy = pointerY - heroRect.top + canvasPadY;
+    const transitionRadius = minRadius + Math.max(14, Math.round(maxRadius * 0.18));
+    const revealProgress = clamp((blobRadius - minRadius) / Math.max(transitionRadius - minRadius, 1), 0, 1);
+
+    darkCtx.save();
+    darkCtx.globalAlpha = 1;
+    darkCtx.globalCompositeOperation = 'source-over';
+    darkCtx.filter = 'none';
+    darkCtx.shadowColor = 'transparent';
+    darkCtx.shadowBlur = 0;
+    darkCtx.beginPath();
+    darkCtx.arc(cx, cy, blobRadius, 0, Math.PI * 2);
+    darkCtx.fillStyle = spotlightDark;
+    darkCtx.fill();
+
+    if (revealProgress > 0.01 && revealCanvas) {
+      darkCtx.save();
+      darkCtx.beginPath();
+      darkCtx.arc(cx, cy, blobRadius, 0, Math.PI * 2);
+      darkCtx.clip();
+      darkCtx.globalAlpha = revealProgress;
+      darkCtx.drawImage(revealCanvas, 0, 0, canvasWidth, canvasHeight);
+      darkCtx.restore();
+    }
+
+    darkCtx.restore();
+    darkLayerDrawn = true;
+  };
+
+  const updateBlobTarget = (clientX, clientY) => {
+    if (!heroRect || !titleMetrics) {
+      return;
+    }
+
+    const inActiveTitleArea =
+      clientX >= titleMetrics.left - activationPad &&
+      clientX <= titleMetrics.right + activationPad &&
+      clientY >= titleMetrics.top - activationPadTop &&
+      clientY <= titleMetrics.bottom + activationPadBottom;
+
+    if (!inActiveTitleArea) {
+      pointerInside = false;
+      blobTarget = minRadius;
+      return;
+    }
+
+    const dx = Math.max(titleMetrics.left - clientX, 0, clientX - titleMetrics.right);
+    const dy = Math.max(titleMetrics.top - clientY, 0, clientY - titleMetrics.bottom);
+    const distance = Math.hypot(dx, dy);
+    const activation = clamp(1 - distance / activationPad, 0, 1);
+
+    if (activation <= 0.04) {
+      pointerInside = false;
+      blobTarget = minRadius;
+      return;
+    }
+
+    pointerInside = true;
+    blobTarget = minRadius + (maxRadius - minRadius) * smoothstep(activation);
+  };
+
+  const onMove = (event) => {
+    pointerX = event.clientX;
+    pointerY = event.clientY;
+    updateBlobTarget(pointerX, pointerY);
+  };
+
+  const onLeave = () => {
+    pointerInside = false;
+    blobTarget = minRadius;
+    drawDarkLayer();
+    syncCursorVisual();
+  };
+
+  const onScroll = () => {
+    refreshViewportMetrics();
+    updateBlobTarget(pointerX, pointerY);
+    drawDarkLayer();
+    syncCursorVisual();
+  };
+
+  const tick = () => {
+    blobRadius += (blobTarget - blobRadius) * 0.095;
+    if (Math.abs(blobTarget - blobRadius) < 0.03) {
+      blobRadius = blobTarget;
+    }
+    blobRadius = Math.max(minRadius, blobRadius);
+    drawDarkLayer();
+    syncCursorVisual();
+    rafId = window.requestAnimationFrame(tick);
+  };
+
+  const handleResize = () => {
+    if (!desktopWidthQuery.matches) {
+      darkCanvas.style.display = 'none';
+      pointerInside = false;
+      blobRadius = minRadius;
+      blobTarget = minRadius;
+      document.body.classList.remove('hero-reveal-cursor-active');
+      lastRevealVisible = null;
+      darkLayerDrawn = false;
+      syncCursorVisual(true);
+      return;
+    }
+
+    syncCanvasMetrics();
+    blobRadius = Math.max(blobRadius, minRadius);
+    blobTarget = Math.max(blobTarget, minRadius);
+    syncCursorVisual(true);
+    drawDarkLayer();
+  };
+
+  const init = () => {
+    syncCanvasMetrics();
+    blobRadius = minRadius;
+    blobTarget = minRadius;
+    syncCursorVisual(true);
+    drawDarkLayer();
+    rafId = window.requestAnimationFrame(tick);
+  };
+
+  window.addEventListener('resize', () => {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(handleResize, 120);
+  });
+
+  desktopWidthQuery.addEventListener?.('change', handleResize);
+
+  window.addEventListener('mousemove', onMove, { passive: true });
+  window.addEventListener('mouseleave', onLeave);
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(init);
+  } else {
+    window.addEventListener('load', init);
+  }
+})();
+
+(() => {
+  const customCursor = document.querySelector('.custom-cursor');
+
+  if (!customCursor) {
+    return;
+  }
+
+  const supportsDesktopCursor = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const desktopWidthQuery = window.matchMedia('(min-width: 768px)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!supportsDesktopCursor || reducedMotion || !desktopWidthQuery.matches) {
+    return;
+  }
+
+  document.body.classList.add('has-custom-cursor');
+
+  window.addEventListener(
+    'mousemove',
+    (event) => {
+      customCursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate3d(-50%, -50%, 0)`;
+      customCursor.classList.add('is-visible');
+    },
+    { passive: true }
+  );
+
+  window.addEventListener('mousedown', () => {
+    customCursor.classList.add('is-active');
+  });
+
+  window.addEventListener('mouseup', () => {
+    customCursor.classList.remove('is-active');
+  });
+
+  const hideCursor = () => {
+    customCursor.classList.remove('is-visible');
+    customCursor.classList.remove('is-active');
+    customCursor.classList.remove('is-black');
+  };
+
+  window.addEventListener('mouseleave', hideCursor);
+  document.documentElement.addEventListener('mouseleave', hideCursor);
+  window.addEventListener('blur', hideCursor);
+
+  window.addEventListener('resize', () => {
+    if (!desktopWidthQuery.matches) {
+      document.body.classList.remove('has-custom-cursor');
+      customCursor.classList.remove('is-visible', 'is-active', 'is-black');
+      return;
+    }
+  });
+
+  document.querySelectorAll('.meta-item:not(#project-schultz-featured .meta-item)').forEach((item) => {
+    item.addEventListener('mouseenter', () => {
+      customCursor.classList.add('is-black');
+    });
+
+    item.addEventListener('mouseleave', () => {
+      customCursor.classList.remove('is-black');
+    });
+  });
+
+  document.querySelectorAll('#project-schultz-featured .meta-item').forEach((item) => {
+    item.addEventListener('mouseenter', () => {
+      customCursor.classList.remove('is-black');
+    });
+  });
+
+  document.querySelectorAll('.nav-links a').forEach((link) => {
+    link.addEventListener('mouseenter', () => {
+      customCursor.classList.add('is-black');
+    });
+
+    link.addEventListener('mouseleave', () => {
+      customCursor.classList.remove('is-black');
+    });
+  });
+
+  document.querySelectorAll('.schultz-explore-btn').forEach((button) => {
+    button.addEventListener('mouseenter', () => {
+      customCursor.classList.add('is-black');
+    });
+
+    button.addEventListener('mouseleave', () => {
+      customCursor.classList.remove('is-black');
+    });
+  });
+
+  document.querySelectorAll('body.moveit-dark-page .prototype-button').forEach((button) => {
+    button.addEventListener('mouseenter', () => {
+      customCursor.classList.add('is-black');
+    });
+
+    button.addEventListener('mouseleave', () => {
+      customCursor.classList.remove('is-black');
+    });
+  });
+
+  document.querySelectorAll('body.moveit-dark-page .moveit-detail-card').forEach((card) => {
+    card.addEventListener('mouseenter', () => {
+      customCursor.classList.add('is-black');
+    });
+
+    card.addEventListener('mouseleave', () => {
+      customCursor.classList.remove('is-black');
+    });
+  });
+
+  document.querySelectorAll('.btn-dark:not(.btn-truffle-cta), .btn-light').forEach((button) => {
+    button.addEventListener('mouseenter', () => {
+      customCursor.classList.add('is-black');
+    });
+
+    button.addEventListener('mouseleave', () => {
+      customCursor.classList.remove('is-black');
+    });
+  });
+
+})();
 
 const focusWordEl = document.querySelector('[data-focus-word]');
 
@@ -360,144 +1242,6 @@ if (projectSelectorButtons.length && truffleFeaturedPanel && schultzFeaturedPane
     positionProjectSelectorIndicator(
       projectSelectorButtons.find((button) => button.classList.contains('is-active')) ?? projectSelectorButtons[0]
     );
-  });
-}
-
-const cursor = document.querySelector('.custom-cursor');
-
-if (cursor && desktopPointer) {
-  document.body.classList.add('has-custom-cursor');
-
-  window.addEventListener('mousemove', (event) => {
-    cursor.style.left = `${event.clientX}px`;
-    cursor.style.top = `${event.clientY}px`;
-    cursor.classList.add('is-visible');
-  });
-
-  window.addEventListener('mousedown', () => {
-    cursor.classList.add('is-active');
-  });
-
-  window.addEventListener('mouseup', () => {
-    cursor.classList.remove('is-active');
-  });
-
-  document.addEventListener('mouseleave', () => {
-    cursor.classList.remove('is-visible');
-  });
-
-  document.querySelectorAll('.meta-item:not(#project-schultz-featured .meta-item)').forEach((item) => {
-    item.addEventListener('mouseenter', () => {
-      cursor.classList.add('is-black');
-    });
-
-    item.addEventListener('mouseleave', () => {
-      cursor.classList.remove('is-black');
-    });
-  });
-
-  document.querySelectorAll('#project-schultz-featured .meta-item').forEach((item) => {
-    item.addEventListener('mouseenter', () => {
-      cursor.classList.remove('is-black');
-    });
-  });
-
-  const heroTitle = document.querySelector('.hero-title');
-  if (heroTitle) {
-    heroTitle.querySelectorAll('.char').forEach((charEl) => {
-      charEl.addEventListener('mouseenter', () => {
-        const becomesPinkOnHover = !charEl.closest('.word.line-2') && !charEl.classList.contains('hero-dot');
-        if (becomesPinkOnHover) {
-          cursor.classList.add('is-black');
-        } else {
-          cursor.classList.remove('is-black');
-        }
-      });
-    });
-
-    heroTitle.addEventListener('mouseleave', () => {
-      cursor.classList.remove('is-black');
-    });
-  }
-
-  document.querySelectorAll('.nav-links a').forEach((link) => {
-    link.addEventListener('mouseenter', () => {
-      cursor.classList.add('is-black');
-    });
-
-    link.addEventListener('mouseleave', () => {
-      cursor.classList.remove('is-black');
-    });
-  });
-
-  document.querySelectorAll('.process-row').forEach((row) => {
-    row.addEventListener('mouseenter', () => {
-      cursor.classList.add('is-black');
-    });
-
-    row.addEventListener('mouseleave', () => {
-      cursor.classList.remove('is-black');
-    });
-  });
-
-  document.querySelectorAll('.about-timeline-item').forEach((item) => {
-    item.addEventListener('mouseenter', () => {
-      cursor.classList.add('is-black');
-    });
-
-    item.addEventListener('mouseleave', () => {
-      cursor.classList.remove('is-black');
-    });
-  });
-
-  document.querySelectorAll('.story-timeline, .timeline-milestone, .timeline-icon-img').forEach((item) => {
-    item.addEventListener('mouseenter', () => {
-      cursor.classList.add('is-black');
-    });
-
-    item.addEventListener('mouseleave', () => {
-      cursor.classList.remove('is-black');
-    });
-  });
-
-  document.querySelectorAll('.schultz-explore-btn').forEach((button) => {
-    button.addEventListener('mouseenter', () => {
-      cursor.classList.add('is-black');
-    });
-
-    button.addEventListener('mouseleave', () => {
-      cursor.classList.remove('is-black');
-    });
-  });
-
-  document.querySelectorAll('body.moveit-dark-page .prototype-button').forEach((button) => {
-    button.addEventListener('mouseenter', () => {
-      cursor.classList.add('is-black');
-    });
-
-    button.addEventListener('mouseleave', () => {
-      cursor.classList.remove('is-black');
-    });
-  });
-
-  document.querySelectorAll('body.moveit-dark-page .moveit-detail-card').forEach((card) => {
-    card.addEventListener('mouseenter', () => {
-      cursor.classList.add('is-black');
-    });
-
-    card.addEventListener('mouseleave', () => {
-      cursor.classList.remove('is-black');
-    });
-  });
-
-  document.querySelectorAll('.btn-dark').forEach((button) => {
-    button.addEventListener('mouseenter', () => {
-      cursor.classList.add('is-black');
-    });
-
-    button.addEventListener('mouseleave', () => {
-      cursor.classList.remove('is-black');
-    });
   });
 }
 
