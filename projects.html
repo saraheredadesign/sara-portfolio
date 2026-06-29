@@ -30,9 +30,22 @@
         </button>
 
         <nav id="menu" class="nav-links" aria-label="Main">
-          <a href="index.html">Home</a>
-          <a href="projects.html">Projects</a>
-          <a href="about.html">About</a>
+          <a class="nav-home-link" href="/" aria-label="Home">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 4.5 4 11.5V20h5.5v-5.5h5V20H20v-8.5L12 4.5Z"></path>
+              <path d="M16.5 6.5V4h2v4.25"></path>
+            </svg>
+          </a>
+          <a href="/projects">Projects</a>
+          <a href="/about">About</a>
+          <a class="nav-external-link" href="/assets/Hereda_Sara_Resume.pdf" target="_blank" rel="noopener noreferrer">
+            <span>Resume</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M14 3h7v7"></path>
+              <path d="M10 14 21 3"></path>
+              <path d="M21 14v4a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h4"></path>
+            </svg>
+          </a>
         </nav>
       </div>
     </header>
@@ -43,11 +56,11 @@
         <span class="projects-progress-track">
           <span class="projects-progress-fill" data-project-progress-fill></span>
         </span>
-        <span class="projects-progress-end">04</span>
+        <span class="projects-progress-end">05</span>
       </aside>
 
       <div class="projects-snap">
-        <section class="project-section" data-project-index="01" aria-label="Truffle project">
+        <section class="project-section project-section--truffle" data-project-index="01" aria-label="Truffle project">
           <div class="project-section-inner">
             <a class="project-section-media-link" href="project-truffle.html" aria-label="View Truffle project">
               <div class="project-section-media">
@@ -74,7 +87,29 @@
           </div>
         </section>
 
-        <section class="project-section" data-project-index="02" aria-label="Schultz Studios project">
+        <section class="project-section project-section--campaign-shark" data-project-index="02" aria-label="Campaign Shark project">
+          <div class="project-section-inner">
+            <a class="project-section-media-link project-section-media-link-campaign-shark" href="project-campaign-shark.html" aria-label="View Campaign Shark project">
+              <div class="project-section-media project-section-media-campaign-shark">
+                <img
+                  class="project-section-logo-campaign-shark"
+                  src="/assets/logo-campaignshark.png"
+                  alt="Campaign Shark logo"
+                  loading="lazy"
+                />
+              </div>
+              <span class="project-section-hover-cta" aria-hidden="true">View project</span>
+            </a>
+            <div class="project-section-copy">
+              <p class="project-section-tags">STARTUP APP for WEB · UX ARCHITECTURE · USER FLOW</p>
+              <h2>Campaign Shark</h2>
+              <p class="project-section-subtitle">Helping founders organise their early product idea into clear flow and structure.</p>
+              <a class="project-section-link" href="project-campaign-shark.html">View project →</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="project-section project-section--schultz" data-project-index="03" aria-label="Schultz Studios project">
           <div class="project-section-inner">
             <a class="project-section-media-link" href="project-schultz-studios.html" aria-label="View Schultz’ Studios project">
               <div class="project-section-media">
@@ -101,7 +136,7 @@
           </div>
         </section>
 
-        <section class="project-section" data-project-index="03" aria-label="MoveIt project">
+        <section class="project-section project-section--moveit" data-project-index="04" aria-label="MoveIt project">
           <div class="project-section-inner">
             <a class="project-section-media-link" href="project-moveit.html" aria-label="View MoveIt project">
               <div class="project-section-media">
@@ -117,7 +152,7 @@
           </div>
         </section>
 
-        <section class="project-section" data-project-index="04" aria-label="Flexee project">
+        <section class="project-section project-section--flexee" data-project-index="05" aria-label="Flexee project">
           <div class="project-section-inner">
             <a class="project-section-media-link project-section-media-link-flexee" href="project-flexee.html" aria-label="View Flexee project">
               <div class="project-section-media project-section-media-flexee">
@@ -148,7 +183,7 @@
             </div>
 
             <div class="about-closing-actions" aria-label="Contact options">
-              <a href="/assets/CV_Sara.pdf" class="btn btn-light" aria-label="Read my CV" target="_blank" rel="noopener noreferrer">Read my CV</a>
+              <a href="/assets/Hereda_Sara_Resume.pdf" class="btn btn-light" aria-label="Read my CV" target="_blank" rel="noopener noreferrer">Read my CV</a>
               <a href="mailto:hello@saraheredadesign.com" class="btn btn-light" aria-label="Send me an email">Send me an email</a>
               <a href="https://www.linkedin.com/in/saraheredadesign" class="btn btn-light" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
@@ -163,7 +198,7 @@
         <span aria-hidden="true"> · </span>
         <a href="https://www.linkedin.com/in/saraheredadesign" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <span aria-hidden="true"> · </span>
-        <a href="/assets/CV_Sara.pdf" download>Resume</a>
+        <a href="/assets/Hereda_Sara_Resume.pdf" download>Resume</a>
       </p>
     </footer>
 

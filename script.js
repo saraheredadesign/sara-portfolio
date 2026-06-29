@@ -876,6 +876,7 @@ if (letterFxTitle && !letterFxTitle.dataset.processed) {
   });
 
   const hideCursor = () => {
+    document.body.classList.remove('is-over-site-header');
     customCursor.classList.remove('is-visible');
     customCursor.classList.remove('is-active');
     customCursor.classList.remove('is-black');
@@ -888,6 +889,7 @@ if (letterFxTitle && !letterFxTitle.dataset.processed) {
   window.addEventListener('resize', () => {
     if (!desktopWidthQuery.matches) {
       document.body.classList.remove('has-custom-cursor');
+      document.body.classList.remove('is-over-site-header');
       customCursor.classList.remove('is-visible', 'is-active', 'is-black');
       return;
     }
@@ -909,17 +911,41 @@ if (letterFxTitle && !letterFxTitle.dataset.processed) {
     });
   });
 
-  document.querySelectorAll('.nav-links a').forEach((link) => {
-    link.addEventListener('mouseenter', () => {
+  const siteHeader = document.querySelector('.site-header');
+
+  if (siteHeader) {
+    siteHeader.addEventListener('mouseenter', () => {
+      document.body.classList.add('is-over-site-header');
+      customCursor.classList.remove('is-black');
+    });
+
+    siteHeader.addEventListener('mouseleave', () => {
+      document.body.classList.remove('is-over-site-header');
+      customCursor.classList.remove('is-black');
+    });
+  }
+
+  document.querySelectorAll('.site-header a, .site-header button').forEach((target) => {
+    target.addEventListener('mouseenter', () => {
       customCursor.classList.add('is-black');
     });
 
-    link.addEventListener('mouseleave', () => {
+    target.addEventListener('mouseleave', () => {
       customCursor.classList.remove('is-black');
     });
   });
 
   document.querySelectorAll('.schultz-explore-btn').forEach((button) => {
+    button.addEventListener('mouseenter', () => {
+      customCursor.classList.add('is-black');
+    });
+
+    button.addEventListener('mouseleave', () => {
+      customCursor.classList.remove('is-black');
+    });
+  });
+
+  document.querySelectorAll('.schultz-closing-btn-primary').forEach((button) => {
     button.addEventListener('mouseenter', () => {
       customCursor.classList.add('is-black');
     });

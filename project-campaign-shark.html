@@ -13,7 +13,7 @@
     />
     <link rel="stylesheet" href="/styles.css" />
   </head>
-  <body>
+  <body class="campaign-shark-page-body">
     <div id="top"></div>
     <div class="custom-cursor" aria-hidden="true"></div>
     <header class="site-header">
@@ -28,38 +28,320 @@
         </button>
 
         <nav id="menu" class="nav-links" aria-label="Main">
-          <a href="index.html">Home</a>
-          <a href="projects.html">Projects</a>
-          <a href="about.html">About</a>
-          <div class="project-menu-wrap">
-            <button
-              class="project-menu-trigger"
-              type="button"
-              aria-expanded="false"
-              aria-controls="project-menu"
-              data-project-menu-trigger
-            >
-              <span>My projects</span>
-              <span class="project-menu-trigger-icon" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </button>
-            <div class="project-menu-popover" id="project-menu" hidden data-project-menu>
-              <a href="project-truffle.html">Truffle</a>
-              <a href="project-campaign-shark.html">Campaign Shark</a>
-              <a href="project-schultz-studios.html">Schultz' Studios</a>
-              <a href="project-moveit.html">MoveIt</a>
-              <a href="project-flexee.html">Flexee</a>
-              <a class="project-menu-see-all" href="projects.html">See all projects</a>
-            </div>
-          </div>
+          <a class="nav-home-link" href="/" aria-label="Home">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 4.5 4 11.5V20h5.5v-5.5h5V20H20v-8.5L12 4.5Z"></path>
+              <path d="M16.5 6.5V4h2v4.25"></path>
+            </svg>
+          </a>
+          <a href="/projects">Projects</a>
+          <a href="/about">About</a>
+          <a class="nav-external-link" href="/assets/Hereda_Sara_Resume.pdf" target="_blank" rel="noopener noreferrer">
+            <span>Resume</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M14 3h7v7"></path>
+              <path d="M10 14 21 3"></path>
+              <path d="M21 14v4a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h4"></path>
+            </svg>
+          </a>
         </nav>
       </div>
     </header>
-    <main class="blank-page" aria-label="Campaign Shark">
+    <main class="campaign-shark-page reveal" aria-label="Campaign Shark">
+      <section class="campaign-shark-hero" aria-label="Campaign Shark project intro">
+        <div class="campaign-shark-shell">
+          <div class="campaign-shark-hero-copy">
+            <h1 class="info-title">Campaign Shark</h1>
+            <div class="campaign-shark-pill-row" aria-label="Campaign Shark focus areas">
+              <span class="campaign-shark-pill">UX architecture</span>
+              <span class="campaign-shark-pill">User flow</span>
+              <span class="campaign-shark-pill">Guided onboarding</span>
+            </div>
+            <p class="campaign-shark-intro">I worked closely with the developer to turn an early product idea into a clearer web app experience.</p>
+            <a
+              class="campaign-shark-hero-cta"
+              href="https://www.campaignshark.com/about-us"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Meet the team
+            </a>
+          </div>
+
+          <aside class="campaign-shark-hero-visual" aria-label="Campaign Shark logo">
+            <div class="campaign-shark-logo-stage">
+              <img src="/assets/logo-campaignshark.png" alt="Campaign Shark logo" />
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="campaign-shark-architecture-section" aria-label="App architecture">
+        <div class="campaign-shark-architecture-copy">
+          <h2 class="campaign-shark-architecture-title">Structuring the app first</h2>
+          <p class="campaign-shark-architecture-text">
+             Before designing screens, I mapped the product structure in FigJam to clarify the main sections, navigation and campaign creation flow.
+          </p>
+        </div>
+
+        <div class="campaign-shark-architecture-grid">
+          <article class="campaign-shark-architecture-card">
+            <p class="campaign-shark-architecture-card-label">APP ARCHITECTURE</p>
+            <p class="campaign-shark-architecture-card-text">
+              Organised the main product areas so the team had a clearer foundation to build from.
+            </p>
+            <div class="campaign-shark-architecture-media">
+              <img
+                class="campaign-shark-architecture-image"
+                src="/assets/architectureCS-trim.png"
+                alt="Campaign Shark app architecture map created in FigJam"
+              />
+            </div>
+          </article>
+
+          <article class="campaign-shark-architecture-card">
+            <p class="campaign-shark-architecture-card-label">USER FLOW</p>
+            <p class="campaign-shark-architecture-card-text">
+              Mapped how a campaign could be created, saved and continued inside the product.
+            </p>
+            <div class="campaign-shark-architecture-media campaign-shark-architecture-media-userflow">
+              <img
+                class="campaign-shark-architecture-image"
+                src="/assets/userflowCS-trim.png"
+                alt="Campaign Shark user flow for creating and saving a campaign"
+              />
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="campaign-shark-guided-section" aria-label="Guided setup flow">
+        <div class="campaign-shark-guided-copy">
+          <h2 class="campaign-shark-guided-title">Guided setup flow</h2>
+          <p class="campaign-shark-guided-intro">
+            A guided onboarding flow designed to help users define their business, audience and brand context step by step, even without marketing experience.
+          </p>
+        </div>
+
+        <div class="campaign-shark-guided-stage">
+          <div class="campaign-shark-guided-stage-head">
+            <div>
+              <h3 class="campaign-shark-guided-stage-title">A selection of screens from the full guided setup.</h3>
+            </div>
+            <p class="campaign-shark-guided-stage-count">
+              <span data-guided-index>1</span>
+              <span>/ 6</span>
+            </p>
+          </div>
+
+          <div class="campaign-shark-monitor">
+            <img
+              class="campaign-shark-monitor-image"
+              data-guided-image
+              src="/assets/1WecolmeCS.png"
+              alt="Welcome to Campaign Shark onboarding mockup"
+            />
+          </div>
+
+          <p class="campaign-shark-guided-screen-caption" data-guided-caption>Welcome to Campaign Shark</p>
+
+          <div class="campaign-shark-guided-controls" role="group" aria-label="Guided setup screens">
+            <button class="campaign-shark-guided-nav" type="button" data-guided-prev>Previous</button>
+
+            <div class="campaign-shark-guided-dots" aria-label="Select onboarding step">
+              <button class="campaign-shark-guided-dot is-active" type="button" data-guided-step="0" aria-label="Welcome to Campaign Shark"></button>
+              <button class="campaign-shark-guided-dot" type="button" data-guided-step="1" aria-label="What best describes you?"></button>
+              <button class="campaign-shark-guided-dot" type="button" data-guided-step="2" aria-label="Who buys from you?"></button>
+              <button class="campaign-shark-guided-dot" type="button" data-guided-step="3" aria-label="Brand voice"></button>
+              <button class="campaign-shark-guided-dot" type="button" data-guided-step="4" aria-label="Creating SharkBrain"></button>
+              <button class="campaign-shark-guided-dot" type="button" data-guided-step="5" aria-label="Business Profile is ready"></button>
+            </div>
+
+            <button class="campaign-shark-guided-nav" type="button" data-guided-next>Next</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="campaign-shark-nav-section" aria-label="Navigation proposal">
+        <div class="campaign-shark-nav-panel">
+          <div class="campaign-shark-nav-main">
+            <div class="campaign-shark-nav-copy">
+              <p class="campaign-shark-nav-eyebrow">NAVIGATION PROPOSAL</p>
+              <h2 class="campaign-shark-nav-title">A collapsible sidebar for more focus</h2>
+              <p class="campaign-shark-nav-text">
+                The original product used a fixed sidebar. I proposed a more brand-aligned navigation style and a collapsible version to reduce visual weight and give more space to the main workspace.
+              </p>
+              <p class="campaign-shark-nav-support">
+                A flexible sidebar keeps navigation accessible while allowing users to focus on the main content.
+              </p>
+            </div>
+
+            <div class="campaign-shark-nav-visuals" aria-label="Sidebar navigation comparison">
+              <article class="campaign-shark-nav-compare-block campaign-shark-nav-compare-block-before">
+                <div class="campaign-shark-nav-card-head">
+                  <p class="campaign-shark-nav-card-label">BEFORE</p>
+                  <p class="campaign-shark-nav-card-subtitle">Fixed sidebar (current)</p>
+                </div>
+                <div class="campaign-shark-nav-media campaign-shark-nav-media-before">
+                  <img
+                    class="campaign-shark-nav-image campaign-shark-nav-image-before"
+                    src="/assets/FixedbarCS.png"
+                    alt="Campaign Shark current interface with fixed sidebar navigation"
+                  />
+                </div>
+              </article>
+
+              <div class="campaign-shark-nav-divider" aria-hidden="true">
+                <span>→</span>
+              </div>
+
+              <article class="campaign-shark-nav-compare-block campaign-shark-nav-compare-block-after">
+                <div class="campaign-shark-nav-card-head">
+                  <p class="campaign-shark-nav-card-label">AFTER (PROPOSAL)</p>
+                  <p class="campaign-shark-nav-card-subtitle">Collapsible sidebar</p>
+                </div>
+                <div class="campaign-shark-nav-media-grid">
+                  <div class="campaign-shark-nav-media">
+                    <img
+                      class="campaign-shark-nav-image"
+                      src="/assets/newnavCS.png"
+                      alt="Campaign Shark navigation proposal with expanded collapsible sidebar"
+                    />
+                  </div>
+                  <div class="campaign-shark-nav-media">
+                    <img
+                      class="campaign-shark-nav-image"
+                      src="/assets/newnavcollapsedCS.png"
+                      alt="Campaign Shark navigation proposal with collapsed sidebar"
+                    />
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="campaign-shark-nav-benefits">
+            <p class="campaign-shark-nav-benefits-title">Why this approach?</p>
+            <ul class="campaign-shark-nav-benefits-list">
+              <li>Aligned with the brand</li>
+              <li>More room for content</li>
+              <li>Less visual weight</li>
+              <li>Flexible navigation</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-closing-card" aria-label="Closing call to action">
+        <div class="about-closing-card-pattern" aria-hidden="true"></div>
+        <img class="about-closing-logo-mark" src="/assets/logo-flower-clean.png" alt="" aria-hidden="true" />
+        <div class="about-closing-copy">
+          <h2>Let’s bring clarity to your product<span class="footer-title-dot">.</span></h2>
+          <p>From app structure to guided flows, I can help shape early ideas into clearer digital experiences.</p>
+        </div>
+
+        <div class="about-closing-actions" aria-label="Contact options">
+          <a href="mailto:hello@saraheredadesign.com" class="btn btn-light" aria-label="Contact me">Contact me</a>
+        </div>
+      </section>
+
     </main>
+    <footer class="site-footer" aria-label="Site footer">
+      <p>© 2026 Sara Hereda. Designed with care in Oslo.</p>
+      <p>
+        <a href="mailto:hello@saraheredadesign.com">Email</a>
+        <span aria-hidden="true"> · </span>
+        <a href="https://www.linkedin.com/in/saraheredadesign" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span aria-hidden="true"> · </span>
+        <a href="/assets/Hereda_Sara_Resume.pdf" download>Resume</a>
+      </p>
+    </footer>
     <script type="module" src="/script.js"></script>
+    <script>
+      (() => {
+        if (!document.body.classList.contains('campaign-shark-page-body')) {
+          return;
+        }
+
+        const steps = [
+          {
+            title: 'Welcome to Campaign Shark',
+            src: '/assets/1WecolmeCS.png',
+            alt: 'Welcome to Campaign Shark onboarding mockup',
+          },
+          {
+            title: 'What best describes you?',
+            src: '/assets/2WhatbestdescribeCS.png',
+            alt: 'What best describes you mockup',
+          },
+          {
+            title: 'Who buys from you?',
+            src: '/assets/3whobuysfromyouCS.png',
+            alt: 'Who buys from you mockup',
+          },
+          {
+            title: 'Brand voice',
+            src: '/assets/4BrandvoiceCS.png',
+            alt: 'Brand voice mockup',
+          },
+          {
+            title: 'Creating Shark Brain',
+            src: '/assets/5SharkbrainCS.png',
+            alt: 'Creating Shark Brain mockup',
+          },
+          {
+            title: 'Business Profile is ready',
+            src: '/assets/6profilereadyCS.png',
+            alt: 'Business Profile is ready mockup',
+          },
+        ];
+
+        const image = document.querySelector('[data-guided-image]');
+        const caption = document.querySelector('[data-guided-caption]');
+        const indexLabel = document.querySelector('[data-guided-index]');
+        const prevButton = document.querySelector('[data-guided-prev]');
+        const nextButton = document.querySelector('[data-guided-next]');
+        const dots = Array.from(document.querySelectorAll('[data-guided-step]'));
+
+        if (!image || !caption || !indexLabel || !prevButton || !nextButton || !dots.length) {
+          return;
+        }
+
+        let currentIndex = 0;
+
+        const renderStep = (index) => {
+          const safeIndex = (index + steps.length) % steps.length;
+          const step = steps[safeIndex];
+          currentIndex = safeIndex;
+
+          image.src = step.src;
+          image.alt = step.alt;
+          caption.textContent = step.title;
+          indexLabel.textContent = String(safeIndex + 1);
+
+          dots.forEach((dot, dotIndex) => {
+            const isActive = dotIndex === safeIndex;
+            dot.classList.toggle('is-active', isActive);
+            dot.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          });
+        };
+
+        prevButton.addEventListener('click', () => {
+          renderStep(currentIndex - 1);
+        });
+
+        nextButton.addEventListener('click', () => {
+          renderStep(currentIndex + 1);
+        });
+
+        dots.forEach((dot, dotIndex) => {
+          dot.addEventListener('click', () => {
+            renderStep(dotIndex);
+          });
+        });
+
+        renderStep(0);
+      })();
+    </script>
   </body>
 </html>
