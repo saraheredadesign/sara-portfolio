@@ -1196,6 +1196,47 @@ if (heroGalleryScroll && !prefersReducedMotion) {
   );
 }
 
+const selectedWorkAccordion = document.querySelector('.selected-work-accordion');
+const selectedWorkItems = selectedWorkAccordion
+  ? Array.from(selectedWorkAccordion.querySelectorAll('.selected-work-accordion-item'))
+  : [];
+
+if (selectedWorkItems.length) {
+  const setSelectedWorkItem = (activeItem) => {
+    selectedWorkItems.forEach((item) => {
+      const isActive = item === activeItem;
+      item.classList.toggle('is-expanded', isActive);
+      item.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    });
+  };
+
+  selectedWorkItems.forEach((item) => {
+    item.setAttribute('role', 'button');
+    item.setAttribute('aria-expanded', item.classList.contains('is-expanded') ? 'true' : 'false');
+
+    item.addEventListener('click', (event) => {
+      if (event.target.closest('a') && item.classList.contains('is-expanded')) {
+        return;
+      }
+
+      if (event.target.closest('a')) {
+        event.preventDefault();
+      }
+
+      setSelectedWorkItem(item);
+    });
+
+    item.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') {
+        return;
+      }
+
+      event.preventDefault();
+      setSelectedWorkItem(item);
+    });
+  });
+}
+
 const projectSelectorButtons = Array.from(document.querySelectorAll('[data-featured-project]'));
 const truffleFeaturedPanel = document.querySelector('[data-featured-panel="truffle"]');
 const schultzFeaturedPanel = document.querySelector('[data-featured-panel="schultz"]');
@@ -1273,8 +1314,9 @@ if (projectSelectorButtons.length && truffleFeaturedPanel && schultzFeaturedPane
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isMoveitPage = document.body.classList.contains('moveit-dark-page');
+const isCampaignSharkPage = document.body.classList.contains('campaign-shark-page-body');
 
-if (!reducedMotion && !isMoveitPage) {
+if (!reducedMotion && !isMoveitPage && !isCampaignSharkPage) {
   let bg = document.querySelector('.calm-lavender-bg');
   if (!bg) {
     bg = document.createElement('div');

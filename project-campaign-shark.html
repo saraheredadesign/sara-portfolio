@@ -28,12 +28,7 @@
         </button>
 
         <nav id="menu" class="nav-links" aria-label="Main">
-          <a class="nav-home-link" href="/" aria-label="Home">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M12 4.5 4 11.5V20h5.5v-5.5h5V20H20v-8.5L12 4.5Z"></path>
-              <path d="M16.5 6.5V4h2v4.25"></path>
-            </svg>
-          </a>
+          <a class="nav-home-link" href="/" aria-label="Home">Home</a>
           <a href="/projects">Projects</a>
           <a href="/about">About</a>
           <a class="nav-external-link" href="/assets/Hereda_Sara_Resume.pdf" target="_blank" rel="noopener noreferrer">
@@ -77,41 +72,41 @@
       </section>
 
       <section class="campaign-shark-architecture-section" aria-label="App architecture">
-        <div class="campaign-shark-architecture-copy">
-          <h2 class="campaign-shark-architecture-title">Structuring the app first</h2>
-          <p class="campaign-shark-architecture-text">
-             Before designing screens, I mapped the product structure in FigJam to clarify the main sections, navigation and campaign creation flow.
-          </p>
-        </div>
-
-        <div class="campaign-shark-architecture-grid">
-          <article class="campaign-shark-architecture-card">
-            <p class="campaign-shark-architecture-card-label">APP ARCHITECTURE</p>
-            <p class="campaign-shark-architecture-card-text">
-              Organised the main product areas so the team had a clearer foundation to build from.
+        <div class="campaign-shark-architecture-panel">
+          <div class="campaign-shark-architecture-copy">
+            <h2 class="campaign-shark-architecture-title">App structure</h2>
+            <p class="campaign-shark-architecture-text">
+               Before designing screens, I mapped the product structure in FigJam to clarify the main sections, navigation and campaign creation flow.
             </p>
-            <div class="campaign-shark-architecture-media">
-              <img
-                class="campaign-shark-architecture-image"
-                src="/assets/architectureCS-trim.png"
-                alt="Campaign Shark app architecture map created in FigJam"
-              />
-            </div>
-          </article>
+          </div>
 
-          <article class="campaign-shark-architecture-card">
-            <p class="campaign-shark-architecture-card-label">USER FLOW</p>
-            <p class="campaign-shark-architecture-card-text">
-              Mapped how a campaign could be created, saved and continued inside the product.
-            </p>
-            <div class="campaign-shark-architecture-media campaign-shark-architecture-media-userflow">
-              <img
-                class="campaign-shark-architecture-image"
-                src="/assets/userflowCS-trim.png"
-                alt="Campaign Shark user flow for creating and saving a campaign"
-              />
-            </div>
-          </article>
+          <div class="campaign-shark-architecture-grid">
+            <article class="campaign-shark-architecture-card">
+              <p class="campaign-shark-architecture-card-label">APP ARCHITECTURE</p>
+              <p class="campaign-shark-architecture-card-text">
+              </p>
+              <div class="campaign-shark-architecture-media campaign-shark-architecture-media-app">
+                <img
+                  class="campaign-shark-architecture-image"
+                  src="/assets/architectureCS-trim.png"
+                  alt="Campaign Shark app architecture map created in FigJam"
+                />
+              </div>
+            </article>
+
+            <article class="campaign-shark-architecture-card">
+              <p class="campaign-shark-architecture-card-label">USER FLOW</p>
+              <p class="campaign-shark-architecture-card-text">
+              </p>
+              <div class="campaign-shark-architecture-media campaign-shark-architecture-media-userflow">
+                <img
+                  class="campaign-shark-architecture-image"
+                  src="/assets/userflowCS-trim.png"
+                  alt="Campaign Shark user flow for creating and saving a campaign"
+                />
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -121,44 +116,46 @@
           <p class="campaign-shark-guided-intro">
             A guided onboarding flow designed to help users define their business, audience and brand context step by step, even without marketing experience.
           </p>
+          <p>See below a selection from onboarding screens:</p>
         </div>
 
         <div class="campaign-shark-guided-stage">
-          <div class="campaign-shark-guided-stage-head">
-            <div>
-              <h3 class="campaign-shark-guided-stage-title">A selection of screens from the full guided setup.</h3>
-            </div>
-            <p class="campaign-shark-guided-stage-count">
-              <span data-guided-index>1</span>
-              <span>/ 6</span>
-            </p>
-          </div>
+          <div class="campaign-shark-guided-viewer" role="group" aria-label="Guided setup screens">
+            <button class="campaign-shark-guided-nav" type="button" data-guided-prev aria-label="Previous screen">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M14.5 6 8.5 12l6 6"></path>
+              </svg>
+            </button>
 
-          <div class="campaign-shark-monitor">
-            <img
-              class="campaign-shark-monitor-image"
-              data-guided-image
-              src="/assets/1WecolmeCS.png"
-              alt="Welcome to Campaign Shark onboarding mockup"
-            />
+            <div class="campaign-shark-guided-frame">
+              <div class="campaign-shark-guided-dots" aria-label="Select onboarding step">
+                <button class="campaign-shark-guided-dot is-active" type="button" data-guided-step="0" aria-label="Welcome to Campaign Shark"></button>
+                <button class="campaign-shark-guided-dot" type="button" data-guided-step="1" aria-label="What best describes you?"></button>
+                <button class="campaign-shark-guided-dot" type="button" data-guided-step="2" aria-label="Who buys from you?"></button>
+                <button class="campaign-shark-guided-dot" type="button" data-guided-step="3" aria-label="Brand voice"></button>
+                <button class="campaign-shark-guided-dot" type="button" data-guided-step="4" aria-label="Creating SharkBrain"></button>
+                <button class="campaign-shark-guided-dot" type="button" data-guided-step="5" aria-label="Business Profile is ready"></button>
+              </div>
+
+              <div class="campaign-shark-monitor">
+                <img
+                  class="campaign-shark-monitor-image"
+                  data-guided-image
+                  src="/assets/1WecolmeCS.png"
+                  alt="Welcome to Campaign Shark onboarding mockup"
+                />
+              </div>
+            </div>
+
+            <button class="campaign-shark-guided-nav" type="button" data-guided-next aria-label="Next screen">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="m9.5 6 6 6-6 6"></path>
+              </svg>
+            </button>
           </div>
 
           <p class="campaign-shark-guided-screen-caption" data-guided-caption>Welcome to Campaign Shark</p>
 
-          <div class="campaign-shark-guided-controls" role="group" aria-label="Guided setup screens">
-            <button class="campaign-shark-guided-nav" type="button" data-guided-prev>Previous</button>
-
-            <div class="campaign-shark-guided-dots" aria-label="Select onboarding step">
-              <button class="campaign-shark-guided-dot is-active" type="button" data-guided-step="0" aria-label="Welcome to Campaign Shark"></button>
-              <button class="campaign-shark-guided-dot" type="button" data-guided-step="1" aria-label="What best describes you?"></button>
-              <button class="campaign-shark-guided-dot" type="button" data-guided-step="2" aria-label="Who buys from you?"></button>
-              <button class="campaign-shark-guided-dot" type="button" data-guided-step="3" aria-label="Brand voice"></button>
-              <button class="campaign-shark-guided-dot" type="button" data-guided-step="4" aria-label="Creating SharkBrain"></button>
-              <button class="campaign-shark-guided-dot" type="button" data-guided-step="5" aria-label="Business Profile is ready"></button>
-            </div>
-
-            <button class="campaign-shark-guided-nav" type="button" data-guided-next>Next</button>
-          </div>
         </div>
       </section>
 
@@ -167,12 +164,12 @@
           <div class="campaign-shark-nav-main">
             <div class="campaign-shark-nav-copy">
               <p class="campaign-shark-nav-eyebrow">NAVIGATION PROPOSAL</p>
-              <h2 class="campaign-shark-nav-title">A collapsible sidebar for more focus</h2>
+              <h2 class="campaign-shark-nav-title">I redesigned a new navigation bar</h2>
               <p class="campaign-shark-nav-text">
                 The original product used a fixed sidebar. I proposed a more brand-aligned navigation style and a collapsible version to reduce visual weight and give more space to the main workspace.
               </p>
               <p class="campaign-shark-nav-support">
-                A flexible sidebar keeps navigation accessible while allowing users to focus on the main content.
+                A flexible sidebar keeps navigation accessible without competing with the main content.
               </p>
             </div>
 
@@ -221,12 +218,48 @@
           </div>
 
           <div class="campaign-shark-nav-benefits">
-            <p class="campaign-shark-nav-benefits-title">Why this approach?</p>
             <ul class="campaign-shark-nav-benefits-list">
-              <li>Aligned with the brand</li>
-              <li>More room for content</li>
-              <li>Less visual weight</li>
-              <li>Flexible navigation</li>
+              <li>
+                <span class="campaign-shark-nav-benefits-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false">
+                    <circle cx="12" cy="12" r="7"></circle>
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M15.5 8.5 20 4"></path>
+                    <path d="M16 4h4v4"></path>
+                  </svg>
+                </span>
+                <span class="campaign-shark-nav-benefits-text">Aligned with the brand</span>
+              </li>
+              <li>
+                <span class="campaign-shark-nav-benefits-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M8 3.5h6l4 4V20a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 7 20V5A1.5 1.5 0 0 1 8.5 3.5Z"></path>
+                    <path d="M14 3.5V8h4"></path>
+                    <path d="M10 12h5"></path>
+                    <path d="M10 16h5"></path>
+                  </svg>
+                </span>
+                <span class="campaign-shark-nav-benefits-text">More room for content</span>
+              </li>
+              <li>
+                <span class="campaign-shark-nav-benefits-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M19.5 6.5c-4.2-.6-7.9.7-10.5 3.4-2.8 2.8-3.8 6.4-3 9.6 3.2.8 6.8-.2 9.6-3 2.7-2.6 4-6.3 3.4-10.5Z"></path>
+                    <path d="M8 16 16 8"></path>
+                    <path d="M10.2 18.2 5.8 22.2"></path>
+                  </svg>
+                </span>
+                <span class="campaign-shark-nav-benefits-text">Less visual weight</span>
+              </li>
+              <li>
+                <span class="campaign-shark-nav-benefits-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M20 4 10.5 13.5"></path>
+                    <path d="M20 4 14 20l-3.5-6.5L4 10 20 4Z"></path>
+                  </svg>
+                </span>
+                <span class="campaign-shark-nav-benefits-text">Flexible navigation</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -296,14 +329,14 @@
           },
         ];
 
-        const image = document.querySelector('[data-guided-image]');
-        const caption = document.querySelector('[data-guided-caption]');
-        const indexLabel = document.querySelector('[data-guided-index]');
-        const prevButton = document.querySelector('[data-guided-prev]');
-        const nextButton = document.querySelector('[data-guided-next]');
-        const dots = Array.from(document.querySelectorAll('[data-guided-step]'));
+        const guidedSection = document.querySelector('.campaign-shark-guided-section');
+        const image = guidedSection?.querySelector('[data-guided-image]');
+        const caption = guidedSection?.querySelector('[data-guided-caption]');
+        const prevButton = guidedSection?.querySelector('[data-guided-prev]');
+        const nextButton = guidedSection?.querySelector('[data-guided-next]');
+        const dots = guidedSection ? Array.from(guidedSection.querySelectorAll('[data-guided-step]')) : [];
 
-        if (!image || !caption || !indexLabel || !prevButton || !nextButton || !dots.length) {
+        if (!image || !caption || !prevButton || !nextButton || !dots.length) {
           return;
         }
 
@@ -317,7 +350,6 @@
           image.src = step.src;
           image.alt = step.alt;
           caption.textContent = step.title;
-          indexLabel.textContent = String(safeIndex + 1);
 
           dots.forEach((dot, dotIndex) => {
             const isActive = dotIndex === safeIndex;
