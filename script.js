@@ -1202,12 +1202,55 @@ const selectedWorkItems = selectedWorkAccordion
   : [];
 
 if (selectedWorkItems.length) {
-  const setSelectedWorkItem = (activeItem) => {
+  const selectedWorkReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const selectedWorkTransitionMs = selectedWorkReducedMotion ? 0 : 560;
+  const selectedWorkRevealDelayMs = selectedWorkReducedMotion ? 0 : selectedWorkTransitionMs - 40;
+  let selectedWorkRevealTimer = null;
+
+  const revealSelectedWorkItemContent = (activeItem) => {
+    selectedWorkItems.forEach((item) => {
+      const isActive = item === activeItem && item.classList.contains('is-expanded');
+      item.classList.toggle('is-activating', false);
+      item.classList.toggle('is-content-visible', isActive);
+    });
+  };
+
+  const queueSelectedWorkContentReveal = (activeItem, immediate = false) => {
+    if (selectedWorkRevealTimer) {
+      window.clearTimeout(selectedWorkRevealTimer);
+      selectedWorkRevealTimer = null;
+    }
+
+    if (immediate) {
+      revealSelectedWorkItemContent(activeItem);
+      return;
+    }
+
+    selectedWorkRevealTimer = window.setTimeout(() => {
+      revealSelectedWorkItemContent(activeItem);
+      selectedWorkRevealTimer = null;
+    }, selectedWorkRevealDelayMs);
+  };
+
+  const setSelectedWorkItem = (activeItem, { immediate = false } = {}) => {
+    const alreadyActive =
+      activeItem.classList.contains('is-expanded') &&
+      activeItem.classList.contains('is-content-visible') &&
+      !activeItem.classList.contains('is-activating');
+
+    if (alreadyActive) {
+      return;
+    }
+
     selectedWorkItems.forEach((item) => {
       const isActive = item === activeItem;
+      item.classList.toggle('is-content-visible', false);
+      item.classList.toggle('is-activating', isActive && !immediate);
       item.classList.toggle('is-expanded', isActive);
       item.setAttribute('aria-expanded', isActive ? 'true' : 'false');
     });
+
+    queueSelectedWorkContentReveal(activeItem, immediate || selectedWorkReducedMotion);
   };
 
   selectedWorkItems.forEach((item) => {
@@ -1235,6 +1278,11 @@ if (selectedWorkItems.length) {
       setSelectedWorkItem(item);
     });
   });
+
+  setSelectedWorkItem(
+    selectedWorkItems.find((item) => item.classList.contains('is-expanded')) ?? selectedWorkItems[0],
+    { immediate: true }
+  );
 }
 
 const projectSelectorButtons = Array.from(document.querySelectorAll('[data-featured-project]'));

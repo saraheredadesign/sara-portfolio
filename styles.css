@@ -2788,6 +2788,17 @@ h2 {
     box-shadow 240ms ease;
 }
 
+.selected-work-accordion-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: #fffdf8;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
 .selected-work-accordion-item.is-expanded {
   flex: 1 1 auto;
 }
@@ -2827,6 +2838,7 @@ h2 {
   background: linear-gradient(90deg, rgba(18, 18, 18, 0.48), rgba(18, 18, 18, 0.04) 58%, rgba(18, 18, 18, 0.1));
   opacity: 0.72;
   pointer-events: none;
+  transition: opacity 220ms ease;
 }
 
 .selected-work-accordion-media img,
@@ -2835,7 +2847,10 @@ h2 {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: filter 320ms ease, transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 220ms ease,
+    filter 320ms ease,
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .selected-work-accordion-item--truffle .selected-work-accordion-media {
@@ -2858,28 +2873,47 @@ h2 {
 }
 
 .selected-work-accordion-truffle-logo {
-  width: min(58px, 62%);
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  z-index: 2;
+  width: min(92px, 80%);
+  max-width: none;
   height: auto;
   object-fit: contain;
+  filter: none;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  transition:
+    opacity 220ms ease,
+    filter 280ms ease,
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .selected-work-accordion-item--truffle:not(.is-expanded) .selected-work-accordion-video {
   display: none;
 }
 
+.selected-work-accordion-item--truffle.is-activating .selected-work-accordion-truffle-logo,
 .selected-work-accordion-item--truffle.is-expanded .selected-work-accordion-truffle-logo {
-  display: none;
+  opacity: 0;
+  filter: blur(14px);
+  transform: none;
+  pointer-events: none;
 }
 
 .selected-work-accordion-item--truffle.is-expanded .selected-work-accordion-media {
   align-items: flex-end;
   justify-content: flex-end;
-  padding-right: clamp(2rem, 7vw, 5.8rem);
+  padding-right: 0;
   box-sizing: border-box;
 }
 
 .selected-work-accordion-item--truffle.is-expanded .selected-work-accordion-video {
-  transform: translateY(54px);
+  position: absolute;
+  right: clamp(2rem, 7vw, 5.8rem);
+  bottom: -54px;
+  transform: none;
 }
 
 .selected-work-accordion-item--truffle .selected-work-accordion-copy {
@@ -2904,6 +2938,12 @@ h2 {
 .selected-work-accordion-item--campaign-shark .selected-work-accordion-media img {
   width: min(68%, 320px);
   height: auto;
+}
+
+.selected-work-accordion-item--campaign-shark.is-expanded .selected-work-accordion-media img {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
 }
 
 .selected-work-accordion-item--campaign-shark .selected-work-accordion-copy {
@@ -2946,10 +2986,18 @@ h2 {
   filter: none;
   opacity: 1;
   transform: translate(-50%, -50%);
+  transition:
+    opacity 220ms ease,
+    filter 280ms ease,
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.selected-work-accordion-item--schultz.is-activating .selected-work-accordion-schultz-logo,
 .selected-work-accordion-item--schultz.is-expanded .selected-work-accordion-schultz-logo {
-  display: none;
+  opacity: 0;
+  filter: blur(14px);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .selected-work-accordion-schultz-mockup {
@@ -2980,6 +3028,18 @@ h2 {
   object-fit: contain;
   filter: none;
   transform: translateX(14%);
+}
+
+.selected-work-accordion-item--schultz.is-expanded:not(.is-content-visible) .selected-work-accordion-media img.selected-work-accordion-video {
+  opacity: 0;
+  filter: blur(8px);
+  will-change: opacity, filter;
+}
+
+.selected-work-accordion-item--schultz.is-content-visible .selected-work-accordion-media img.selected-work-accordion-video {
+  opacity: 1;
+  filter: blur(0);
+  will-change: opacity, filter;
 }
 
 .selected-work-accordion-item--schultz.is-expanded .selected-work-accordion-schultz-mockup {
@@ -3029,6 +3089,13 @@ h2 {
   opacity: 1;
 }
 
+.selected-work-accordion-item--schultz.is-teaser.is-expanded .selected-work-accordion-media img.selected-work-accordion-schultz-logo {
+  opacity: 0;
+  filter: blur(14px);
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .selected-work-accordion-item.is-teaser.is-expanded .selected-work-accordion-media img,
 .selected-work-accordion-item.is-teaser.is-expanded .selected-work-accordion-media video {
   filter: blur(3px) brightness(0.82) saturate(0.9);
@@ -3054,14 +3121,20 @@ h2 {
   justify-content: flex-end;
   color: #fffdf8;
   opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 240ms ease, transform 320ms ease;
+  visibility: hidden;
+  filter: blur(8px);
+  transform: none;
+  transition: opacity 220ms ease, filter 220ms ease, visibility 0s linear 220ms;
+  will-change: opacity, filter;
   pointer-events: none;
 }
 
-.selected-work-accordion-item.is-expanded .selected-work-accordion-copy {
+.selected-work-accordion-item.is-content-visible .selected-work-accordion-copy {
   opacity: 1;
-  transform: translateY(0);
+  visibility: visible;
+  filter: blur(0);
+  transform: none;
+  transition-delay: 0s;
   pointer-events: auto;
 }
 
@@ -3260,10 +3333,12 @@ h2 {
   }
 
   .selected-work-accordion-copy,
+  .selected-work-accordion-item.is-content-visible .selected-work-accordion-copy,
   .selected-work-accordion-item.is-expanded .selected-work-accordion-copy,
   .selected-work-accordion-item.is-expanded .selected-work-accordion-copy {
     width: min(440px, 86%);
     opacity: 1;
+    filter: none;
     transform: none;
     pointer-events: auto;
   }
