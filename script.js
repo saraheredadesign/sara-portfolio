@@ -1270,6 +1270,10 @@ if (selectedWorkItems.length) {
     });
 
     item.addEventListener('keydown', (event) => {
+      if (event.target.closest('a') && event.target.closest('a') !== item) {
+        return;
+      }
+
       if (event.key !== 'Enter' && event.key !== ' ') {
         return;
       }

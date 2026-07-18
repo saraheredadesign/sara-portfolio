@@ -1,14 +1,41 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/projects/truffle",
+      "destination": "/projects/truffle/",
+      "permanent": true
+    },
+    {
+      "source": "/project-truffle",
+      "destination": "/projects/truffle/",
+      "permanent": true
+    },
+    {
+      "source": "/project-truffle-draft",
+      "destination": "/projects/truffle/",
+      "permanent": true
+    },
+    {
+      "source": "/truffle-product-case-study",
+      "destination": "/projects/truffle/",
+      "permanent": true
+    },
+    {
+      "source": "/project-truffle-brand-identity-ui-system",
+      "destination": "/projects/truffle/",
+      "permanent": true
+    },
+    {
+      "source": "/projects/truffle-final-preview/:path*",
+      "destination": "/projects/truffle/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/projects",
       "destination": "/projects.html"
-    },
-    {
-      "source": "/project-truffle",
-      "destination": "/project-truffle.html"
     },
     {
       "source": "/project-moveit",
