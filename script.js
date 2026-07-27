@@ -1436,6 +1436,7 @@ if (aboutSlider) {
   const sliderButtons = Array.from(aboutSlider.querySelectorAll('[data-about-slide]'));
   const sliderPanels = Array.from(aboutSlider.querySelectorAll('[data-about-panel]'));
   const galleryNodes = Array.from(aboutSlider.querySelectorAll('[data-about-gallery]'));
+  const sliderToggle = aboutSlider.querySelector('.about-slider-toggle');
   let indicatorResetTimer = null;
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const aboutCarouselImages = {
@@ -1459,21 +1460,6 @@ if (aboutSlider) {
   };
   const galleryState = new Map();
   const galleryTransitionMs = 460;
-
-  const positionIndicator = (activeButton) => {
-    const sliderIndicator = aboutSlider.querySelector('.about-slider-indicator');
-    const sliderToggle = aboutSlider.querySelector('.about-slider-toggle');
-
-    if (!sliderIndicator || !activeButton || !sliderToggle) {
-      return;
-    }
-
-    const toggleStyles = window.getComputedStyle(sliderToggle);
-    const inset = parseFloat(toggleStyles.paddingLeft) || 0;
-
-    sliderIndicator.style.width = `${activeButton.offsetWidth}px`;
-    sliderIndicator.style.transform = `translateX(${activeButton.offsetLeft - inset}px)`;
-  };
 
   const animateIndicator = () => {
     const sliderIndicator = aboutSlider.querySelector('.about-slider-indicator');
@@ -1598,6 +1584,11 @@ if (aboutSlider) {
   };
 
   const setAboutSlide = (slideKey) => {
+    const activeIndex = sliderButtons.findIndex((button) => button.dataset.aboutSlide === slideKey);
+    if (sliderToggle && activeIndex >= 0) {
+      sliderToggle.dataset.activeIndex = String(activeIndex);
+    }
+
     sliderButtons.forEach((button) => {
       const isActive = button.dataset.aboutSlide === slideKey;
       button.classList.toggle('is-active', isActive);
@@ -1611,7 +1602,6 @@ if (aboutSlider) {
     });
 
     animateIndicator();
-    positionIndicator(sliderButtons.find((button) => button.dataset.aboutSlide === slideKey));
 
     galleryState.forEach((state, key) => {
       if (key !== slideKey) {
@@ -1704,10 +1694,6 @@ if (aboutSlider) {
     button.addEventListener('click', () => {
       setAboutSlide(button.dataset.aboutSlide);
     });
-  });
-
-  window.addEventListener('resize', () => {
-    positionIndicator(sliderButtons.find((button) => button.classList.contains('is-active')));
   });
 
   requestAnimationFrame(() => {

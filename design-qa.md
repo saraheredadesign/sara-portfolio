@@ -1,3 +1,53 @@
+# About page — Animals / Design / Life slider Safari layout fix
+
+**Source visual truth**
+
+- Correct pre-change Chrome rendering: `/tmp/about-slider-baseline-desktop.png`.
+- User-supplied broken Safari capture and written requirement: preserve the correct existing appearance while eliminating clipped labels and indicator displacement.
+
+**Rendered implementation**
+
+- Development route: `http://127.0.0.1:5174/about`.
+- Fixed desktop capture: `/tmp/about-slider-fixed-desktop.png`.
+- Fixed mobile capture: `/tmp/about-slider-fixed-mobile-sequence.png`.
+- Production-build desktop capture: `/tmp/about-slider-production-desktop.png`.
+
+**Viewport, pixels, density, and state**
+
+- Desktop source and implementation: `1440 × 1113` pixels, `1440 × 1113` CSS pixels, device scale factor `1`, Design active.
+- Mobile implementation: `390 × 844` pixels, `390 × 844` CSS pixels, device scale factor `1`, Design active.
+- No density normalization was required because the desktop source and implementation have identical pixel and CSS dimensions.
+
+**Comparison evidence**
+
+- Full-view side-by-side comparison, source left and implementation right: `/tmp/about-slider-comparison-full.png` (`2904 × 1113`).
+- Focused slider comparison, source left and implementation right: `/tmp/about-slider-comparison-focused.png` (`1064 × 112`).
+- The focused comparison was required to confirm the pill bounds, label positions, indicator size, and active alignment at readable scale.
+
+**Findings and comparison history**
+
+- No actionable P0, P1, or P2 visual mismatch remains. The fixed control preserves the source container size, centering, padding, gaps, radius, typography, colors, and active state.
+- The reported P1 Safari failure was addressed before the comparison pass by replacing the shrink-to-fit flex/fixed-basis layout and JavaScript `offsetWidth`/`offsetLeft` positioning with one responsive three-column grid and a CSS-positioned indicator.
+- Post-fix evidence: all labels remained fully inside the control and the indicator matched the active button bounds at `1440`, `820`, `768`, and `390` CSS-pixel widths, including repeated Animals → Design → Life switching.
+
+**Required fidelity surfaces**
+
+- Fonts and typography: Inter family, `700` weight, `0.94rem` desktop size, `0.9rem` mobile size, line height, copy, and label wrapping are unchanged.
+- Spacing and layout rhythm: desktop control remains `419.2px` wide with `4px` inset/gaps; the existing mobile full-width behavior and `3px` inset/gaps remain unchanged.
+- Colors and visual tokens: the white outer surface, `var(--pink)` indicator, text colors, shadows, and radii are unchanged.
+- Image quality and asset fidelity: the slider has no image assets; surrounding page imagery was not modified and remained unchanged in the full-view comparison.
+- Copy and content: Animals, Design, Life, associated panels, gallery content, and transition behavior are unchanged.
+
+**Browser and regression checks**
+
+- Chrome development build: direct load, hard refresh, navigate away/back, resize `1440 → 820 → 768 → 390 → 1440`, and repeated tab switching.
+- Chrome production build: desktop hard refresh plus repeated tab switching; mobile hard refresh.
+- In every measured state: all three labels visible, indicator aligned to the active option within `0.1px`, fonts loaded, no horizontal document overflow, no error overlay, and no browser console errors.
+- Safari desktop automation was unavailable because Safari's persistent “Allow Remote Automation” security setting is disabled. The setting was not changed without explicit user approval.
+- Production build: passed with Vite 8.0.12.
+
+final result: passed
+
 # Truffle Case Study — “Ideas for the future” roadmap
 
 **Source visual truth**
