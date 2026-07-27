@@ -1440,21 +1440,21 @@ if (aboutSlider) {
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const aboutCarouselImages = {
     animals: [
-      'assets/carrousel_1/sara_vet0.png',
-      'assets/carrousel_1/sara_vet1.png',
-      'assets/carrousel_1/sara_vet2.png'
+      '/assets/carrousel_1/sara_vet0.png',
+      '/assets/carrousel_1/sara_vet1.png',
+      '/assets/carrousel_1/sara_vet2.png'
     ],
     design: [
-      'assets/carrousel_2/sara_studio0.png',
-      'assets/carrousel_2/sara_studio1.png',
-      'assets/carrousel_2/sara_studio2.png',
-      'assets/carrousel_2/sara_studio3.png'
+      '/assets/carrousel_2/sara_studio0.png',
+      '/assets/carrousel_2/sara_studio1.png',
+      '/assets/carrousel_2/sara_studio2.png',
+      '/assets/carrousel_2/sara_studio3.png'
     ],
     life: [
-      'assets/carrousel_3/life_0.png',
-      'assets/carrousel_3/life_1.png',
-      'assets/carrousel_3/life_2.png',
-      'assets/carrousel_3/life_3.png'
+      '/assets/carrousel_3/life_0.png',
+      '/assets/carrousel_3/life_1.png',
+      '/assets/carrousel_3/life_2.png',
+      '/assets/carrousel_3/life_3.png'
     ]
   };
   const galleryState = new Map();
